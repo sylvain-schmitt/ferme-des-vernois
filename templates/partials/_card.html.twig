@@ -6,7 +6,7 @@
                 <h5 class="card-title">{{ product.title }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
                 <p class="card-text">{{ product.description | u.truncate(60, '...', false)}}</p>
-                <a href="#" class="btn btn-primary">voir le produit</a>
+                <a href="{{ path('app_product_show', {slug:product.slug}) }}" class="btn btn-primary">voir le produit</a>
             </div>
             <div class="card-footer text-muted">
                 <p>prix: {{ product.price }} €</p>

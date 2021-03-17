@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,5 +26,13 @@ class HomeController extends AbstractController
     {
         $products = $productRepository->findAll();
         return $this->render('home/product.html.twig', compact('products'));
+    }
+
+    /**
+     * @Route("/product/{slug}", name="app_product_show")
+     */
+    public function productShow(Product $product): Response
+    {
+        return $this->render('home/product_show.html.twig', compact('product'));
     }
 }
