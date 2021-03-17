@@ -50,7 +50,7 @@ class Product
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="integer")
      */
     private $pound;
 
