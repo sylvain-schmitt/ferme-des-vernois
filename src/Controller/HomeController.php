@@ -35,4 +35,5 @@ class HomeController extends AbstractController
     {
         return $this->render('home/product_show.html.twig', compact('product'));
     }
+
 }
