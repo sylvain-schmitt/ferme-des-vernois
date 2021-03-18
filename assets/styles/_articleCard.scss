@@ -1,0 +1,21 @@
+.card {
+  height: 600px;
+  -webkit-box-shadow: -7px 6px 9px -4px rgba(0,0,0,0.54);
+  -moz-box-shadow: -7px 6px 9px -4px rgba(0,0,0,0.54);
+  box-shadow: -7px 6px 9px -4px rgba(0,0,0,0.54);
+  border: none;
+  .card-body {
+    border: 1px solid rgba(0,0,0,.125);
+    .card-content {
+      height: 140px;
+    }
+  }
+  .card-footer {
+    height: 80px;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.125);
+  }
+  .card-img, .card-img-top{
+    height: 300px;
+  }
+}

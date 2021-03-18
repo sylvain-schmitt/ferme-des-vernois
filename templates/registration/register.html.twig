@@ -3,19 +3,30 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+<div class="form-register mx-auto col-4">
+    <div>
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <div>
+            <h1 class="pb-2 text-center">Inscription</h1>
+        </div>
+        <div>
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email, { attr: {'class': 'samarche'}}) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
 
-    <h1>Inscription</h1>
+            {{ form_row(registrationForm.agreeTerms) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            <button type="submit" class="btn btn-primary">inscription</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">inscription</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+
+
+    {% endblock %}
