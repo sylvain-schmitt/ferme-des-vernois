@@ -34,10 +34,6 @@ class Category
      */
     private $products;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=SubCat::class, inversedBy="categories")
-     */
-    private $subCat;
 
     public function __construct()
     {
@@ -108,15 +104,4 @@ class Category
         return $this;
     }
 
-    public function getSubCat(): ?SubCat
-    {
-        return $this->subCat;
-    }
-
-    public function setSubCat(?SubCat $subCat): self
-    {
-        $this->subCat = $subCat;
-
-        return $this;
-    }
 }
