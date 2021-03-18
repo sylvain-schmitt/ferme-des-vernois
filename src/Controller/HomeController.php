@@ -20,7 +20,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/product", name="app_product")
+     * @Route("/produit", name="app_product")
      */
     public function product(ProductRepository $productRepository): Response
     {
@@ -29,7 +29,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/product/{slug}", name="app_product_show")
+     * @Route("/produit/{slug}", name="app_product_show")
      */
     public function productShow(Product $product): Response
     {
