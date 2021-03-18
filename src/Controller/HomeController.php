@@ -15,7 +15,7 @@ class HomeController extends AbstractController
      */
     public function index(ProductRepository $productRepository): Response
     {
-       $products = $productRepository->findBy([], ['createdAt'=>'desc'],3 );
+       $products = $productRepository->findBy(['active' => '1'], ['createdAt'=>'desc'],3 );
         return $this->render('home/index.html.twig', compact('products'));
     }
 

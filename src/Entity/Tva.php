@@ -20,7 +20,7 @@ class Tva
     private $id;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string")
      */
     private $title;
 
@@ -33,6 +33,11 @@ class Tva
     public function __construct()
     {
         $this->products = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     public function getId(): ?int

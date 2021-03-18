@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord{% endblock %}
+
+{% block body %}
+
+    {# Liste des produits #}
+    <div class="container my-5" style="overflow: auto; max-height: 400px">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Catégorie</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Poid</th>
+                <th scope="col">TVA</th>
+                <th scope="col">Modifier</th>
+                <th scope="col">Activer/Désactiver</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <th scope="row">{{ product.category }}</th>
+                    <td><a href="{{ path('app_admin_show_product', {id: product.id}) }}">{{ product.title }}</a></td>
+                    <td>
+                        {% if product.quantity == 0 %}
+                            <a href="#"
+                               onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') &&
+                                       document
+                                       .getElementById
+                                       ('js-product-delete-form-{{ product.id }}').submit();"
+                               class="btn"><img src="https://img.icons8.com/fluent/20/000000/trash.png"/></a>
+                            <form id="js-product-delete-form-{{ product.id }}"
+                                  action="{{ path('app_admin_delete_product', {id: product.id}) }}"
+                                  method="post" style="display:none;">
+                                <input type="hidden" name="csrf_token"
+                                       value="{{ csrf_token('product_deletion_' ~ product.id) }}">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form>
+                            {{ product.quantity }}
+                            <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn">
+                                <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('app_quantity_delete', {id: product.id}) }}" class="btn">
+                                <img src="https://img.icons8.com/fluent/20/000000/minus-math.png"/>
+                            </a>
+                            {{ product.quantity }}
+                            <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn">
+                                <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/>
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.pound }}</td>
+                    <td>
+                        {% if product.tva %}
+                            {{ product.tva }}%
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
+                           class="btn btn-info">Modifier</a></td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input type="checkbox"
+                                   class="form-check-input mx-auto" {{ (product.active) ? 'checked' : '' }}
+                                   data-id="{{ product.id }}" id="{{ product.id }}">
+                            <label class="form-check-label" for="{{ product.id }}"></label>
+                        </div>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="container col-md-6 my-5" style="overflow: auto; max-height: 400px">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom des catégories</th>
+                    <th scope="col">Modifier</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for categorie in categories %}
+                    <tr>
+                        <th scope="row">{{ categorie.title }}</th>
+                        <td><a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}"
+                               class="btn btn-info">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container col-md-2 my-5" style="overflow: auto; max-height: 400px">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">TVA</th>
+                    <th scope="col">Modifier</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tva in tvas %}
+                    <tr>
+                        <th scope="row">{{ tva.title }} %</th>
+                        <td><a href="{{ path('app_admin_edit_tva' , {id: tva.id}) }}"
+                               class="btn btn-info">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container col-md-3 my-5" style="overflow: auto; max-height: 400px">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">UNité</th>
+                    <th scope="col">Modifier</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for unit in units %}
+                    <tr>
+                        <th scope="row">{{ unit.title }}</th>
+                        <td><a href="{{ path('app_admin_edit_tva' , {id: unit.id}) }}"
+                               class="btn btn-info">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {# Todo : Ajouter un bouton Ajouter une catégorie #}
+    {# Todo : Ajouter un bouton Ajouter un produit #}
+    <script>
+        let activer = document.querySelectorAll('.form-check-input')
+        for (let bouton of activer) {
+            bouton.addEventListener("click", function () {
+                let xmlhttp = new XMLHttpRequest;
+                xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`)
+                xmlhttp.send()
+            })
+        }
+    </script>
+{% endblock %}
