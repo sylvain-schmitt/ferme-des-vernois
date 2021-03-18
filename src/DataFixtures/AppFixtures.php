@@ -4,6 +4,8 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Tva;
+use App\Entity\Unit;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -13,10 +15,25 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
+
+        for ($i = 0; $i < 3; $i++) {
+            $tva = (new Tva())
+                ->setTitle($faker->randomFloat(1, 2, 20));
+            $manager->persist($tva);
+        }
+
+        for ($l = 0; $l < 3; $l++){
+            $unit = (new Unit())
+                ->setTitle($faker->sentence())
+                ->setSlug($faker->slug(2));
+            $manager->persist($unit);
+        }
+
+
         for ($j = 0; $j < 5; $j++){
             $cat = (new Category())
                 ->setTitle($faker->sentence(3))
-                ->setSlug($faker->sentence(3));
+                ->setSlug($faker->slug(2));
             $manager->persist($cat);
 
              for ($k = 0; $k < 3; $k++) {
@@ -25,9 +42,13 @@ class AppFixtures extends Fixture
                      ->setDescription($faker->paragraph())
                      ->setPrice($faker->randomFloat(2, 5, 30))
                      ->setPound($faker->numberBetween(500, 4000))
-                     ->setSlug($faker->sentence(3))
+                     ->setSlug($faker->slug(2))
                      ->setCategory($cat)
-                     ->setCreatedAt($faker->dateTimeBetween('-2 weeks','now'));
+                     ->setUnits($unit)
+                     ->setActive(1)
+                     ->setCreatedAt($faker->dateTimeBetween('-2 weeks','now'))
+                     ->setQuantity($faker->numberBetween(0, 40));
+
                  $manager->persist($product);
              }
         }

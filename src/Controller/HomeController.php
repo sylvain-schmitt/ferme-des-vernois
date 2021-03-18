@@ -36,4 +36,13 @@ class HomeController extends AbstractController
         return $this->render('home/product_show.html.twig', compact('product'));
     }
 
+    /**
+     * @Route("/categorie/{slug}", name="app_category")
+     */
+    public function categoryShow(ProductRepository $productRepository): Response
+    {
+        $products= $productRepository->findBy(['categoryId'],[]);
+        return $this->render('home/category_show.html.twig', compact('products'));
+    }
+
 }

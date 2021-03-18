@@ -50,15 +50,36 @@ class Product
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $pound;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantity;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $pound;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $active;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Tva::class, inversedBy="products")
+     */
+    private $tva;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $units;
 
     public function getId(): ?int
     {
@@ -137,6 +158,30 @@ class Product
         return $this;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
     public function getPound(): ?float
     {
         return $this->pound;
@@ -149,14 +194,38 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getActive(): ?bool
     {
-        return $this->category;
+        return $this->active;
     }
 
-    public function setCategory(?Category $category): self
+    public function setActive(bool $active): self
     {
-        $this->category = $category;
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getTva(): ?Tva
+    {
+        return $this->tva;
+    }
+
+    public function setTva(?Tva $tva): self
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    public function getUnits(): ?Unit
+    {
+        return $this->units;
+    }
+
+    public function setUnits(?Unit $units): self
+    {
+        $this->units = $units;
 
         return $this;
     }
