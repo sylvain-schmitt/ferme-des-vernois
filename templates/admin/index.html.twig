@@ -5,7 +5,7 @@
 {% block body %}
 
     {# Liste des produits #}
-    <div class="container my-5" style="overflow: auto; max-height: 400px">
+    <div class="container my-5" style="overflow: auto; height: 75vh">
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -17,6 +17,7 @@
                 <th scope="col">TVA</th>
                 <th scope="col">Modifier</th>
                 <th scope="col">Activer/Désactiver</th>
+                <th scope="col">Supprimer</th>
             </tr>
             </thead>
             <tbody>
@@ -69,6 +70,21 @@
                                    data-id="{{ product.id }}" id="{{ product.id }}">
                             <label class="form-check-label" for="{{ product.id }}"></label>
                         </div>
+                    </td>
+                    <td>
+                        <a href="#"
+                           onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') &&
+                                   document
+                                   .getElementById
+                                   ('js-product-delete-form-{{ product.id }}').submit();"
+                           class="btn"><img src="https://img.icons8.com/fluent/20/000000/trash.png"/></a>
+                        <form id="js-product-delete-form-{{ product.id }}"
+                              action="{{ path('app_admin_delete_product', {id: product.id}) }}"
+                              method="post" style="display:none;">
+                            <input type="hidden" name="csrf_token"
+                                   value="{{ csrf_token('product_deletion_' ~ product.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
                     </td>
 
                 </tr>
@@ -144,6 +160,7 @@
 
     {# Todo : Ajouter un bouton Ajouter une catégorie #}
     {# Todo : Ajouter un bouton Ajouter un produit #}
+
     <script>
         let activer = document.querySelectorAll('.form-check-input')
         for (let bouton of activer) {
@@ -154,4 +171,5 @@
             })
         }
     </script>
+
 {% endblock %}

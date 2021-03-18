@@ -13,7 +13,6 @@ class UnitType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('slug')
         ;
     }
 

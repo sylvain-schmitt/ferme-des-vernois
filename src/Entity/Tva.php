@@ -24,7 +24,6 @@ class Tva
      */
     private $title;
 
-
     /**
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="tva")
      */

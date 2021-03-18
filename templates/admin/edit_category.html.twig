@@ -3,7 +3,16 @@
 {% block title %}Modifier {{ category.title }}{% endblock %}
 
 {% block body %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    <button type="submit" class="btn btn-success">Modifier</button>
+    <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
+    {{ form_end(form) }}
+
+
     {# Todo : Ajouter un bouton modifier #}
     {# Todo : Ajouter un bouton supprimer #}
     {# Todo : Ajouter un bouton revenir au tableau de bord #}
+
 {% endblock %}

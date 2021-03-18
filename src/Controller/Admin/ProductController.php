@@ -72,7 +72,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/supprimer_produit/{id<[0-9]+>}", name="app_admin_delete_product", methods={"DELETE"})
+     * @Route("/admin/supprimer_produit/{id<[0-9]+>}", name="app_admin_delete_product")
      */
     public function deleteProduct(Request $request, Product $product)
     {
