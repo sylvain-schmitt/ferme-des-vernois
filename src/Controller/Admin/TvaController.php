@@ -21,7 +21,7 @@ class TvaController extends AbstractController
     /**
      * @Route("/admin/modifier_tva/{id}", name="app_admin_edit_tva")
      */
-    public function editStreamer(Tva $tva, Request $request)
+    public function editTva(Tva $tva, Request $request)
     {
         $form = $this->createForm(TvaType::class, $tva);
         $form->handleRequest($request);

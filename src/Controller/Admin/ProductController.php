@@ -54,7 +54,7 @@ class ProductController extends AbstractController
     /**
      * @Route("/admin/modifier_profuit/{id}", name="app_admin_edit_product")
      */
-    public function editProduct(Request $request, ProductRepository $productRepository, Product $product)
+    public function editProduct(Request $request, Product $product)
     {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);

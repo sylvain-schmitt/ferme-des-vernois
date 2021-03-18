@@ -44,7 +44,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/modifier_categorie/{id}", name="app_admin_edit_category")
      */
-    public function editStreamer(Category $category, Request $request, CategoryRepository $categoryRepository)
+    public function editCategory(Category $category, Request $request)
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);

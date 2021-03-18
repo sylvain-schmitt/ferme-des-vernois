@@ -21,7 +21,7 @@ class UnitController extends AbstractController
     /**
      * @Route("/admin/modifier_unit/{id}", name="app_admin_edit_unit")
      */
-    public function editStreamer(Unit $unit, Request $request)
+    public function editUnit(Unit $unit, Request $request)
     {
         $form = $this->createForm(UnitType::class, $unit);
         $form->handleRequest($request);
