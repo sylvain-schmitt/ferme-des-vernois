@@ -1,0 +1,17 @@
+{% for product in products %}
+    <div class="col mb-4">
+        <div class="card" style="width: 25rem;">
+            <img src="https://picsum.photos/300/300" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Catégorie <a href="#">{{ product.category }}</a></h6>
+                <p class="card-text">{{ product.description | u.truncate(60, '...', false)}}</p>
+                <a href="{{ path('app_product_show', {slug:product.slug}) }}" class="btn btn-primary">voir le produit</a>
+            </div>
+            <div class="card-footer text-muted">
+                <p>prix: {{ product.price }} €</p>
+                <p>poid: {{ product.pound }} Grammes</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
