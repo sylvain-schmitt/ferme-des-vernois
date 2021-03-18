@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use App\Repository\TvaRepository;
@@ -20,7 +19,6 @@ class AdminController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
-
 
     /**
      * @Route("/admin", name="app_admin")
