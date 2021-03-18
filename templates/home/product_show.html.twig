@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center my-4">{{ product.title }}</h2>
+    <img src="https://picsum.photos/800/500" alt="">
+    <p>{{ product.description }}</p>
+{% endblock %}
+
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
