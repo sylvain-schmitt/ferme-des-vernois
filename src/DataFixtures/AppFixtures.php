@@ -22,38 +22,31 @@ class AppFixtures extends Fixture
             $manager->persist($tva);
         }
 
-        for ($l = 0; $l < 3; $l++){
+        for ($l = 0; $l < 3; $l++) {
             $unit = (new Unit())
-                ->setTitle($faker->sentence())
-                ->setSlug($faker->slug(2));
+                ->setTitle($faker->sentence());
             $manager->persist($unit);
         }
 
-
-        for ($j = 0; $j < 5; $j++){
+        for ($j = 0; $j < 5; $j++) {
             $cat = (new Category())
-                ->setTitle($faker->sentence(3))
-                ->setSlug($faker->slug(2));
+                ->setTitle($faker->sentence(3));
             $manager->persist($cat);
 
-             for ($k = 0; $k < 3; $k++) {
-                 $product = (new Product())
-                     ->setTitle($faker->sentence(3))
-                     ->setDescription($faker->paragraph())
-                     ->setPrice($faker->randomFloat(2, 5, 30))
-                     ->setPound($faker->numberBetween(500, 4000))
-                     ->setSlug($faker->slug(2))
-                     ->setCategory($cat)
-                     ->setUnits($unit)
-                     ->setActive(1)
-                     ->setCreatedAt($faker->dateTimeBetween('-2 weeks','now'))
-                     ->setQuantity($faker->numberBetween(0, 40));
+            for ($k = 0; $k < 3; $k++) {
+                $product = (new Product())
+                    ->setTitle($faker->sentence(3))
+                    ->setDescription($faker->paragraph())
+                    ->setPrice($faker->randomFloat(2, 5, 30))
+                    ->setPound($faker->numberBetween(500, 4000))
+                    ->setCategory($cat)
+                    ->setUnits($unit)
+                    ->setActive(1)
+                    ->setQuantity($faker->numberBetween(0, 40));
 
-                 $manager->persist($product);
-             }
+                $manager->persist($product);
+            }
         }
-
-
-                $manager->flush();
+        $manager->flush();
     }
 }
