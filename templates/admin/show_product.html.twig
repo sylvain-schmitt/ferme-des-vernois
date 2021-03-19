@@ -3,9 +3,8 @@
     {% block title %}{{ product.title }}{% endblock %}
 
 {% block body %}
-    {# Todo : Afficher le produit #}
-    {# Todo : Ajouter un bouton modifier #}
-    {# Todo : Ajouter un bouton supprimer #}
+    <h2 class="text-center my-4">{{ product.title }}</h2>
+    <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_large') }} "/>
+    <p>{{ product.description | raw}}</p>
+    <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
 {% endblock %}
-
-

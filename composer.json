@@ -13,6 +13,8 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
         "fakerphp/faker": "^1.13",
+        "friendsofsymfony/ckeditor-bundle": "^2.3",
+        "knplabs/knp-paginator-bundle": "^5.4",
         "liip/imagine-bundle": "^2.5",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
