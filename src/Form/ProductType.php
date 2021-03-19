@@ -3,13 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Product;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -19,14 +19,17 @@ class ProductType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Nom du Produit'
             ])
-            ->add('description', TextType::class, [
-                'label' => 'Description'
+            ->add('description', TextareaType::class, [
+                'label' => 'Déscription'
             ])
             ->add('price', TextType::class, [
                 'label' => 'Prix TTC'
             ])
             ->add('pound', TextType::class, [
-                'label' => 'Poids'
+                'label' => 'Poids (xx.xx)',
+                'attr' => [
+                    'pattern' => '[0-9]{1,5}[.]{0,1}[0-9]{0,2}'
+                ]
             ])
             ->add('category')
             ->add('tva')
@@ -34,12 +37,17 @@ class ProductType extends AbstractType
             ->add('quantity', TextType::class, [
                 'label' => 'Quantité'
             ])
-            ->add('active', CheckboxType::class, [
-                'label' => 'Activer ou Désactiver le Produit',
+
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image (JPG ou PNG)',
                 'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer',
+                'download_uri' => false,
+                'image_uri' => false,
                 'attr' => [
-                    'class' => 'form-check-input'
-                ]
+                    'class' => 'form-control'
+                ],
             ])
         ;
     }

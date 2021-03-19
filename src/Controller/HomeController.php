@@ -10,21 +10,28 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(): Response
     {
-       $products = $productRepository->findBy(['active' => '1'], ['createdAt'=>'desc'],3 );
+       $products = $this->productRepository->findBy(['active' => '1'], ['createdAt'=>'desc'],3 );
         return $this->render('home/index.html.twig', compact('products'));
     }
 
     /**
      * @Route("/produit", name="app_product")
      */
-    public function product(ProductRepository $productRepository): Response
+    public function product(): Response
     {
-        $products = $productRepository->findAll();
+        $products = $this->productRepository->findAll();
         return $this->render('home/product.html.twig', compact('products'));
     }
 
@@ -39,9 +46,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/categorie/{slug}", name="app_category")
      */
-    public function categoryShow(ProductRepository $productRepository): Response
+    public function categoryShow(): Response
     {
-        $products= $productRepository->findBy(['categoryId'],[]);
+        $products= $this->productRepository->findBy(['categoryId'],[]);
         return $this->render('home/category_show.html.twig', compact('products'));
     }
 

@@ -23,9 +23,8 @@
     {{ form_label(form.units, 'Unité') }}
     {{ form_widget(form.units) }}
     {{ form_row(form.quantity) }}
-    <div class="form-check form-switch">
-        {{ form_row(form.active) }}
-    </div>
+    {{ form_widget(form.imageFile) }}
+    <img class="w-100" src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/placeholder.jpg')) }} "/>
     {% if route == 'app_admin_edit_product' %}
         <button type="submit" class="btn btn-success">Modifier</button>
     {% else %}
