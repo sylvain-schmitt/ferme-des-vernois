@@ -1,29 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier {{ product.title }}{% endblock %}
+{% set route = app.request.attributes.get('_route') %}
+
+{% block title %}
+    {% if route == 'app_admin_edit_product' %}
+        Modifier {{ product.title }}
+    {% else %}
+        Nouveau Produit
+    {% endif %}
+{% endblock %}
 
 {% block body %}
 
     {{ form_start(form) }}
-    {{ form_row(form.category) }}
+    {{ form_label(form.category, 'Catégorie') }}
+    {{ form_widget(form.category) }}
     {{ form_row(form.title) }}
     {{ form_row(form.description) }}
     {{ form_row(form.price) }}
     {{ form_row(form.tva) }}
     {{ form_row(form.pound) }}
-    {{ form_row(form.units) }}
+    {{ form_label(form.units, 'Unité') }}
+    {{ form_widget(form.units) }}
     {{ form_row(form.quantity) }}
     <div class="form-check form-switch">
         {{ form_row(form.active) }}
     </div>
-    <button type="submit" class="btn btn-success">Modifier</button>
+    {% if route == 'app_admin_edit_product' %}
+        <button type="submit" class="btn btn-success">Modifier</button>
+    {% else %}
+        <button type="submit" class="btn btn-success">Crée</button>
+    {% endif %}
     <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
     {{ form_end(form) }}
 
-
-    {# Todo : Ajouter un bouton modifier #}
-    {# Todo : Ajouter un bouton supprimer #}
-    {# Todo : Ajouter un bouton revenir au tableau de bord #}
 {% endblock %}
 
 

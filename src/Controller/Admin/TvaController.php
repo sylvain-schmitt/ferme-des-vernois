@@ -19,6 +19,26 @@ class TvaController extends AbstractController
     }
 
     /**
+     * @Route("/admin/nouvelle_tva/", name="app_admin_new_tva")
+     */
+    public function newTva(Request $request)
+    {
+        $tva = new Tva();
+        $form = $this->createForm(TvaType::class, $tva);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($tva);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'TVA créer avec succès');
+            return $this->redirectToRoute('app_admin');
+        }
+        return $this->render('admin/edit_tva.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/admin/modifier_tva/{id}", name="app_admin_edit_tva")
      */
     public function editTva(Tva $tva, Request $request)
@@ -33,7 +53,7 @@ class TvaController extends AbstractController
         }
 
         return $this->render('admin/edit_tva.html.twig', [
-            'tvas' => $tva,
+            'tva' => $tva,
             'form' => $form->createView(),
         ]);
     }

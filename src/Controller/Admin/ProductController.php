@@ -33,10 +33,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/admin/nouveau_produit/", name="app_admin_new_product")
      */
-    public function newProduct(Request $request, ProductRepository $productRepository): Response
+    public function newProduct(Request $request): Response
     {
         $product = new Product();
-        $form = $this->createForm(ProductType::class, $productRepository);
+        $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,8 +45,7 @@ class ProductController extends AbstractController
             $this->addFlash('success', 'Produit créer avec succès');
             return $this->redirectToRoute('app_admin');
         }
-        return $this->render('admin/new_product.html.twig', [
-            'product' => $product,
+        return $this->render('admin/edit_product.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -80,7 +79,7 @@ class ProductController extends AbstractController
             $this->entityManager->remove($product);
             $this->entityManager->flush();
 
-            $this->addFlash('info', 'Rendez vous supprimer avec succès !');
+            $this->addFlash('info', 'Produit supprimer avec succès !');
         }
         return $this->redirectToRoute('app_admin');
     }

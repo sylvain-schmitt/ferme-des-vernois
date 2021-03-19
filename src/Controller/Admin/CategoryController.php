@@ -23,10 +23,10 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/nouvelle_categorie/", name="app_admin_new_categorie")
      */
-    public function newCategory(Request $request, CategoryRepository $categoryRepository): Response
+    public function newCategory(Request $request): Response
     {
         $category = new Category();
-        $form = $this->createForm(CategoryType::class, $categoryRepository);
+        $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -35,8 +35,7 @@ class CategoryController extends AbstractController
             $this->addFlash('success', 'Categorie créer avec succès');
             return $this->redirectToRoute('app_admin');
         }
-        return $this->render('admin/new_category.html.twig', [
-            'category' => $category,
+        return $this->render('admin/edit_category.html.twig', [
             'form' => $form->createView(),
         ]);
     }

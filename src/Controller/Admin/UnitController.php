@@ -19,6 +19,26 @@ class UnitController extends AbstractController
     }
 
     /**
+     * @Route("/admin/nouvelle_unite/", name="app_admin_new_unit")
+     */
+    public function newUnit(Request $request)
+    {
+        $unit = new Unit();
+        $form = $this->createForm(UnitType::class, $unit);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($unit);
+            $this->entityManager->flush();
+            $this->addFlash('success', 'Unité créer avec succès');
+            return $this->redirectToRoute('app_admin');
+        }
+        return $this->render('admin/edit_unit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/admin/modifier_unit/{id}", name="app_admin_edit_unit")
      */
     public function editUnit(Unit $unit, Request $request)
