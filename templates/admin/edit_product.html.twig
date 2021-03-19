@@ -24,7 +24,7 @@
     {{ form_widget(form.units) }}
     {{ form_row(form.quantity) }}
     {{ form_widget(form.imageFile) }}
-    <img class="w-100" src="{{ (product.imageName ? vich_uploader_asset(product) : asset('build/images/placeholder.jpg')) }} "/>
+    <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
     {% if route == 'app_admin_edit_product' %}
         <button type="submit" class="btn btn-success">Modifier</button>
     {% else %}

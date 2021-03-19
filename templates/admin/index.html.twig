@@ -9,7 +9,7 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Catégorie</th>
+                <th scope="col">Miniature</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Stock</th>
                 <th scope="col">Prix</th>
@@ -23,7 +23,9 @@
             <tbody>
             {% for product in products %}
                 <tr>
-                    <th scope="row">{{ product.category }}</th>
+                    <th scope="row">
+                        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
+                    </th>
                     <td><a href="{{ path('app_admin_show_product', {id: product.id}) }}">{{ product.title }}</a></td>
                     <td>
                         {% if product.quantity == 0 %}
@@ -56,11 +58,7 @@
                     </td>
                     <td>{{ product.price }} €</td>
                     <td>
-                        {% if product.pound > 1 %}
-                        {{ product.pound }} {{ product.units }}s
-                        {% else %}
-                        {{ product.pound }} {{ product.units }}
-                        {% endif %}
+                        {{ pluralize(product.pound , product.units) }}
                     </td>
                     <td>
                         {% if product.tva %}

@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +25,7 @@ class ProductType extends AbstractType
                 'label' => 'Prix TTC'
             ])
             ->add('pound', TextType::class, [
-                'label' => 'Poids (xx.xx)',
+                'label' => 'Quantité (xx.xx)',
                 'attr' => [
                     'pattern' => '[0-9]{1,5}[.]{0,1}[0-9]{0,2}'
                 ]
@@ -35,14 +34,14 @@ class ProductType extends AbstractType
             ->add('tva')
             ->add('units')
             ->add('quantity', TextType::class, [
-                'label' => 'Quantité'
+                'label' => 'Stock'
             ])
 
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image (JPG ou PNG)',
                 'required' => false,
                 'allow_delete' => true,
-                'delete_label' => 'Supprimer',
+                'delete_label' => 'Supprimer l\'image',
                 'download_uri' => false,
                 'image_uri' => false,
                 'attr' => [

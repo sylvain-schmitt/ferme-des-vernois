@@ -2,7 +2,7 @@
 
 {% block body %}
     <h2 class="text-center my-4">{{ product.title }}</h2>
-    <img src="https://picsum.photos/800/500" alt="">
+    <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_large') }} "/>
     <p>{{ product.description }}</p>
 {% endblock %}
 
