@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\OrderType;
-use Symfony\Component\Mailer\Mailer;
+use App\Repository\OrderRepository;
 use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -19,10 +19,18 @@ use Doctrine\ORM\EntityManagerInterface;
 class HomeController extends AbstractController
 {
     private ProductRepository $productRepository;
+    private EntityManagerInterface $entityManager;
+    private OrderRepository $orderRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(
+        ProductRepository $productRepository,
+        EntityManagerInterface $entityManager,
+        OrderRepository $orderRepository)
     {
         $this->productRepository = $productRepository;
+        $this->entityManager = $entityManager;
+        $this->orderRepository = $orderRepository;
+
     }
 
     /**
@@ -30,7 +38,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-       $products = $this->productRepository->findBy(['active' => '1'], ['createdAt'=>'desc'],3 );
+        $products = $this->productRepository->findBy(['active' => '1'], ['createdAt' => 'desc'], 3);
         return $this->render('home/index.html.twig', compact('products'));
     }
 
@@ -62,14 +70,14 @@ class HomeController extends AbstractController
      */
     public function categoryShow(): Response
     {
-        $products= $this->productRepository->findBy(['categoryId'],[]);
+        $products = $this->productRepository->findBy(['categoryId'], []);
         return $this->render('home/category_show.html.twig', compact('products'));
     }
 
     /**
      * @Route("/commande", name="app_order")
      */
-    public function order(Request $request, MailerServiceInterface $mailer): Response
+    public function order(Request $request, MailerServiceInterface $mailer, OrderRepository $orderRepository): Response
     {
 
         $order = new Order();
@@ -79,16 +87,24 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // Todo : Crée le PDF avec toute les infos récupérer pour les produits
+            // Todo : Set le PDF en BDD
+
             $toAdresses = [new Address($order->getAddress()), new Address('mailcentre@mail.com')];
             $mailer->send('repare_online_garage@test.fr', $toAdresses, 'Contact depuis le site Repare Online Garage',
                 'emails/contact.mjml.twig',
                 'emails/contact.txt.twig', [
-                    'order_id' => $order->getId(),
+                    'order_id' => $order->getOrderId(),
                     'nom' => $order->getFirstName(),
                     'prenom' => $order->getLastName(),
                     'phone' => $order->getPhone(),
                     'address' => $order->getAddress(),
+                    // Todo : 'pdf' => $order->getPdf(),
+                    // Todo : Ajouter le PDF pour l'envoyer par mail
                 ]);
+
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();
             $this->addFlash('message', 'Votre Mail à bien été envoyer');
             return $this->redirectToRoute('app_home');
         }

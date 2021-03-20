@@ -38,6 +38,11 @@ class Order
      */
     private $address;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $order_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Order
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getOrderId(): ?int
+    {
+        return $this->order_id;
+    }
+
+    public function setOrderId(int $order_id): self
+    {
+        $this->order_id = $order_id;
 
         return $this;
     }

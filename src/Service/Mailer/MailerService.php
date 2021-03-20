@@ -71,7 +71,7 @@ class MailerService implements MailerServiceInterface
             ->from($from)
             ->to(...$toAddresses)
             ->subject($subject)
-            ->html($mjmlTemplate)
+            ->html($this->convertMjmlToHtml($mjmlTemplate, $params))
             ->textTemplate($txt)
             ->context($params)
         ;
