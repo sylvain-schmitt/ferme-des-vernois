@@ -110,7 +110,8 @@
                 {% for categorie in categories %}
                     <tr>
                         <th scope="row">{{ categorie.title }}</th>
-                        <td><a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}"
+                        <td>
+                            <a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}"
                                class="btn btn-info">Modifier</a>
                         </td>
                     </tr>

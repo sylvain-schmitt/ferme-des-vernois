@@ -2,13 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\OrderType;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Mailer\MailerServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class HomeController extends AbstractController
 {
@@ -58,6 +64,38 @@ class HomeController extends AbstractController
     {
         $products= $this->productRepository->findBy(['categoryId'],[]);
         return $this->render('home/category_show.html.twig', compact('products'));
+    }
+
+    /**
+     * @Route("/commande", name="app_order")
+     */
+    public function order(Request $request, MailerServiceInterface $mailer): Response
+    {
+
+        $order = new Order();
+        $form = $this->createForm(OrderType::class, $order);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $toAdresses = [new Address($order->getAddress()), new Address('mailcentre@mail.com')];
+            $mailer->send('repare_online_garage@test.fr', $toAdresses, 'Contact depuis le site Repare Online Garage',
+                'emails/contact.mjml.twig',
+                'emails/contact.txt.twig', [
+                    'order_id' => $order->getId(),
+                    'nom' => $order->getFirstName(),
+                    'prenom' => $order->getLastName(),
+                    'phone' => $order->getPhone(),
+                    'address' => $order->getAddress(),
+                ]);
+            $this->addFlash('message', 'Votre Mail à bien été envoyer');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('home/order.html.twig', [
+            'products' => $this->productRepository->findBy(['active' => '1']),
+            'form' => $form->createView()
+        ]);
     }
 
 }
