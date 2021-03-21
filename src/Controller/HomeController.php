@@ -24,8 +24,11 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-       $products = $this->productRepository->findBy(['active' => '1'], ['createdAt'=>'desc'],3 );
-        return $this->render('home/index.html.twig', compact('products'));
+       $products = $this->productRepository->findBy(['active' => true], ['createdAt'=>'desc'], 3);
+
+        return $this->render('home/index.html.twig', [
+            'products' => $products,
+        ]);
     }
 
     /**
@@ -33,7 +36,7 @@ class HomeController extends AbstractController
      */
     public function product(Request $request, PaginatorInterface $paginator): Response
     {
-        $donnees = $this->productRepository->findBy([], ['createdAt' => 'desc']);
+        $donnees = $this->productRepository->findBy(['active' => true], ['createdAt' => 'desc']);
 
         $products = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)

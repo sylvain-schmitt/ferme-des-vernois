@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Rechercher de produit</h1>
+    <div class="row">
+        {{ form(form) }}
+        {% include 'partials/_card.html.twig' %}
+    </div>
+
+{% endblock %}

@@ -6,6 +6,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
+
 class AppExtension extends AbstractExtension
 {
     public function getFilters(): array
@@ -31,4 +32,6 @@ class AppExtension extends AbstractExtension
         $result =  $count <= 1 ? $singular : $plural;
         return "$count $result";
     }
+
+
 }
