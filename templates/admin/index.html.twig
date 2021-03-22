@@ -68,21 +68,12 @@
                     <td><a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
                            class="btn btn-info">Modifier</a></td>
                     <td>
-                        {% if product.quantity == 0 %}
-                            <div class="form-check form-switch">
-                                <input type="checkbox"
-                                       class="form-check-input mx-auto" {{ (product.active) ? '' : '' }}
-                                       data-id="{{ product.id }}" id="{{ product.id }}">
-                                <label class="form-check-label" for="{{ product.id }}"></label>
-                            </div>
-                        {% else %}
-                            <div class="form-check form-switch">
-                                <input type="checkbox"
-                                       class="form-check-input mx-auto" {{ (product.active) ? 'checked' : '' }}
-                                       data-id="{{ product.id }}" id="{{ product.id }}">
-                                <label class="form-check-label" for="{{ product.id }}"></label>
-                            </div>
-                        {% endif %}
+                        <div class="form-check form-switch">
+                            <input type="checkbox"
+                                   class="form-check-input mx-auto" {{ (product.active) ? 'checked' : '' }}
+                                   data-id="{{ product.id }}" id="{{ product.id }}">
+                            <label class="form-check-label" for="{{ product.id }}"></label>
+                        </div>
                     </td>
                     <td>
                         <a href="#"
