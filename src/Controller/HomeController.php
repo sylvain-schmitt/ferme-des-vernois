@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\OrderType;
+use App\Repository\ActualityRepository;
 use App\Repository\OrderRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\Mime\Address;
@@ -24,18 +25,21 @@ class HomeController extends AbstractController
     private EntityManagerInterface $entityManager;
     private OrderRepository $orderRepository;
     private FlashyNotifier $flashy;
+    private ActualityRepository $actualityRepository;
 
     public function __construct(
         ProductRepository $productRepository,
         EntityManagerInterface $entityManager,
         OrderRepository $orderRepository,
-        FlashyNotifier $flashy
+        FlashyNotifier $flashy,
+        ActualityRepository $actualityRepository
     )
     {
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
         $this->orderRepository = $orderRepository;
         $this->flashy = $flashy;
+        $this->actualityRepository = $actualityRepository;
     }
 
     /**
@@ -44,12 +48,9 @@ class HomeController extends AbstractController
     public function index(): Response
     {
 
-       $products = $this->productRepository->findBy(['active' => true], ['createdAt'=>'desc'], 3);
-
         return $this->render('home/index.html.twig', [
-            'products' => $products,
+            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
-
 
     }
 

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'annonce{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
+    {{ form_row(form.imageFile) }}
+    <div class="form-check form-switch">
+        <input type="checkbox"
+               class="form-check-input mx-auto" {{ (actuality.active) ? 'checked' : '' }}
+               data-id="{{ actuality.id }}" id="{{ actuality.id }}">
+        <label class="form-check-label" for="{{ actuality.id }}"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    {{ form_end(form) }}
+
+    <script>
+        let activer = document.querySelectorAll('.form-check-input')
+        for (let bouton of activer) {
+            bouton.addEventListener("click", function () {
+                let xmlhttp = new XMLHttpRequest;
+                xmlhttp.open("get", `activer/${this.dataset.id}`)
+                xmlhttp.send()
+            })
+        }
+    </script>
+
+{% endblock %}
+
+

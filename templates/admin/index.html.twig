@@ -65,8 +65,10 @@
                             {{ product.tva }}%
                         {% endif %}
                     </td>
-                    <td><a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
-                           class="btn btn-info">Modifier</a></td>
+                    <td>
+                        <a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
+                           class="btn btn-info">Modifier</a>
+                    </td>
                     <td>
                         <div class="form-check form-switch">
                             <input type="checkbox"
@@ -162,9 +164,6 @@
             </table>
         </div>
     </div>
-
-    {# Todo : Ajouter un bouton Ajouter une catégorie #}
-    {# Todo : Ajouter un bouton Ajouter un produit #}
 
     <script>
         let activer = document.querySelectorAll('.form-check-input')

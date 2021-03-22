@@ -127,7 +127,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/activer/{id}", name="activer")
+     * @Route("/admin/product/activer/{id}", name="activer_product")
      */
     public function activer(Product $product)
     {

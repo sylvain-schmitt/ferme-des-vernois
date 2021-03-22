@@ -1,0 +1,12 @@
+<div class="row mb-4">
+    {% for actuality in actuality %}
+        <div class="col">
+            <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "
+                 style="border-radius: 50%"/>
+        </div>
+        <div class="col">
+            <h1>{{ actuality.title }}</h1>
+            <p>{{ actuality.description | raw }}</p>
+        </div>
+    {% endfor %}
+</div>
