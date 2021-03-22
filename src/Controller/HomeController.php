@@ -9,6 +9,8 @@ use App\Form\OrderType;
 use App\Repository\ActualityRepository;
 use App\Repository\OrderRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -89,7 +91,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/commande", name="app_order")
      */
-    public function order(Request $request, MailerServiceInterface $mailer): Response
+    public function order(Request $request, MailerInterface $mailer): Response
     {
 
         $order = new Order();
@@ -101,20 +103,22 @@ class HomeController extends AbstractController
 
             // Todo : Crée le PDF avec toute les infos récupérer pour les produits
             // Todo : Set le PDF en BDD
-
-            $toAdresses = [new Address($order->getAddress()), new Address('mailcentre@mail.com')];
-            $mailer->send('repare_online_garage@test.fr', $toAdresses, 'Contact depuis le site Repare Online Garage',
-                'emails/contact.mjml.twig',
-                'emails/contact.txt.twig', [
-                    'order_id' => $order->getOrderId(),
+            $email = (new TemplatedEmail())
+                ->from('fermedesvernois@test.com')
+                ->to($order->getAddress())
+                ->subject('contact depuis la ferme des vernois')
+                ->htmlTemplate('emails/contact.html.twig')
+                ->context([
+                    'id' => $order->getId(),
+                    'address' => $order->getAddress(),
                     'nom' => $order->getFirstName(),
                     'prenom' => $order->getLastName(),
                     'phone' => $order->getPhone(),
-                    'address' => $order->getAddress(),
-                    // Todo : 'pdf' => $order->getPdf(),
-                    // Todo : Ajouter le PDF pour l'envoyer par mail
-                ]);
+                    'sujet' => ('nouvelle commande'),
+                ])
+            ;
 
+            $mailer->send($email);
             $this->entityManager->persist($order);
             $this->entityManager->flush();
             $this->flashy->success('Votre mail à bien été envoyer !');
