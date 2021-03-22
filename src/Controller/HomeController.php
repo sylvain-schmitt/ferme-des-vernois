@@ -7,6 +7,7 @@ use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Component\Mime\Address;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -22,16 +23,19 @@ class HomeController extends AbstractController
     private ProductRepository $productRepository;
     private EntityManagerInterface $entityManager;
     private OrderRepository $orderRepository;
+    private FlashyNotifier $flashy;
 
     public function __construct(
         ProductRepository $productRepository,
         EntityManagerInterface $entityManager,
-        OrderRepository $orderRepository)
+        OrderRepository $orderRepository,
+        FlashyNotifier $flashy
+    )
     {
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
         $this->orderRepository = $orderRepository;
-
+        $this->flashy = $flashy;
     }
 
     /**
@@ -112,7 +116,7 @@ class HomeController extends AbstractController
 
             $this->entityManager->persist($order);
             $this->entityManager->flush();
-            $this->addFlash('message', 'Votre Mail à bien été envoyer');
+            $this->flashy->success('Votre mail à bien été envoyer !');
             return $this->redirectToRoute('app_home');
         }
         return $this->render('home/order.html.twig', [
