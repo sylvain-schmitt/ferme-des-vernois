@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Form\ProductType;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private FlashyNotifier $flashy;
 
-    public function __construct(EntityManagerInterface $entityManager)
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FlashyNotifier $flashy
+    )
     {
         $this->entityManager = $entityManager;
+        $this->flashy = $flashy;
     }
 
     /**
@@ -41,7 +48,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($product);
             $this->entityManager->flush();
-            $this->addFlash('success', 'Produit créer avec succès');
+            $this->flashy->success('Produit créer');
             return $this->redirectToRoute('app_admin');
         }
         return $this->render('admin/edit_product.html.twig', [
@@ -59,7 +66,7 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash('success', 'Produit modifier avec succès');
+            $this->flashy->info('Produit modifier');
             return $this->redirectToRoute('app_admin');
         }
 
@@ -77,8 +84,7 @@ class ProductController extends AbstractController
         if ($this->isCsrfTokenValid('product_deletion_' . $product->getId(), $request->request->get('csrf_token'))) {
             $this->entityManager->remove($product);
             $this->entityManager->flush();
-
-            $this->addFlash('info', 'Produit supprimer avec succès !');
+            $this->flashy->error('Produit supprimer');
         }
         return $this->redirectToRoute('app_admin');
     }
@@ -92,7 +98,6 @@ class ProductController extends AbstractController
         $count = $count + 1;
         $product->setQuantity($count);
         $this->entityManager->flush();
-
         return $this->redirectToRoute('app_admin');
     }
 

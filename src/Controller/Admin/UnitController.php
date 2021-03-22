@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Unit;
 use App\Form\UnitType;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class UnitController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private FlashyNotifier $flashy;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, FlashyNotifier $flashy)
     {
         $this->entityManager = $entityManager;
+        $this->flashy = $flashy;
     }
 
     /**
@@ -30,7 +33,7 @@ class UnitController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($unit);
             $this->entityManager->flush();
-            $this->addFlash('success', 'Unité créer avec succès');
+            $this->flashy->success('Unité créer');
             return $this->redirectToRoute('app_admin');
         }
         return $this->render('admin/edit_unit.html.twig', [
@@ -48,7 +51,7 @@ class UnitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash('success', 'Unité modifier avec succès');
+            $this->flashy->info('Unité modifier');
             return $this->redirectToRoute('app_admin');
         }
 

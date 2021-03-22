@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Tva;
 use App\Form\TvaType;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class TvaController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private FlashyNotifier $flashy;
 
-    public function __construct(EntityManagerInterface $entityManager)
+
+    public function __construct(EntityManagerInterface $entityManager, FlashyNotifier $flashy)
     {
         $this->entityManager = $entityManager;
+        $this->flashy = $flashy;
     }
 
     /**
@@ -30,7 +34,7 @@ class TvaController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($tva);
             $this->entityManager->flush();
-            $this->addFlash('success', 'TVA créer avec succès');
+            $this->flashy->success('Tva créer');
             return $this->redirectToRoute('app_admin');
         }
         return $this->render('admin/edit_tva.html.twig', [
@@ -48,7 +52,7 @@ class TvaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash('success', 'TVA modifier avec succès');
+            $this->flashy->info('Tva modifier');
             return $this->redirectToRoute('app_admin');
         }
 

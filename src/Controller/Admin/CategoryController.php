@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Doctrine\ORM\EntityManagerInterface;
+use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
+    private FlashyNotifier $flashy;
 
-    public function __construct(EntityManagerInterface $entityManager)
+
+    public function __construct(EntityManagerInterface $entityManager, FlashyNotifier $flashy)
     {
         $this->entityManager = $entityManager;
+        $this->flashy = $flashy;
     }
 
     /**
@@ -31,7 +35,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->persist($category);
             $this->entityManager->flush();
-            $this->addFlash('success', 'Categorie créer avec succès');
+            $this->flashy->success('Catégorie créer');
             return $this->redirectToRoute('app_admin');
         }
         return $this->render('admin/edit_category.html.twig', [
@@ -49,7 +53,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
-            $this->addFlash('success', 'Categorie modifier avec succès');
+            $this->flashy->info('Catégorie modifier');
             return $this->redirectToRoute('app_admin');
         }
 
