@@ -30,6 +30,7 @@ class Product
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -86,7 +87,7 @@ class Product
     /**
      * @ORM\Column(type="boolean", options={"default":true})
      */
-    private $active;
+    private $active = true;
 
     /**
      * @ORM\ManyToOne(targetEntity=Tva::class, inversedBy="products")
