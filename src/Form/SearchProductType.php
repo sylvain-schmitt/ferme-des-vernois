@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,6 +24,15 @@ class SearchProductType extends AbstractType
                 'required' => false
             ])
 
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'label' => false,
+                'placeholder' => 'Recherche par catégorie',
+                'attr' => [
+                    'class' => 'form-group',
+                ],
+                'required' => false
+            ])
             ->add('Rechercher', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary',

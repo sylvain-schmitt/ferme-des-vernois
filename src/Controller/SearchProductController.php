@@ -25,6 +25,7 @@ class SearchProductController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $products = $productRepository->search(
                 $search->get('words')->getData(),
+                $search->get('category')->getData()
             );
             if (!$products) {
                 throw new NotFoundHttpException('Aucuns produits trouvée');

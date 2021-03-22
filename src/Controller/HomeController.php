@@ -115,7 +115,7 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         return $this->render('home/order.html.twig', [
-            'products' => $this->productRepository->findBy(['active' => '1']),
+            'products' => $this->productRepository->findBy(['active' => true]),
             'form' => $form->createView()
         ]);
     }

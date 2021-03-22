@@ -20,18 +20,18 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
-    public function search($words = null){
+    public function search($words, $category = null){
         $query = $this->createQueryBuilder('p');
         $query->where('p.active = 1');
         if($words != null){
             $query->andWhere('MATCH_AGAINST(p.title, p.description) AGAINST (:words boolean)>0')
                 ->setParameter('words', $words);
         }
-       /* if($categorie != null){
-            $query->leftJoin('a.categories', 'c');
+        if($category != null){
+            $query->leftJoin('p.category', 'c');
             $query->andWhere('c.id = :id')
-                ->setParameter('id', $categorie);
-        }*/
+                ->setParameter('id', $category);
+        }
         return $query->getQuery()->getResult();
     }
 
