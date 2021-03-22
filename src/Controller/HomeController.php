@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\OrderType;
@@ -74,16 +75,16 @@ class HomeController extends AbstractController
     /**
      * @Route("/categorie/{slug}", name="app_category")
      */
-    public function categoryShow(): Response
+    public function categoryShow(Category $category): Response
     {
-        $products = $this->productRepository->findBy(['categoryId'], []);
-        return $this->render('home/category_show.html.twig', compact('products'));
+        $products = $this->productRepository->findByCategory($category);
+        return $this->render('home/category_show.html.twig', compact('products', 'category'));
     }
 
     /**
      * @Route("/commande", name="app_order")
      */
-    public function order(Request $request, MailerServiceInterface $mailer, OrderRepository $orderRepository): Response
+    public function order(Request $request, MailerServiceInterface $mailer): Response
     {
 
         $order = new Order();

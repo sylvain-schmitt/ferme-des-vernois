@@ -27,9 +27,6 @@ class SearchProductController extends AbstractController
                 $search->get('words')->getData(),
                 $search->get('category')->getData()
             );
-            if (!$products) {
-                throw new NotFoundHttpException('Aucuns produits trouvée');
-            }
         }
 
 
