@@ -2,13 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Order;
+use App\Entity\Product;
+use App\Repository\ProductRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OrderType extends AbstractType
 {
@@ -28,13 +29,17 @@ class OrderType extends AbstractType
             ->add('address', EmailType::class, [
                 'label' => 'Adresse mail'
             ])
+            ->add('product', EntityType::class, [
+                'class' => Product::class,
+                'query_builder' => function (ProductRepository $productRepository){
+                    return $productRepository->createQueryBuilder('product')
+                        ->where('product.active = true')
+                        ;
+                },
+                'choice_value' => function (Product $product) {
+                    return $product->getTitle();
+                },
+            ])
         ;
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => Order::class,
-        ]);
     }
 }
