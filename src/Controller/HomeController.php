@@ -90,43 +90,82 @@ class HomeController extends AbstractController
     /**
      * @Route("/commande", name="app_order")
      */
-    public function order(Request $request, MailerInterface $mailer): Response
+    public function order(Request $request, ProductRepository $productRepository): Response
     {
 
-        $order = new Order();
-        $form = $this->createForm(OrderType::class, $order);
+        if (!empty($request->request->all())) {
 
-        $form->handleRequest($request);
+            $order_id = $this->generate();
+            $order = (array_filter($request->request->all(), fn($value) => !is_null($value) && $value !== ''));
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            // 19 / 20 /21
+            $productId = array_filter(array_keys($order), 'is_int');
+
+
+
+            $last_name = $order["last_name"];
+            $first_name = $order["first_name"];
+            $address = $order["address"];
+            $phone = $order["phone"];
+
+                foreach ($productId as $result) {
+
+
+
+                    foreach ($productId as $item) {
+                        $value = $order[$item];
+                        dd($value);
+                    }
+
+                    $product = $productRepository->findOneBy(["id" => $result]);
+                    $order = (new Order())
+                        ->setOrderId($order_id)
+                        ->setFirstName($first_name)
+                        ->setLastName($last_name)
+                        ->setAddress($address)
+                        ->setPhone($phone)
+                        ->setProduct($product)
+                        ->setQuantity($value)
+                    ;
+                    $this->entityManager->persist($order);
+                    $this->entityManager->flush();
+                }
+
+            $this->flashy->success('Votre mail à bien été envoyer !');
+            return $this->redirectToRoute('app_home');
+
+        }
 
             // Todo : Crée le PDF avec toute les infos récupérer pour les produits
             // Todo : Set le PDF en BDD
-            $email = (new TemplatedEmail())
-                ->from('fermedesvernois@test.com')
-                ->to($order->getAddress())
-                ->subject('contact depuis la ferme des vernois')
-                ->htmlTemplate('emails/contact.html.twig')
-                ->context([
-                    'id' => $order->getId(),
-                    'address' => $order->getAddress(),
-                    'nom' => $order->getFirstName(),
-                    'prenom' => $order->getLastName(),
-                    'phone' => $order->getPhone(),
-                    'sujet' => ('nouvelle commande'),
-                ])
-            ;
+//            $email = (new TemplatedEmail())
+//                ->from('fermedesvernois@test.com')
+//                ->to($order->getAddress())
+//                ->subject('contact depuis la ferme des vernois')
+//                ->htmlTemplate('emails/contact.html.twig')
+//                ->context([
+//                    'id' => $order->getId(),
+//                    'address' => $order->getAddress(),
+//                    'nom' => $order->getFirstName(),
+//                    'prenom' => $order->getLastName(),
+//                    'phone' => $order->getPhone(),
+//                    'sujet' => ('nouvelle commande'),
+//                ])
+//            ;
+//            $mailer->send($email);
 
-            $mailer->send($email);
-            $this->entityManager->persist($order);
-            $this->entityManager->flush();
-            $this->flashy->success('Votre mail à bien été envoyer !');
-            return $this->redirectToRoute('app_home');
-        }
         return $this->render('home/order.html.twig', [
             'products' => $this->productRepository->findBy(['active' => true]),
-            'form' => $form->createView()
         ]);
     }
+
+    private function generate(int $length= 12): string
+    {
+        return substr(
+            bin2hex(random_bytes((int) ceil($length / 2))),
+            0, $length
+        );
+    }
+
 
 }

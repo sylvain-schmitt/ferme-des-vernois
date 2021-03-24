@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,19 +39,20 @@ class Order
     private $address;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $order_id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="orders")
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $quantity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $product;
-
-    public function __construct()
-    {
-        $this->product = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -108,39 +107,45 @@ class Order
         return $this;
     }
 
-    public function getOrderId(): ?int
+    public function getOrderId(): ?string
     {
         return $this->order_id;
     }
 
-    public function setOrderId(int $order_id): self
+    public function setOrderId(string $order_id): self
     {
         $this->order_id = $order_id;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProduct(): Collection
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function addProduct(Product $product): self
+    public function setProduct(?Product $product): self
     {
-        if (!$this->product->contains($product)) {
-            $this->product[] = $product;
-        }
+        $this->product = $product;
 
         return $this;
     }
 
-    public function removeProduct(Product $product): self
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
     {
-        $this->product->removeElement($product);
+        return $this->quantity;
+    }
 
+    /**
+     * @param mixed $quantity
+     * @return Order
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
         return $this;
     }
 

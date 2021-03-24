@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210322125649 extends AbstractMigration
+final class Version20210323102455 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,12 +20,16 @@ final class Version20210322125649 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE actuality (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, image_name VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, active TINYINT(1) DEFAULT \'1\' NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE `order` ADD quantity INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE `order` ADD CONSTRAINT FK_F52993984584665A FOREIGN KEY (product_id) REFERENCES products (id)');
+        $this->addSql('CREATE INDEX IDX_F52993984584665A ON `order` (product_id)');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE actuality');
+        $this->addSql('ALTER TABLE `order` DROP FOREIGN KEY FK_F52993984584665A');
+        $this->addSql('DROP INDEX IDX_F52993984584665A ON `order`');
+        $this->addSql('ALTER TABLE `order` DROP quantity');
     }
 }
