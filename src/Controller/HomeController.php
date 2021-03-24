@@ -9,15 +9,12 @@ use App\Form\OrderType;
 use App\Repository\ActualityRepository;
 use App\Repository\OrderRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\MailerInterface;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\Mailer\MailerServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class HomeController extends AbstractController
@@ -93,67 +90,52 @@ class HomeController extends AbstractController
     public function order(Request $request, ProductRepository $productRepository): Response
     {
 
+
         if (!empty($request->request->all())) {
 
             $order_id = $this->generate();
-            $order = (array_filter($request->request->all(), fn($value) => !is_null($value) && $value !== ''));
+            $order1 = (array_filter($request->request->all(), fn($value) => !is_null($value) && $value !== ''));
 
             // 19 / 20 /21
-            $productId = array_filter(array_keys($order), 'is_int');
+            $productId = array_filter(array_keys($order1), 'is_int');
 
 
-
-            $last_name = $order["last_name"];
-            $first_name = $order["first_name"];
-            $address = $order["address"];
-            $phone = $order["phone"];
+            $last_name = $order1["last_name"];
+            $first_name = $order1["first_name"];
+            $address = $order1["address"];
+            $phone = $order1["phone"];
 
                 foreach ($productId as $result) {
 
 
 
-                    foreach ($productId as $item) {
-                        $value = $order[$item];
-                        dd($value);
+
+                        $product = $productRepository->findOneBy(["id" => $result]);
+                        $order = (new Order())
+                            ->setOrderId($order_id)
+                            ->setFirstName($first_name)
+                            ->setLastName($last_name)
+                            ->setAddress($address)
+                            ->setPhone($phone)
+                            ->setProduct($product);
+                             foreach ($productId as $item) {
+                                 $value = $order1[$item];
+                            $order->setQuantity($value);
+
+                        dump($order);
                     }
 
-                    $product = $productRepository->findOneBy(["id" => $result]);
-                    $order = (new Order())
-                        ->setOrderId($order_id)
-                        ->setFirstName($first_name)
-                        ->setLastName($last_name)
-                        ->setAddress($address)
-                        ->setPhone($phone)
-                        ->setProduct($product)
-                        ->setQuantity($value)
-                    ;
                     $this->entityManager->persist($order);
-                    $this->entityManager->flush();
+                    dd(111);
+                        $this->entityManager->flush();
+
+
                 }
 
             $this->flashy->success('Votre mail à bien été envoyer !');
             return $this->redirectToRoute('app_home');
 
         }
-
-            // Todo : Crée le PDF avec toute les infos récupérer pour les produits
-            // Todo : Set le PDF en BDD
-//            $email = (new TemplatedEmail())
-//                ->from('fermedesvernois@test.com')
-//                ->to($order->getAddress())
-//                ->subject('contact depuis la ferme des vernois')
-//                ->htmlTemplate('emails/contact.html.twig')
-//                ->context([
-//                    'id' => $order->getId(),
-//                    'address' => $order->getAddress(),
-//                    'nom' => $order->getFirstName(),
-//                    'prenom' => $order->getLastName(),
-//                    'phone' => $order->getPhone(),
-//                    'sujet' => ('nouvelle commande'),
-//                ])
-//            ;
-//            $mailer->send($email);
-
         return $this->render('home/order.html.twig', [
             'products' => $this->productRepository->findBy(['active' => true]),
         ]);

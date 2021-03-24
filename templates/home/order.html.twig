@@ -5,6 +5,7 @@
 {% block body %}
 
     <div class="container my-5" style="overflow: auto; height: 75vh">
+
         <form method="post" action="{{ path('app_order') }}">
             <table class="table">
                 <thead class="thead-dark">
@@ -45,7 +46,9 @@
             </table>
             <div class="row mb-3">
                 <div class="col">
-                    {# Todo : Mettre les requires #}
+{#
+                    Todo : Mettre les requires
+#}
                     <input type="text" placeholder="Prénom" name="last_name">
                     <input type="text" placeholder="Nom" name="first_name">
                 </div>
