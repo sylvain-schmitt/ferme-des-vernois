@@ -6,13 +6,12 @@
                 <h5 class="card-title">{{ product.title }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Catégorie <a href="{{ path('app_category', {slug: product.category.slug}) }}">{{ product.category }}</a></h6>
                 <p class="card-text">{{ product.description | u.truncate(60, '...', false) | raw}}</p>
-                <a href="{{ path('app_product_show', {slug:product.slug}) }}" class="btn btn-primary">voir le produit</a>
+                <a href="{{ path('app_product_show', {slug:product.slug}) }}" class="btn btn-primary">Voir le produit</a>
+                <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="btn btn-success">Ajouter au panier</a>
             </div>
             <div class="card-footer text-muted">
-                <p>{{ product.price }} €</p>
-                <p>
-                    {{ pluralize(product.pound , product.units) }}
-                </p>
+                <p>Prix : {{ product.price }}€/{{ product.units }}</p>
+                <p>Stock : {{ pluralize(product.pound , product.units) }}</p>
             </div>
         </div>
     </div>

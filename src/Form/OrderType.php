@@ -32,20 +32,6 @@ class OrderType extends AbstractType
             ->add('address', EmailType::class, [
                 'label' => 'Adresse mail'
             ])
-            ->add('product', EntityType::class, [
-                'expanded' => true,
-                'required' => false,
-                'class' => Product::class,
-                'multiple' => true,
-                'query_builder' => function (ProductRepository $productRepository){
-                    return $productRepository->createQueryBuilder('product')
-                        ->where('product.active = true')
-                    ;
-                },
-                'choice_label' => function (Product $product) {
-                    return $product->getTitle();
-                },
-            ])
         ;
     }
 

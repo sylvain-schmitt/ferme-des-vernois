@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Panier{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Votre Panier</h2>
+
+        {% if items | length > 0 %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Miniature</th>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Poids</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                    <th scope="row">
+                        <img src="{{ (item.product.imageName ? vich_uploader_asset(item.product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
+                    </th>
+                    <td>{{ item.product.title }}</td>
+                    <td>{{ item.product.price }} €</td>
+                    <td>{{ pluralize(item.product.pound , item.product.units) }}</td>
+                    <td>
+                        <a href="{{ path('app_cart_remove_quantity', {id: item.product.id}) }}">
+                            <img src="https://img.icons8.com/fluent/20/000000/minus-math.png"/>
+                        </a>
+                    {{ item.quantity }}
+                    <a href="{{ path('app_cart_add_quantity', {id: item.product.id}) }}">
+                        <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/>
+                    </a>
+                    </td>
+                    <td>
+                        {{ item.product.price * item.quantity }} €
+                    </td>
+                    <td>
+                        <a href="{{ path('app_cart_remove_product', {id: item.product.id}) }}" class="btn">
+                            <img src="https://img.icons8.com/fluent/24/000000/filled-trash.png"/>
+                        </a>
+                    </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5" style="text-align: right">Total :</td>
+                    <td>{{ total }} €</td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        {% else %}
+            <p>Votre panier est vide <a href="{{ path('app_product') }}">Cliquez ici pour le remplir !</a></p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

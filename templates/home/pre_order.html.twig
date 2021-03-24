@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Passer commande{% endblock %}
+
+{% block body %}
+
+    <div class="container my-5" style="overflow: auto; height: 75vh">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Miniature</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Poid</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <th scope="row">
+                        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
+                    </th>
+                    <td><a href="{{ path('app_admin_show_product', {id: product.id}) }}">{{ product.title }}</a></td>
+                    <td>
+                        {{ product.quantity }}
+                    </td>
+                    <td>{{ product.price }} €</td>
+                    <td>
+                        {{ pluralize(product.pound , product.units) }}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="btn btn-success">Ajouter au Panier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+

@@ -26,7 +26,7 @@ class ProductType extends AbstractType
                 'label' => 'Prix TTC'
             ])
             ->add('pound', TextType::class, [
-                'label' => 'Quantité (xx.xx)',
+                'label' => 'Quantité (Kilo, Gramme, Litre, etc..)',
                 'attr' => [
                     'pattern' => '[0-9]{1,5}[.]{0,1}[0-9]{0,2}'
                 ]

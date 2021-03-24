@@ -84,63 +84,6 @@ class HomeController extends AbstractController
         return $this->render('home/category_show.html.twig', compact('products', 'category'));
     }
 
-    /**
-     * @Route("/commande", name="app_order")
-     */
-    public function order(Request $request, ProductRepository $productRepository): Response
-    {
-
-
-        if (!empty($request->request->all())) {
-
-            $order_id = $this->generate();
-            $order1 = (array_filter($request->request->all(), fn($value) => !is_null($value) && $value !== ''));
-
-            // 19 / 20 /21
-            $productId = array_filter(array_keys($order1), 'is_int');
-
-
-            $last_name = $order1["last_name"];
-            $first_name = $order1["first_name"];
-            $address = $order1["address"];
-            $phone = $order1["phone"];
-
-                foreach ($productId as $result) {
-
-
-
-
-                        $product = $productRepository->findOneBy(["id" => $result]);
-                        $order = (new Order())
-                            ->setOrderId($order_id)
-                            ->setFirstName($first_name)
-                            ->setLastName($last_name)
-                            ->setAddress($address)
-                            ->setPhone($phone)
-                            ->setProduct($product);
-                             foreach ($productId as $item) {
-                                 $value = $order1[$item];
-                            $order->setQuantity($value);
-
-                        dump($order);
-                    }
-
-                    $this->entityManager->persist($order);
-                    dd(111);
-                        $this->entityManager->flush();
-
-
-                }
-
-            $this->flashy->success('Votre mail à bien été envoyer !');
-            return $this->redirectToRoute('app_home');
-
-        }
-        return $this->render('home/order.html.twig', [
-            'products' => $this->productRepository->findBy(['active' => true]),
-        ]);
-    }
-
     private function generate(int $length= 12): string
     {
         return substr(
