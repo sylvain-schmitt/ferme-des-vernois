@@ -17,27 +17,41 @@ use MercurySeries\FlashyBundle\FlashyNotifier;
 
 class CartController extends AbstractController
 {
+
+    private ProductRepository $productRepository;
+    private EntityManagerInterface $entityManager;
+    private FlashyNotifier $flashy;
+    private Request $request;
+    private SessionInterface $session;
+
+    public function __construct(
+        ProductRepository $productRepository,
+        EntityManagerInterface $entityManager,
+        FlashyNotifier $flashy,
+        Request $request,
+        SessionInterface $session
+    )
+    {
+        $this->productRepository = $productRepository;
+        $this->entityManager = $entityManager;
+        $this->flashy = $flashy;
+        $this->request = $request;
+        $this->session = $session;
+    }
+
     /**
      * @Route("/panier", name="app_cart")
      */
     public function cart(
-        CartService $cartService,
-        Request $request,
-        EntityManagerInterface $entityManager,
-        FlashyNotifier $flashy,
-        SessionInterface $session,
-        ProductRepository $productRepository
+        CartService $cartService
     ): Response
     {
-
         $order_id = $this->generate();
         $product = $cartService->getFullCart();
-
         $form = $this->createForm(OrderType::class);
-        $form->handleRequest($request);
-
+        $form->handleRequest($this->request);
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($product as $value){
+            foreach ($product as $value) {
                 $order = (new Order())
                     ->setFirstName($form->get('first_name')->getData())
                     ->setLastName($form->get('last_name')->getData())
@@ -47,23 +61,19 @@ class CartController extends AbstractController
                     ->setOrderId($order_id)
                     ->setProduct($value['product'])
                     ->setQuantity($value['quantity']);
-                $entityManager->persist($order);
-
-                $products = $productRepository->findOneBy(["id" => $value['product'] ]);
+                $this->entityManager->persist($order);
+                $products = $this->productRepository->findOneBy(["id" => $value['product']]);
                 $quantity = $products->getQuantity() - $value['quantity'];
                 $products->setQuantity($quantity);
-                if ($quantity == 0 ) {
+                if ($quantity == 0) {
                     $products->setActive(false);
                 }
-                $entityManager->flush();
-
+                $this->entityManager->flush();
             }
-
-            $session->remove('panier');
-            $flashy->success('Votre commande à bien été prise en compte');
+            $this->session->remove('panier');
+            $this->flashy->success('Votre commande à bien été prise en compte');
             return $this->redirectToRoute('app_home');
         }
-
 
         return $this->render('home/cart.html.twig', [
             'items' => $cartService->getFullCart(),
@@ -81,11 +91,11 @@ class CartController extends AbstractController
 
         $cartService->addProduct($id);
 
-
         return $this->json([
             'code' => 200,
             'message' => 'ok',
         ], 200);
+
     }
 
     /**
@@ -124,10 +134,10 @@ class CartController extends AbstractController
 
     }
 
-    private function generate(int $length= 12): string
+    private function generate(int $length = 12): string
     {
         return substr(
-            bin2hex(random_bytes((int) ceil($length / 2))),
+            bin2hex(random_bytes((int)ceil($length / 2))),
             0, $length
         );
     }
