@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Form\OrderType;
+use App\Repository\ProductRepository;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,13 +25,13 @@ class CartController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        SessionInterface $session
+        SessionInterface $session,
+        ProductRepository $productRepository
     ): Response
     {
 
         $order_id = $this->generate();
         $product = $cartService->getFullCart();
-
 
         $form = $this->createForm(OrderType::class);
         $form->handleRequest($request);
@@ -47,8 +48,14 @@ class CartController extends AbstractController
                     ->setProduct($value['product'])
                     ->setQuantity($value['quantity']);
                 $entityManager->persist($order);
+
+                $products = $productRepository->findOneBy(["id" => $value['product'] ]);
+                $quantity = $products->getQuantity() - $value['quantity'];
+                $products->setQuantity($quantity);
                 $entityManager->flush();
+
             }
+
             $session->remove('panier');
             $flashy->success('Votre commande à bien été prise en compte');
             return $this->redirectToRoute('app_home');
