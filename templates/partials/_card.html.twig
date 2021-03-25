@@ -7,7 +7,12 @@
                 <h6 class="card-subtitle mb-2 text-muted">Catégorie <a href="{{ path('app_category', {slug: product.category.slug}) }}">{{ product.category }}</a></h6>
                 <p class="card-text">{{ product.description | u.truncate(60, '...', false) | raw}}</p>
                 <a href="{{ path('app_product_show', {slug:product.slug}) }}" class="btn btn-primary">Voir le produit</a>
-                <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="btn btn-success">Ajouter au panier</a>
+                {% if app.session.get('panier')[product.id] is not defined%}
+                    <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart "><span class="btn btn-success js-disable">Ajouter au pannier</span></a>
+                {% else %}
+                    <a href="{{ path('app_cart') }}" class="btn btn-primary">Voir le Panier</a>
+                {% endif %}
+
             </div>
             <div class="card-footer text-muted">
                 <p>Prix : {{ product.price }}€/{{ product.units }}</p>
@@ -16,3 +21,5 @@
         </div>
     </div>
 {% endfor %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="{{ asset('js/addcart.js') }}"></script>
