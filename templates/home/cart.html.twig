@@ -57,6 +57,14 @@
                 </tr>
                 </tfoot>
             </table>
+            {{ form_start(form) }}
+            {{ form_row(form.first_name) }}
+            {{ form_row(form.last_name) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.phone) }}
+            {{ form_row(form.email) }}
+            <button type="submit" class="btn btn-primary">Modifier</button>
+            {{ form_end(form) }}
         {% else %}
             <p>Votre panier est vide <a href="{{ path('app_product') }}">Cliquez ici pour le remplir !</a></p>
         {% endif %}

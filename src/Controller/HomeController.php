@@ -84,14 +84,4 @@ class HomeController extends AbstractController
         $products = $this->productRepository->findByCategory($category);
         return $this->render('home/category_show.html.twig', compact('products', 'category'));
     }
-
-    private function generate(int $length= 12): string
-    {
-        return substr(
-            bin2hex(random_bytes((int) ceil($length / 2))),
-            0, $length
-        );
-    }
-
-
 }

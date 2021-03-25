@@ -39,6 +39,11 @@ class Order
     private $address;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $order_id;
@@ -131,21 +136,29 @@ class Order
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
+
     public function getQuantity()
     {
         return $this->quantity;
     }
 
-    /**
-     * @param mixed $quantity
-     * @return Order
-     */
-    public function setQuantity($quantity)
+
+    public function setQuantity($quantity): self
     {
         $this->quantity = $quantity;
+        return $this;
+    }
+
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+
+    public function setEmail($email): self
+    {
+        $this->email = $email;
         return $this;
     }
 
