@@ -21,21 +21,18 @@ class CartController extends AbstractController
     private ProductRepository $productRepository;
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
-    private Request $request;
     private SessionInterface $session;
 
     public function __construct(
         ProductRepository $productRepository,
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        Request $request,
         SessionInterface $session
     )
     {
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
-        $this->request = $request;
         $this->session = $session;
     }
 
@@ -43,13 +40,15 @@ class CartController extends AbstractController
      * @Route("/panier", name="app_cart")
      */
     public function cart(
-        CartService $cartService
+        CartService $cartService,
+        Request $request
     ): Response
+
     {
         $order_id = $this->generate();
         $product = $cartService->getFullCart();
         $form = $this->createForm(OrderType::class);
-        $form->handleRequest($this->request);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($product as $value) {
                 $order = (new Order())
@@ -74,12 +73,12 @@ class CartController extends AbstractController
             $this->flashy->success('Votre commande à bien été prise en compte');
             return $this->redirectToRoute('app_home');
         }
-
         return $this->render('home/cart.html.twig', [
             'items' => $cartService->getFullCart(),
             'total' => $cartService->getTotal(),
             'form' => $form->createView(),
         ]);
+
     }
 
     /**
