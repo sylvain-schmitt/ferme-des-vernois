@@ -52,6 +52,9 @@ class CartController extends AbstractController
                 $products = $productRepository->findOneBy(["id" => $value['product'] ]);
                 $quantity = $products->getQuantity() - $value['quantity'];
                 $products->setQuantity($quantity);
+                if ($quantity == 0 ) {
+                    $products->setActive(false);
+                }
                 $entityManager->flush();
 
             }
