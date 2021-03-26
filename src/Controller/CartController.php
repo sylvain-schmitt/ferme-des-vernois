@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Event\OrderEvent;
 use App\Form\OrderType;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Service\Cart\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,18 +25,24 @@ class CartController extends AbstractController
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
     private SessionInterface $session;
+    private EventDispatcherInterface $eventDispatcher;
+    private OrderRepository $orderRepository;
 
     public function __construct(
         ProductRepository $productRepository,
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        SessionInterface $session
+        SessionInterface $session,
+        EventDispatcherInterface $eventDispatcher,
+        OrderRepository $orderRepository
     )
     {
         $this->productRepository = $productRepository;
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
         $this->session = $session;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -60,12 +69,19 @@ class CartController extends AbstractController
                     ->setOrderId($order_id)
                     ->setProduct($value['product'])
                     ->setQuantity($value['quantity']);
+
+
                 $this->entityManager->persist($order);
                 $products = $this->productRepository->findOneBy(["id" => $value['product']]);
                 $quantity = $products->getQuantity() - $value['quantity'];
                 $products->setQuantity($quantity);
                 $this->entityManager->flush();
             }
+
+            $findBy = $this->orderRepository->findBy(['order_id' => $order_id]);
+
+            $this->eventDispatcher->dispatch(new OrderEvent($findBy));
+
             $this->session->remove('panier');
             $this->flashy->success('Votre commande à bien été prise en compte');
             return $this->redirectToRoute('app_home');

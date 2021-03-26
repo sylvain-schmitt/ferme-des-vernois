@@ -92,11 +92,6 @@ class Product
     private $active = true;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Tva::class, inversedBy="products")
-     */
-    private $tva;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -250,18 +245,6 @@ class Product
     public function setActive(bool $active): self
     {
         $this->active = $active;
-
-        return $this;
-    }
-
-    public function getTva(): ?Tva
-    {
-        return $this->tva;
-    }
-
-    public function setTva(?Tva $tva): self
-    {
-        $this->tva = $tva;
 
         return $this;
     }

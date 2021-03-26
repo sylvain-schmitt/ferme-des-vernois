@@ -1,8 +1,7 @@
 {% if app.request.attributes.get('_route') == 'app_admin' or
     app.request.attributes.get('_route') == 'app_admin_new_product' or
     app.request.attributes.get('_route') == 'app_admin_new_categorie' or
-    app.request.attributes.get('_route') == 'app_admin_new_unit' or
-    app.request.attributes.get('_route') == 'app_admin_new_tva'%}
+    app.request.attributes.get('_route') == 'app_admin_new_unit' %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ path('app_home') }}">Ferme des vernois</a>
@@ -27,9 +26,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_admin_new_unit') }}">Ajouter une Unité</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_new_tva') }}">Ajouter une Tva</a>
                     </li>
                     <li class="nav-item">
                         {% for actuality in actuality %}

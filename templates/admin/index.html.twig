@@ -14,7 +14,6 @@
                 <th scope="col">Stock</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Poid</th>
-                <th scope="col">TVA</th>
                 <th scope="col">Modifier</th>
                 <th scope="col">Activer/Désactiver</th>
                 <th scope="col">Supprimer</th>
@@ -59,11 +58,6 @@
                     <td>{{ product.price }} €</td>
                     <td>
                         {{ pluralize(product.pound , product.units) }}
-                    </td>
-                    <td>
-                        {% if product.tva %}
-                            {{ product.tva }}%
-                        {% endif %}
                     </td>
                     <td>
                         <a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
@@ -114,27 +108,6 @@
                         <th scope="row">{{ categorie.title }}</th>
                         <td>
                             <a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}"
-                               class="btn btn-info">Modifier</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="container col-md-2 my-5" style="overflow: auto; max-height: 400px">
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">TVA</th>
-                    <th scope="col">Modifier</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for tva in tvas %}
-                    <tr>
-                        <th scope="row">{{ tva.title }} %</th>
-                        <td><a href="{{ path('app_admin_edit_tva' , {id: tva.id}) }}"
                                class="btn btn-info">Modifier</a>
                         </td>
                     </tr>

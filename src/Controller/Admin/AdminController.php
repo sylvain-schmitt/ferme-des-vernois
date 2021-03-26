@@ -7,9 +7,7 @@ use App\Form\ActualityType;
 use App\Repository\ActualityRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
-use App\Repository\TvaRepository;
 use App\Repository\UnitRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +19,6 @@ class AdminController extends AbstractController
 {
     private ProductRepository $productRepository;
     private CategoryRepository $categoryRepository;
-    private TvaRepository $tvaRepository;
     private UnitRepository $unitRepository;
     private ActualityRepository $actualityRepository;
     private EntityManagerInterface $entityManager;
@@ -30,7 +27,6 @@ class AdminController extends AbstractController
     public function __construct(
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
-        TvaRepository $tvaRepository,
         UnitRepository $unitRepository,
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
@@ -39,7 +35,6 @@ class AdminController extends AbstractController
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
-        $this->tvaRepository = $tvaRepository;
         $this->unitRepository = $unitRepository;
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
@@ -54,7 +49,6 @@ class AdminController extends AbstractController
         return $this->render('admin/index.html.twig', [
             'products' => $this->productRepository->findBy([], ['createdAt' => 'DESC']),
             'categories' => $this->categoryRepository->findAll(),
-            'tvas' => $this->tvaRepository->findAll(),
             'units' => $this->unitRepository->findAll(),
             'actuality' => $this->actualityRepository->findAll(),
         ]);

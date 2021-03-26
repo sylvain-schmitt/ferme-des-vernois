@@ -32,7 +32,6 @@ class ProductType extends AbstractType
                 ]
             ])
             ->add('category')
-            ->add('tva')
             ->add('units')
             ->add('quantity', TextType::class, [
                 'label' => 'Stock'

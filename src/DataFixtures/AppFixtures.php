@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Category;
 use App\Entity\Product;
-use App\Entity\Tva;
 use App\Entity\Unit;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -15,12 +14,6 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr_FR');
-
-        for ($i = 0; $i < 3; $i++) {
-            $tva = (new Tva())
-                ->setTitle($faker->randomFloat(1, 2, 20));
-            $manager->persist($tva);
-        }
 
         for ($l = 0; $l < 3; $l++) {
             $unit = (new Unit())
