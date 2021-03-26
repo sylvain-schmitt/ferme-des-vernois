@@ -69,9 +69,6 @@ class ProductController extends AbstractController
             if ($count >= 1){
                 $product->setActive(true);
             }
-            if ($count == 0){
-                $product->setActive(false);
-            }
             $this->entityManager->flush();
             $this->flashy->info('Produit modifier');
             return $this->redirectToRoute('app_admin');
@@ -118,9 +115,6 @@ class ProductController extends AbstractController
         if ($count >= 1) {
             $count = $count - 1;
             $product->setQuantity($count);
-            if ($count == 0){
-                $product->setActive(false);
-            }
             $this->entityManager->flush();
         }
         return $this->redirectToRoute('app_admin');

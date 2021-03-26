@@ -64,9 +64,6 @@ class CartController extends AbstractController
                 $products = $this->productRepository->findOneBy(["id" => $value['product']]);
                 $quantity = $products->getQuantity() - $value['quantity'];
                 $products->setQuantity($quantity);
-                if ($quantity == 0) {
-                    $products->setActive(false);
-                }
                 $this->entityManager->flush();
             }
             $this->session->remove('panier');
@@ -112,11 +109,20 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/add_quantity/{id}", name="app_cart_add_quantity")
      */
-    public function addQuantity($id, CartService $cartService): Response
+    public function addQuantity($id, CartService $cartService, ProductRepository $productRepository, FlashyNotifier $flashyNotifier): Response
     {
 
-        $cartService->addQuantity($id);
+        $quantity = $productRepository->find($id);
+        $product = $cartService->getFullCart();
 
+        foreach ($product as $value) {
+
+        }
+        if ($quantity->getQuantity() > $value['quantity']) {
+            $cartService->addQuantity($id);
+        } else {
+            $flashyNotifier->info('Stock insufisant');
+        }
         return $this->redirectToRoute('app_cart');
 
     }
@@ -124,7 +130,8 @@ class CartController extends AbstractController
     /**
      * @Route("/panier/remove_quantity/{id}", name="app_cart_remove_quantity")
      */
-    public function removeQuantity($id, CartService $cartService): Response
+    public
+    function removeQuantity($id, CartService $cartService): Response
     {
 
         $cartService->removeQuantity($id);
@@ -133,7 +140,8 @@ class CartController extends AbstractController
 
     }
 
-    private function generate(int $length = 12): string
+    private
+    function generate(int $length = 12): string
     {
         return substr(
             bin2hex(random_bytes((int)ceil($length / 2))),

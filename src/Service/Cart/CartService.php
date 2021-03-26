@@ -38,6 +38,21 @@ class CartService
         return $panier_data;
     }
 
+    public function getQuantity(): array
+    {
+        // On appel le panier (si il est remplis) sinon afficher un tableau vide
+        $panier = $this->session->get('panier', []);
+
+        $panier_data = [];
+
+        foreach ($panier as $id => $quantity) {
+            $panier_data[] = [
+                'quantity' => $quantity
+            ];
+        }
+        return $panier_data;
+    }
+
     public function addProduct(int $id)
     {
 
