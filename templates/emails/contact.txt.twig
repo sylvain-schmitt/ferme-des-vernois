@@ -2,8 +2,22 @@ Nouveau Message
 
 Numéro de commande :  #{{ order_id }}
 
-De : {{ nom }} {{ prenom }}
+{% for product in product %}
+Produit : {{ product }}
+{% endfor %}
 
-Mail: {{ address }}
+{% for quantity in quantity %}
+Quantité : {{ quantity }}
+{% endfor %}
 
-Numéro de téléphone : {{ phone }}
+{% for price in price %}
+Prix : {{ price }}
+{% endfor %}
+
+Prix total de votre commande : {{ total }}€
+
+Nom : {{ first_name }}
+Prénom : {{ last_name }}
+Adresse : {{ address }}
+Mail : {{ mail }}
+Téléphone : {{ phone }}

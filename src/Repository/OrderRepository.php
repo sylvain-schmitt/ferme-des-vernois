@@ -19,6 +19,20 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+
+    public function groupByOrder(string $order_id)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.order_id = :order_id')
+            ->setParameter('order_id', $order_id)
+            ->groupBy('o.order_id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */

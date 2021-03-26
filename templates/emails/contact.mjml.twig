@@ -1,72 +1,56 @@
 <mjml>
-    <mj-head>
-        <mj-title>Hello world</mj-title>
-        <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto:300,500"></mj-font>
-        <mj-attributes>
-            <mj-all font-family="Roboto, Helvetica, sans-serif"></mj-all>
-            <mj-text font-weight="300" font-size="16px" color="#616161" line-height="24px"></mj-text>
-            <mj-section padding="0px"></mj-section>
-        </mj-attributes>
-    </mj-head>
-    <mj-body>
-        <mj-section padding="20px 0">
-            <mj-column width="50%">
-                <mj-text align="right">Repare Online Garage by ACS Promotion 44</mj-text>
-            </mj-column>
-        </mj-section>
-        <mj-section>
+    <mj-body background-color="#ccd3e0" font-size="13px">
+        <mj-section background-color="#fff" padding-bottom="20px" padding-top="20px">
             <mj-column width="100%">
-                <mj-image href="{{ url('app_home') }}" src="{{ absolute_url(asset('build/images/typewriter-801921_1920.jpg')) }}"></mj-image>
+                <mj-image src="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qi.png" alt="" align="center" border="none" width="100px" padding-left="0px" padding-right="0px" padding-bottom="10px" padding-top="10px"></mj-image>
+                <mj-image src="http://go.mailjet.com/tplimg/mtrq/b/ox8s/mg1qz.png" alt="" align="center" border="none" width="200px" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0"></mj-image>
             </mj-column>
         </mj-section>
-        <mj-section>
+        <mj-section background-color="#356cc7" padding-bottom="0px" padding-top="0">
             <mj-column width="100%">
-                <mj-text align="center">Vous avez reçus un nouveau message provenant du site Repare Online Garage</mj-text>
-            </mj-column>
-        </mj-section>
-        <mj-section>
-            <mj-column width="45%">
-                <mj-text align="center" font-weight="500" padding="0px" font-size="18px">Numéro de commande : #{{ order_id }}</mj-text>
-                <mj-divider border-width="2px" border-color="#616161"></mj-divider>
-                <mj-divider border-width="2px" border-color="#616161" width="45%"></mj-divider>
-            </mj-column>
-        </mj-section>
-        <mj-section padding-top="30px">
-            <mj-column width="100%">
-                <mj-text>
-                    <p>Message de {{ nom }} {{ prenom }}</p>
-                    <p>Numéro de tel : {{ phone }}</p>
-                    <p>Adresse E-mail : {{ address }}</p>
+                <mj-text align="center" font-size="13px" color="#ABCDEA" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="18px" padding-top="28px">HELLO
+                    <p style="font-size:16px; color:white">[[FirstName]]</p>
                 </mj-text>
             </mj-column>
         </mj-section>
-        <mj-divider border-width="1px" border-color="#E0E0E0"></mj-divider>
-        <mj-section>
+        <mj-section background-color="#356cc7" padding-bottom="5px" padding-top="0">
+            <mj-column width="100%">
+                <mj-divider border-color="#ffffff" border-width="2px" border-style="solid" padding-left="20px" padding-right="20px" padding-bottom="0px" padding-top="0"></mj-divider>
+                <mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="28px" padding-top="28px"><span style="font-size:20px; font-weight:bold">Thank you very much for your purchase.</span>
+                    <br />
+                    <span style="font-size:15px">Please find the receipt below.</span>
+                </mj-text>
+            </mj-column>
+        </mj-section>
+        <mj-section background-color="#568feb" padding-bottom="15px">
             <mj-column>
-                <mj-text>
-                    <p style="font-size: 14px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi in officiis pariatur, perspiciatis rem voluptate!</p>
-                </mj-text>
-                <mj-divider border-width="1px" border-color="#E0E0E0"></mj-divider>
+                <mj-text align="center" color="#FFF" font-size="15px" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="0px"><strong>Order Number</strong></mj-text>
+                <mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="20px" padding-top="10px">[[OrderNumber]]</mj-text>
+            </mj-column>
+            <mj-column>
+                <mj-text align="center" color="#FFF" font-size="15px" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="0px"><strong>Order Date</strong></mj-text>
+                <mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="20px" padding-top="10px">[[OrderDate]]</mj-text>
+            </mj-column>
+            <mj-column>
+                <mj-text align="center" color="#FFF" font-size="15px" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px" padding-bottom="0px"><strong>Total Price</strong></mj-text>
+                <mj-text align="center" color="#FFF" font-size="13px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="20px" padding-top="10px">[[TotalPrice]]</mj-text>
             </mj-column>
         </mj-section>
-        <mj-section>
-            <mj-column width="65%">
-                <mj-image align="left" width="150px" href="#" src="#">Logo</mj-image>
+        <mj-section background-color="#356CC7" padding-bottom="20px" padding-top="20px">
+            <mj-column width="50%">
+                <mj-button background-color="#ffae00" color="#FFF" font-size="14px" align="center" font-weight="bold" border="none" padding="15px 30px" border-radius="10px" href="https://mjml.io" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="10px">Download Receipt</mj-button>
             </mj-column>
-            <mj-column width="35%">
-                <mj-table>
-                    <tr style="list-style: none;line-height:1">
-                        <td> <a href="#">
-                                <img width="25" src="#" />
-                            </a> </td>
-                        <td> <a href="#">
-                                <img width="25" src="#" />
-                            </a> </td>
-                        <td> <a href="#">
-                                <img width="25" src="#" />
-                            </a> </td>
-                    </tr>
-                </mj-table>
+            <mj-column width="50%">
+                <mj-button background-color="#ffae00" color="#FFF" font-size="14px" align="center" font-weight="bold" border="none" padding="15px 30px" border-radius="10px" href="https://mjml.io" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="12px">Track My Order</mj-button>
+            </mj-column>
+        </mj-section>
+        <mj-section background-color="#356cc7" padding-bottom="5px" padding-top="0">
+            <mj-column width="100%">
+                <mj-divider border-color="#ffffff" border-width="2px" border-style="solid" padding-left="20px" padding-right="20px" padding-bottom="0px" padding-top="0"></mj-divider>
+                <mj-text align="center" color="#FFF" font-size="15px" font-family="Helvetica" padding-left="25px" padding-right="25px" padding-bottom="20px" padding-top="20px">Best,
+                    <br />
+                    <span style="font-size:15px">The [[CompanyName]] Team</span>
+                </mj-text>
             </mj-column>
         </mj-section>
     </mj-body>

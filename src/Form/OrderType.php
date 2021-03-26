@@ -20,19 +20,34 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('last_name', TextType::class, [
-                'label' => 'Nom de Famille'
+                'label' => 'Nom de Famille',
+                'attr' => [
+                    'value' => 'Nom de test'
+                ]
             ])
             ->add('first_name', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'attr' => [
+                    'value' => 'Prénom de test'
+                ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse Postal'
+                'label' => 'Adresse Postal',
+                'attr' => [
+                    'value' => 'Adresse Postal de test'
+                ]
             ])
             ->add('phone', TextType::class, [
-                'label' => 'Numéro de téléphone'
+                'label' => 'Numéro de téléphone',
+                'attr' => [
+                    'value' => '01 23 45 67 89'
+                ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse mail'
+                'label' => 'Adresse mail',
+                'attr' => [
+                    'value' => 'mail@test.com'
+                ]
             ])
         ;
     }
