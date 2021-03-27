@@ -3,6 +3,23 @@
 {% block body %}
     <h2 class="text-center my-4">{{ product.title }}</h2>
     <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_large') }} "/>
+    <div class="row">
+        <div class="col">
+            {% if product.bio == true %}
+                <img src="{{ asset('uploads/images/logo-bio.png') }}" alt="logo agriculture bio" style="width: 50px">
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if product.beef == true %}
+                <img src="{{ asset('uploads/images/logo-boeuf.png') }}" alt="logo boeuf certififié"style="width: 50px">
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if product.logo == true %}
+                <img src="{{ asset('uploads/images/cereal-logo.png') }}" alt="logo cereal "style="width: 50px">
+            {% endif %}
+        </div>
+    </div>
     <p>{{ product.description | raw}}</p>
     <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="btn btn-success">Ajouter au panier</a>
 {% endblock %}

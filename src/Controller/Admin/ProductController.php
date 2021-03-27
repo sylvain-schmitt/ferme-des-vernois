@@ -69,6 +69,25 @@ class ProductController extends AbstractController
             if ($count >= 1){
                 $product->setActive(true);
             }
+
+            if ($request->get("bio") === "on"){
+                $product->setBio(true);
+            }else{
+                $product->setBio(false);
+            }
+
+            if ($request->get("beef") === "on"){
+                $product->setBeef(true);
+            }else{
+                $product->setBeef(false);
+            }
+
+            if ($request->get("logo") === "on"){
+                $product->setLogo(true);
+            }else{
+                $product->setLogo(false);
+            }
+
             $this->entityManager->flush();
             $this->flashy->info('Produit modifier');
             return $this->redirectToRoute('app_admin');
@@ -133,5 +152,6 @@ class ProductController extends AbstractController
 
         return new Response("true");
     }
+
 
 }

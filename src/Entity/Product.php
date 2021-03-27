@@ -92,6 +92,21 @@ class Product
     private $active = true;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $bio;
+
+    /**
+     * @ORM\Column (type="boolean")
+     */
+    private $beef;
+
+    /**
+     * @ORM\Column (type="boolean")
+     */
+    private $logo;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -258,6 +273,41 @@ class Product
     {
         $this->units = $units;
 
+        return $this;
+    }
+
+    public function getBio(): ?bool
+    {
+        return $this->bio;
+    }
+
+    public function setBio(bool $bio): self
+    {
+        $this->bio = $bio;
+        return $this;
+    }
+
+
+    public function getBeef(): ?bool
+    {
+        return $this->beef;
+    }
+
+
+    public function setBeef(bool $beef): self
+    {
+        $this->beef = $beef;
+        return $this;
+    }
+
+    public function getLogo(): ?bool
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(bool $logo): self
+    {
+        $this->logo = $logo;
         return $this;
     }
 
