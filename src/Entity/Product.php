@@ -92,19 +92,19 @@ class Product
     private $active = true;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default":true})
      */
-    private $bio;
+    private $bio = true;
 
     /**
-     * @ORM\Column (type="boolean")
+     * @ORM\Column (type="boolean", options={"default":true})
      */
-    private $beef;
+    private $beef = true;
 
     /**
-     * @ORM\Column (type="boolean")
+     * @ORM\Column (type="boolean", options={"default":true})
      */
-    private $logo;
+    private $logo = true;
 
     /**
      * @ORM\ManyToOne(targetEntity=Unit::class, inversedBy="products")
