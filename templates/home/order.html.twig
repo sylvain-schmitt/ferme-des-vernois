@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center my-4">Commande</h1>
+
+
+    <table>
+        {% for categorie in categories %}
+            <thead>
+            <tr>
+                <th colspan="5">
+                    {{ categorie.title }}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    {#{{ categorie.product.title }}#}
+                    Produit
+                </td>
+            </tr>
+            </tbody>
+        {% endfor %}
+    </table>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/addcart.js') }}"></script>
+{% endblock %}
+
+{#<tbody>#}
+{#<tr>#}
+{#    <th scope="row">#}
+{#        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>#}
+{#    </th>#}
+{#    <td>{{ product.title }}</td>#}
+{#    <td>{{ product.price }} €</td>#}
+{#    <td>{{ pluralize(product.pound , product.units) }}</td>#}
+{#    <td>{% if product.quantity == 0 %}#}
+{#            <span>Produit insdisponible</span>#}
+{#        {% elseif app.session.get('panier')[product.id] is not defined %}#}
+{#            <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart "><span#}
+{#                        class="btn btn-success js-disable">Ajouter au pannier</span></a>#}
+{#        {% endif %}</td>#}
+{#</tr>#}
+{#</tbody>#}
