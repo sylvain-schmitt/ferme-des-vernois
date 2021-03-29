@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gallerie{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+    <div class="custom-file">
+        {{ form(form) }}
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </div>
+{{ form_end(form) }}
+
+    <h2>Images</h2>
+    <div class="row">
+        {% for image in images %}
+            <div class="col">
+                <img src="{{ asset('/uploads/images/'~image.title) | imagine_filter('squared_thumbnail_small') }}" alt="{{ image.alt }}" width="150">
+
+                {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
+                <a href="{{ path('gallery_delete_image', {id: image.id})}}" class="btn btn-primary" data-delete data-token="{{ csrf_token('delete' ~ image.id )}}">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('js/gallery.js') }}"></script>
+    {% endblock %}
+{% endblock %}

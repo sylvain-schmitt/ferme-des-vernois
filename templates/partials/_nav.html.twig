@@ -29,6 +29,9 @@
                         <a class="nav-link" href="{{ path('app_admin_new_unit') }}">Ajouter une Unité</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_gallery') }}">gestion de la gallerie</a>
+                    </li>
+                    <li class="nav-item">
                         {% for actuality in actuality %}
                             <a class="nav-link" href="{{ path('app_admin_new_actuality' , {id: actuality.id}) }}">Modifier l'Annonce</a>
                         {% endfor %}
