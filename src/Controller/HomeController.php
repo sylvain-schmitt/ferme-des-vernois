@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\ActualityRepository;
+use App\Repository\GalleryRepository;
 use App\Repository\OrderRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use App\Repository\ProductRepository;
@@ -22,13 +23,15 @@ class HomeController extends AbstractController
     private OrderRepository $orderRepository;
     private FlashyNotifier $flashy;
     private ActualityRepository $actualityRepository;
+    private GalleryRepository $galleryRepository;
 
     public function __construct(
         ProductRepository $productRepository,
         EntityManagerInterface $entityManager,
         OrderRepository $orderRepository,
         FlashyNotifier $flashy,
-        ActualityRepository $actualityRepository
+        ActualityRepository $actualityRepository,
+        GalleryRepository $galleryRepository
     )
     {
         $this->productRepository = $productRepository;
@@ -36,6 +39,7 @@ class HomeController extends AbstractController
         $this->orderRepository = $orderRepository;
         $this->flashy = $flashy;
         $this->actualityRepository = $actualityRepository;
+        $this->galleryRepository = $galleryRepository;
     }
 
     /**
@@ -81,4 +85,31 @@ class HomeController extends AbstractController
         $products = $this->productRepository->findByCategory($category);
         return $this->render('home/category_show.html.twig', compact('products', 'category'));
     }
+
+    /**
+     * @Route("/contact", name="app_contact")
+     */
+    public function contact(): Response
+    {
+        return $this->render('home/contact.html.twig');
+    }
+
+    /**
+     * @Route("/galerie", name="app_gallery")
+     */
+    public function gallery(): Response
+    {
+        return $this->render('home/gallery.html.twig', [
+            'gallerys' => $this->galleryRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/ferme-des-vernois", name="app_about")
+     */
+    public function about(): Response
+    {
+        return $this->render('home/about.html.twig');
+    }
+
 }

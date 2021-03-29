@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GalleryController extends AbstractController
 {
     /**
-     * @Route("/admin/gallery", name="app_gallery")
+     * @Route("/admin/gallery", name="app_admin_gallery")
      */
     public function index(
         Request $request,

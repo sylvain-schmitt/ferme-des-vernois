@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie{% endblock %}
+
+{% block body %}
+    <h2>Galerie de la Ferme des Vernois</h2>
+    <div class="row">
+        {% for gallery in gallerys %}
+            <div class="col">
+                <img src="{{ asset('/uploads/images/'~gallery.title) | imagine_filter('squared_thumbnail_gallery') }}" alt="{{ gallery.alt }}">
+            </div>
+        {% endfor %}
+    </div>
+    {% block javascripts %}
+        <script src="{{ asset('js/gallery.js') }}"></script>
+    {% endblock %}
+{% endblock %}

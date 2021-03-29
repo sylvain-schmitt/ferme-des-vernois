@@ -28,7 +28,7 @@
                         <a class="nav-link" href="{{ path('app_admin_new_unit') }}">Ajouter une Unité</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_gallery') }}">gestion de la gallerie</a>
+                        <a class="nav-link" href="{{ path('app_admin_gallery') }}">Gestion de la Gallerie</a>
                     </li>
                     <li class="nav-item">
                         {% for actuality in actuality %}
@@ -52,19 +52,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">La ferme</a>
+                        <a class="nav-link " href="{{ path('app_about') }}">La ferme</a>
                     </li>
                     <li>
                         <a class="nav-link " href="{{ path('app_product') }}">Nos Produits</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">Contact</a>
+                    <li>
+                        <a class="nav-link " href="{{ path('app_gallery') }}">Galerie</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="{{ path('app_order') }}">Commander</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{{ path('app_contact') }}">Contact</a>
                     </li>
                 </ul>
                 <div class="d-flex"><a href="{{ path('app_search') }}"><i class="fas fa-search"></i></a></div>
