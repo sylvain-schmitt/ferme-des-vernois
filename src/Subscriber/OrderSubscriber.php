@@ -43,6 +43,8 @@ class OrderSubscriber implements EventSubscriberInterface
         $first_name = $item->getFirstName();
         $phone = $item->getPhone();
         $address = $item->getAddress();
+        $city = $item->getCity();
+        $zip = $item->getZip();
         $email = $item->getEmail();
         $total = $this->cartService->getTotal();
         $toAddresses = [new Address($email), new Address('mailcentre@mail.com')];
@@ -56,6 +58,8 @@ class OrderSubscriber implements EventSubscriberInterface
             'first_name' => $first_name,
             'phone' => $phone,
             'address' => $address,
+            'city' => $city,
+            'zip' => $zip,
             'mail' => $email,
             'total' => $total,
         ]);
@@ -69,6 +73,8 @@ class OrderSubscriber implements EventSubscriberInterface
             'first_name' => $first_name,
             'phone' => $phone,
             'address' => $address,
+            'city' => $city,
+            'zip' => $zip,
             'mail' => $email,
             'total' => $total,
         ]);

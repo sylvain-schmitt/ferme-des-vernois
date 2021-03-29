@@ -32,9 +32,21 @@ class OrderType extends AbstractType
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse Postal',
+                'label' => 'Adresse',
                 'attr' => [
                     'value' => 'Adresse Postal de test'
+                ]
+            ])
+            ->add('city',TextType::class, [
+                'label' => 'ville',
+                'attr' => [
+                    'value' => 'Vesoul'
+                ]
+            ])
+            ->add('zip',TextType::class, [
+                'label' => 'code postal',
+                'attr' => [
+                    'value' => '70000'
                 ]
             ])
             ->add('phone', TextType::class, [

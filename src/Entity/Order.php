@@ -41,6 +41,16 @@ class Order
     /**
      * @ORM\Column(type="string", length=255)
      */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $zip;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $email;
 
     /**
@@ -159,6 +169,29 @@ class Order
     public function setEmail($email): self
     {
         $this->email = $email;
+        return $this;
+    }
+
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city): self
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    public function setZip($zip): self
+    {
+        $this->zip = $zip;
         return $this;
     }
 

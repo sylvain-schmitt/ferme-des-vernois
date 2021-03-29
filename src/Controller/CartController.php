@@ -65,6 +65,8 @@ class CartController extends AbstractController
                     ->setLastName($form->get('last_name')->getData())
                     ->setPhone($form->get('phone')->getData())
                     ->setAddress($form->get('address')->getData())
+                    ->setCity($form->get('city')->getData())
+                    ->setZip($form->get('zip')->getData())
                     ->setEmail($form->get('email')->getData())
                     ->setOrderId($order_id)
                     ->setProduct($value['product'])
