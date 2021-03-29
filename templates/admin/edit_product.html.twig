@@ -22,28 +22,16 @@
     {{ form_label(form.units, 'Unité') }}
     {{ form_widget(form.units) }}
     {{ form_row(form.quantity) }}
+    <div class="form-check form-switch">
+        {{ form_row(form.bio, {'attr': {'class': 'form-check-input'}}) }}
+    </div>
+    <div class="form-check form-switch">
+        {{ form_row(form.beef, {'attr': {'class': 'form-check-input'}}) }}
+    </div>
+    <div class="form-check form-switch">
+        {{ form_row(form.logo, {'attr': {'class': 'form-check-input'}}) }}
+    </div>
     {{ form_widget(form.imageFile) }}
-    <div class="form-check form-switch">
-        <input type="checkbox"
-               class="form-check-input mx-auto js-bio" {{ (product.bio) ? 'checked' : '' }}
-               data-id="{{ product.id }}" id="{{ product.id }}"
-               name="bio">
-        <label class="form-check-label" for="{{ product.id }}"> logo bio</label>
-    </div>
-    <div class="form-check form-switch">
-        <input type="checkbox"
-               class="form-check-input mx-auto js-beef" {{ (product.beef) ? 'checked' : '' }}
-               data-id="{{ product.id }}" id="{{ product.id }}"
-               name="beef">
-        <label class="form-check-label" for="{{ product.id }}"> logo boeuf</label>
-    </div>
-    <div class="form-check form-switch">
-        <input type="checkbox"
-               class="form-check-input mx-auto js-logo" {{ (product.logo) ? 'checked' : '' }}
-               data-id="{{ product.id }}" id="{{ product.id }}"
-               name="logo">
-        <label class="form-check-label" for="{{ product.id }}"> logo3</label>
-    </div>
     {% if route == 'app_admin_edit_product' %}
         <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
         <button type="submit" class="btn btn-success">Modifier</button>
@@ -52,26 +40,6 @@
     {% endif %}
     <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
     {{ form_end(form) }}
-  {#  <script>
-        let bio = document.querySelector('.js-bio')
-            bio.addEventListener("click", function () {
-                let xmlhttp = new XMLHttpRequest;
-                xmlhttp.open("get", `bio/${this.dataset.id}`)
-                xmlhttp.send()
-            })
-        let beef = document.querySelector('.js-beef')
-        beef.addEventListener("click", function () {
-            let xmlhttp = new XMLHttpRequest;
-            xmlhttp.open("get", `beef/${this.dataset.id}`)
-            xmlhttp.send()
-        })
-        let logo = document.querySelector('.js-logo')
-        logo.addEventListener("click", function () {
-            let xmlhttp = new XMLHttpRequest;
-            xmlhttp.open("get", `logo/${this.dataset.id}`)
-            xmlhttp.send()
-        })
-    </script>#}
 {% endblock %}
 
 

@@ -29,9 +29,6 @@
                         <a class="nav-link" href="{{ path('app_admin_new_unit') }}">Ajouter une Unité</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_new_tva') }}">Ajouter une Tva</a>
-                    </li>
-                    <li class="nav-item">
                         {% for actuality in actuality %}
                             <a class="nav-link" href="{{ path('app_admin_new_actuality' , {id: actuality.id}) }}">Modifier l'Annonce</a>
                         {% endfor %}
@@ -65,7 +62,7 @@
                         <a class="nav-link " href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="{{ path('app_order') }}">Commander</a>
+                        <a class="nav-link " href="{{ path('app_product') }}">Commander</a>
                     </li>
                 </ul>
                 <div class="d-flex"><a href="{{ path('app_search') }}"><i class="fas fa-search"></i></a></div>

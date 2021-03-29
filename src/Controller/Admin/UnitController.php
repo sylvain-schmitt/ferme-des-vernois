@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Unit;
 use App\Form\UnitType;
+use App\Repository\ActualityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,11 +15,16 @@ class UnitController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
+    private ActualityRepository $actualityRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, FlashyNotifier $flashy)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FlashyNotifier $flashy,
+        ActualityRepository $actualityRepository)
     {
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
+        $this->actualityRepository = $actualityRepository;
     }
 
     /**
@@ -38,6 +44,7 @@ class UnitController extends AbstractController
         }
         return $this->render('admin/edit_unit.html.twig', [
             'form' => $form->createView(),
+            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -58,6 +65,7 @@ class UnitController extends AbstractController
         return $this->render('admin/edit_unit.html.twig', [
             'units' => $unit,
             'form' => $form->createView(),
+            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 }

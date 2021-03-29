@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Product;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,6 +38,15 @@ class ProductType extends AbstractType
                 'label' => 'Stock'
             ])
 
+            ->add('bio', CheckboxType::class, [
+                'required' => false,
+            ])
+            ->add('beef', CheckboxType::class, [
+                'required' => false,
+            ])
+            ->add('logo', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image (JPG ou PNG)',
                 'required' => false,

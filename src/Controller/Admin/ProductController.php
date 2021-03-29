@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Repository\ActualityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,15 +16,18 @@ class ProductController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
+    private ActualityRepository $actualityRepository;
 
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        FlashyNotifier $flashy
+        FlashyNotifier $flashy,
+        ActualityRepository $actualityRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
+        $this->actualityRepository = $actualityRepository;
     }
 
     /**
@@ -53,6 +57,7 @@ class ProductController extends AbstractController
         }
         return $this->render('admin/edit_product.html.twig', [
             'form' => $form->createView(),
+            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -70,24 +75,6 @@ class ProductController extends AbstractController
                 $product->setActive(true);
             }
 
-            if ($request->get("bio") === "on"){
-                $product->setBio(true);
-            }else{
-                $product->setBio(false);
-            }
-
-            if ($request->get("beef") === "on"){
-                $product->setBeef(true);
-            }else{
-                $product->setBeef(false);
-            }
-
-            if ($request->get("logo") === "on"){
-                $product->setLogo(true);
-            }else{
-                $product->setLogo(false);
-            }
-
             $this->entityManager->flush();
             $this->flashy->info('Produit modifier');
             return $this->redirectToRoute('app_admin');
@@ -96,6 +83,7 @@ class ProductController extends AbstractController
         return $this->render('admin/edit_product.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
+            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
