@@ -1,16 +1,5 @@
 @import "variable";
 
-//.nav {
-//  background-color: rgba(234,236,234,.5);
-//  .nav-link{
-//    color: #2D3E4A !important;
-//    &:hover {
-//      color: #F2994A !important;
-//      text-decoration: underline #F2994A!important;
-//    }
-//  }
-//}
-
 header {
   background-color: rgba(234,236,234,.5);
   padding: 15px 15px 10px 20px;
@@ -18,17 +7,7 @@ header {
     width: 100px;
     margin-left: 30px;
   }
- /* button {
-    color: $text-nav;
-    padding: 9px 25px;
-    border: 1px solid $text-nav;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-    &:hover {
-      border: 1px solid $clickable;
-    }
-  }*/
+
   nav {
     margin-right: 30px;
     li, a {
@@ -40,6 +19,9 @@ header {
       }
       img.search{
         width: 20px;
+      }
+      img.panier{
+        width: 30px;
       }
     }
 
