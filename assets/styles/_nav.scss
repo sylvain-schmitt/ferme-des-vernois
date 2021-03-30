@@ -13,11 +13,12 @@
 
 header {
   background-color: rgba(234,236,234,.5);
-  padding: 30px 10%;
+  padding: 15px 15px 10px 20px;
   .logo {
     width: 100px;
+    margin-left: 30px;
   }
-  button {
+ /* button {
     color: $text-nav;
     padding: 9px 25px;
     border: 1px solid $text-nav;
@@ -27,12 +28,19 @@ header {
     &:hover {
       border: 1px solid $clickable;
     }
-  }
+  }*/
   nav {
+    margin-right: 30px;
     li, a {
       font-weight: 500;
       font-size: 18px;
       color: $text-nav!important;
+      img.facebook{
+          width: 14px;
+      }
+      img.search{
+        width: 20px;
+      }
     }
 
     .nav-links {
