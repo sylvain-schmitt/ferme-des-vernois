@@ -310,6 +310,10 @@ ol, ul {
 
 // Start Margin Top + Bottom
 
+.my-auto {
+  margin: auto 0;
+}
+
 .my-0 {
   margin: 0 0;
 }
@@ -381,6 +385,10 @@ ol, ul {
 // End Margin Top + Bottom
 
 // Start Margin Left + Right
+
+.mx-auto {
+  margin: 0 auto;
+}
 
 .mx-0 {
   margin: 0 0;
