@@ -1,5 +1,7 @@
 <header class="flex justify-between items-center">
-    <img  class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo">
+    <a href="{{ path('app_home') }}">
+        <img  class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo">
+    </a>
 <nav>
     <ul class="nav-links">
         <li>
@@ -16,6 +18,9 @@
         </li>
         <li>
             <a href="{{ path('app_cart') }}">panier</a>
+        </li>
+        <li>
+
         </li>
     </ul>
 </nav>
