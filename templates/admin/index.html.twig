@@ -1,152 +1,858 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
-{% block title %}Tableau de Bord{% endblock %}
+{# {% block title %}Tableau de Bord{% endblock %} #}
+
+{# {% block body %} #}
+
+{# #}{# Liste des produits #}
+{# <div class="container my-5" style="overflow: auto; height: 75vh"> #}
+{# <table class="table"> #}
+{# <thead class="thead-dark"> #}
+{# <tr> #}
+{# <th scope="col">Miniature</th> #}
+{# <th scope="col">Nom</th> #}
+{# <th scope="col">Stock</th> #}
+{# <th scope="col">Prix</th> #}
+{# <th scope="col">Poid</th> #}
+{# <th scope="col">Modifier</th> #}
+{# <th scope="col">Activer/Désactiver</th> #}
+{# <th scope="col">Supprimer</th> #}
+{# </tr> #}
+{# </thead> #}
+{# <tbody> #}
+{# {% for product in products %} #}
+{# <tr> #}
+{# <th scope="row"> #}
+{# <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/> #}
+{# </th> #}
+{# <td><a href="{{ path('app_admin_show_product', {id: product.id}) }}">{{ product.title }}</a></td> #}
+{# <td> #}
+{# {% if product.quantity == 0 %} #}
+{# <a href="#" #}
+{# onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') && #}
+{# document #}
+{# .getElementById #}
+{# ('js-product-delete-form-{{ product.id }}').submit();" #}
+{# class="btn"><img src="https://img.icons8.com/fluent/20/000000/trash.png"/></a> #}
+{# <form id="js-product-delete-form-{{ product.id }}" #}
+{# action="{{ path('app_admin_delete_product', {id: product.id}) }}" #}
+{# method="post" style="display:none;"> #}
+{# <input type="hidden" name="csrf_token" #}
+{# value="{{ csrf_token('product_deletion_' ~ product.id) }}"> #}
+{# <input type="hidden" name="_method" value="DELETE"> #}
+{# </form> #}
+{# {{ product.quantity }} #}
+{# <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn"> #}
+{# <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/> #}
+{# </a> #}
+{# {% else %} #}
+{# <a href="{{ path('app_quantity_delete', {id: product.id}) }}" class="btn"> #}
+{# <img src="https://img.icons8.com/fluent/20/000000/minus-math.png"/> #}
+{# </a> #}
+{# {{ product.quantity }} #}
+{# <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn"> #}
+{# <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/> #}
+{# </a> #}
+{# {% endif %} #}
+{# </td> #}
+{# <td>{{ product.price }} €</td> #}
+{# <td> #}
+{# {{ pluralize(product.pound , product.units) }} #}
+{# </td> #}
+{# <td> #}
+{# <a href="{{ path('app_admin_edit_product' , {id: product.id}) }}" #}
+{# class="btn btn-info">Modifier</a> #}
+{# </td> #}
+{# <td> #}
+{# <div class="form-check form-switch"> #}
+{# <input type="checkbox" #}
+{# class="form-check-input mx-auto" {{ (product.active) ? 'checked' : '' }} #}
+{# data-id="{{ product.id }}" id="{{ product.id }}"> #}
+{# <label class="form-check-label" for="{{ product.id }}"></label> #}
+{# </div> #}
+{# </td> #}
+{# <td> #}
+{# <a href="#" #}
+{# onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') && #}
+{# document #}
+{# .getElementById #}
+{# ('js-product-delete-form-{{ product.id }}').submit();" #}
+{# class="btn"><img src="https://img.icons8.com/fluent/20/000000/trash.png"/></a> #}
+{# <form id="js-product-delete-form-{{ product.id }}" #}
+{# action="{{ path('app_admin_delete_product', {id: product.id}) }}" #}
+{# method="post" style="display:none;"> #}
+{# <input type="hidden" name="csrf_token" #}
+{# value="{{ csrf_token('product_deletion_' ~ product.id) }}"> #}
+{# <input type="hidden" name="_method" value="DELETE"> #}
+{# </form> #}
+{# </td> #}
+
+{# </tr> #}
+{# {% endfor %} #}
+{# </tbody> #}
+{# </table> #}
+{# </div> #}
+
+{# <div class="row"> #}
+{# <div class="container col-md-6 my-5" style="overflow: auto; max-height: 400px"> #}
+{# <table class="table"> #}
+{# <thead class="thead-dark"> #}
+{# <tr> #}
+{# <th scope="col">Nom des catégories</th> #}
+{# <th scope="col">Modifier</th> #}
+{# </tr> #}
+{# </thead> #}
+{# <tbody> #}
+{# {% for categorie in categories %} #}
+{# <tr> #}
+{# <th scope="row">{{ categorie.title }}</th> #}
+{# <td> #}
+{# <a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}" #}
+{# class="btn btn-info">Modifier</a> #}
+{# </td> #}
+{# </tr> #}
+{# {% endfor %} #}
+{# </tbody> #}
+{# </table> #}
+{# </div> #}
+
+{# <div class="container col-md-3 my-5" style="overflow: auto; max-height: 400px"> #}
+{# <table class="table"> #}
+{# <thead class="thead-dark"> #}
+{# <tr> #}
+{# <th scope="col">Unité</th> #}
+{# <th scope="col">Modifier</th> #}
+{# </tr> #}
+{# </thead> #}
+{# <tbody> #}
+{# {% for unit in units %} #}
+{# <tr> #}
+{# <th scope="row">{{ unit.title }}</th> #}
+{# <td><a href="{{ path('app_admin_edit_unit' , {id: unit.id}) }}" #}
+{# class="btn btn-info">Modifier</a> #}
+{# </td> #}
+{# </tr> #}
+{# {% endfor %} #}
+{# </tbody> #}
+{# </table> #}
+{# </div> #}
+{# </div> #}
+
+{# <script> #}
+{# let activer = document.querySelectorAll('.form-check-input') #}
+{# for (let bouton of activer) { #}
+{# bouton.addEventListener("click", function () { #}
+{# let xmlhttp = new XMLHttpRequest; #}
+{# xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`) #}
+{# xmlhttp.send() #}
+{# }) #}
+{# } #}
+{# </script> #}
+
+{# {% endblock %} #}
+
+{% extends 'base.html.twig' %}
 
 {% block body %}
 
-    {# Liste des produits #}
-    <div class="container my-5" style="overflow: auto; height: 75vh">
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Miniature</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Poid</th>
-                <th scope="col">Modifier</th>
-                <th scope="col">Activer/Désactiver</th>
-                <th scope="col">Supprimer</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for product in products %}
-                <tr>
-                    <th scope="row">
-                        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
-                    </th>
-                    <td><a href="{{ path('app_admin_show_product', {id: product.id}) }}">{{ product.title }}</a></td>
-                    <td>
-                        {% if product.quantity == 0 %}
-                            <a href="#"
-                               onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') &&
-                                       document
-                                       .getElementById
-                                       ('js-product-delete-form-{{ product.id }}').submit();"
-                               class="btn"><img src="https://img.icons8.com/fluent/20/000000/trash.png"/></a>
-                            <form id="js-product-delete-form-{{ product.id }}"
-                                  action="{{ path('app_admin_delete_product', {id: product.id}) }}"
-                                  method="post" style="display:none;">
-                                <input type="hidden" name="csrf_token"
-                                       value="{{ csrf_token('product_deletion_' ~ product.id) }}">
-                                <input type="hidden" name="_method" value="DELETE">
-                            </form>
-                            {{ product.quantity }}
-                            <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn">
-                                <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/>
-                            </a>
-                        {% else %}
-                            <a href="{{ path('app_quantity_delete', {id: product.id}) }}" class="btn">
-                                <img src="https://img.icons8.com/fluent/20/000000/minus-math.png"/>
-                            </a>
-                            {{ product.quantity }}
-                            <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn">
-                                <img src="https://img.icons8.com/fluent/20/000000/plus-math.png"/>
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td>{{ product.price }} €</td>
-                    <td>
-                        {{ pluralize(product.pound , product.units) }}
-                    </td>
-                    <td>
-                        <a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
-                           class="btn btn-info">Modifier</a>
-                    </td>
-                    <td>
-                        <div class="form-check form-switch">
-                            <input type="checkbox"
-                                   class="form-check-input mx-auto" {{ (product.active) ? 'checked' : '' }}
-                                   data-id="{{ product.id }}" id="{{ product.id }}">
-                            <label class="form-check-label" for="{{ product.id }}"></label>
-                        </div>
-                    </td>
-                    <td>
-                        <a href="#"
-                           onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') &&
-                                   document
-                                   .getElementById
-                                   ('js-product-delete-form-{{ product.id }}').submit();"
-                           class="btn"><img src="https://img.icons8.com/fluent/20/000000/trash.png"/></a>
-                        <form id="js-product-delete-form-{{ product.id }}"
-                              action="{{ path('app_admin_delete_product', {id: product.id}) }}"
-                              method="post" style="display:none;">
-                            <input type="hidden" name="csrf_token"
-                                   value="{{ csrf_token('product_deletion_' ~ product.id) }}">
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
-                    </td>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800");
 
-    <div class="row">
-        <div class="container col-md-6 my-5" style="overflow: auto; max-height: 400px">
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Nom des catégories</th>
-                    <th scope="col">Modifier</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for categorie in categories %}
-                    <tr>
-                        <th scope="row">{{ categorie.title }}</th>
-                        <td>
-                            <a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}"
-                               class="btn btn-info">Modifier</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div class="container col-md-3 my-5" style="overflow: auto; max-height: 400px">
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Unité</th>
-                    <th scope="col">Modifier</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for unit in units %}
-                    <tr>
-                        <th scope="row">{{ unit.title }}</th>
-                        <td><a href="{{ path('app_admin_edit_unit' , {id: unit.id}) }}"
-                               class="btn btn-info">Modifier</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <script>
-        let activer = document.querySelectorAll('.form-check-input')
-        for (let bouton of activer) {
-            bouton.addEventListener("click", function () {
-                let xmlhttp = new XMLHttpRequest;
-                xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`)
-                xmlhttp.send()
-            })
+        .p-1 {
+            padding: 5px !important;
         }
-    </script>
+
+        .p-2 {
+            padding: 15px !important;
+        }
+
+        .p-3 {
+            padding: 25px !important;
+        }
+
+        .p-4 {
+            padding: 35px !important;
+        }
+
+        .p-5 {
+            padding: 45px !important;
+        }
+
+        .pl-1 {
+            padding-left: 5px !important;
+        }
+
+        .pl-2 {
+            padding-left: 15px !important;
+        }
+
+        .pl-3 {
+            padding-left: 25px !important;
+        }
+
+        .pl-4 {
+            padding-left: 35px !important;
+        }
+
+        .pl-5 {
+            padding-left: 45px !important;
+        }
+
+        .pr-1 {
+            padding-right: 5px !important;
+        }
+
+        .pr-2 {
+            padding-right: 15px !important;
+        }
+
+        .pr-3 {
+            padding-right: 25px !important;
+        }
+
+        .pr-4 {
+            padding-right: 35px !important;
+        }
+
+        .pr-5 {
+            padding-right: 45px !important;
+        }
+
+        .pt-1 {
+            padding-top: 5px !important;
+        }
+
+        .pt-2 {
+            padding-top: 15px !important;
+        }
+
+        .pt-3 {
+            padding-top: 25px !important;
+        }
+
+        .pt-4 {
+            padding-top: 35px !important;
+        }
+
+        .pt-5 {
+            padding-top: 45px !important;
+        }
+
+        .pb-1 {
+            padding-bottom: 5px !important;
+        }
+
+        .pb-2 {
+            padding-bottom: 15px !important;
+        }
+
+        .pb-3 {
+            padding-bottom: 25px !important;
+        }
+
+        .pb-4 {
+            padding-bottom: 35px !important;
+        }
+
+        .pb-5 {
+            padding-bottom: 45px !important;
+        }
+
+        .px-1 {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
+
+        .px-2 {
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+
+        .px-3 {
+            padding-left: 25px !important;
+            padding-right: 25px !important;
+        }
+
+        .px-4 {
+            padding-left: 35px !important;
+            padding-right: 35px !important;
+        }
+
+        .px-5 {
+            padding-left: 45px !important;
+            padding-right: 45px !important;
+        }
+
+        .py-1 {
+            padding-top: 5px !important;
+            padding-bottom: 5px !important;
+        }
+
+        .py-2 {
+            padding-top: 15px !important;
+            padding-bottom: 15px !important;
+        }
+
+        .py-3 {
+            padding-top: 25px !important;
+            padding-bottom: 25px !important;
+        }
+
+        .py-4 {
+            padding-top: 35px !important;
+            padding-bottom: 35px !important;
+        }
+
+        .py-5 {
+            padding-top: 45px !important;
+            padding-bottom: 45px !important;
+        }
+
+        .m-1 {
+            margin: 5px !important;
+        }
+
+        .m-2 {
+            margin: 10px !important;
+        }
+
+        .m-3 {
+            margin: 15px !important;
+        }
+
+        .m-4 {
+            margin: 25px !important;
+        }
+
+        .m-5 {
+            margin: 35px !important;
+        }
+
+        .ml-1 {
+            margin-left: 5px !important;
+        }
+
+        .ml-2 {
+            margin-left: 10px !important;
+        }
+
+        .ml-3 {
+            margin-left: 15px !important;
+        }
+
+        .ml-4 {
+            margin-left: 25px !important;
+        }
+
+        .ml-5 {
+            margin-left: 35px !important;
+        }
+
+        .mr-1 {
+            margin-right: 5px !important;
+        }
+
+        .mr-2 {
+            margin-right: 10px !important;
+        }
+
+        .mr-3 {
+            margin-right: 15px !important;
+        }
+
+        .mr-4 {
+            margin-right: 25px !important;
+        }
+
+        .mr-5 {
+            margin-right: 35px !important;
+        }
+
+        .mt-1 {
+            margin-top: 5px !important;
+        }
+
+        .mt-2 {
+            margin-top: 10px !important;
+        }
+
+        .mt-3 {
+            margin-top: 15px !important;
+        }
+
+        .mt-4 {
+            margin-top: 25px !important;
+        }
+
+        .mt-5 {
+            margin-top: 35px !important;
+        }
+
+        .mb-1 {
+            margin-bottom: 5px !important;
+        }
+
+        .mb-2 {
+            margin-bottom: 10px !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 25px !important;
+        }
+
+        .mb-5 {
+            margin-bottom: 35px !important;
+        }
+
+        .mx-1 {
+            margin-left: 5px !important;
+            margin-right: 5px !important;
+        }
+
+        .mx-2 {
+            margin-left: 10px !important;
+            margin-right: 10px !important;
+        }
+
+        .mx-3 {
+            margin-left: 15px !important;
+            margin-right: 15px !important;
+        }
+
+        .mx-4 {
+            margin-left: 25px !important;
+            margin-right: 25px !important;
+        }
+
+        .mx-5 {
+            margin-left: 35px !important;
+            margin-right: 35px !important;
+        }
+
+        .my-1 {
+            margin-top: 5px !important;
+            margin-bottom: 5px !important;
+        }
+
+        .my-2 {
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+        }
+
+        .my-3 {
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+        }
+
+        .my-4 {
+            margin-top: 25px !important;
+            margin-bottom: 25px !important;
+        }
+
+        .my-5 {
+            margin-top: 35px !important;
+            margin-bottom: 35px !important;
+        }
+
+        body {
+            background-color: gray;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        .wp-content {
+            margin-top: 60px;
+            margin-left: 75px;
+        }
+
+        /* Remove unde
+        a:hover {
+          text-decoration: none;
+        }
+        /* Remove Bootstrap button outline */
+        button .focus, a .focus {
+            outline: 0;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+
+        button:focus, a:focus {
+            outline: 0;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+
+        [data-component=navbar] {
+            /* Right Menu Dropdowns */
+            /* Notification */
+            /* Notification Dropdown */
+        }
+
+        [data-component=navbar] .navbar {
+            background-color: #fff;
+        }
+
+        [data-component=navbar] .navbar-toggler {
+            line-height: 2.4;
+            margin-left: 75px;
+        }
+
+        [data-component=navbar] .navbar-toggler span {
+            text-transform: uppercase;
+            font-size: 1em;
+            font-weight: 400;
+            font-family: "Lato", sans-serif;
+            display: none;
+        }
+
+        [data-component=navbar] .navbar-toggler[aria-expanded=true] {
+            color: #009fff;
+        }
+
+        [data-component=navbar] .navbar-toggler[aria-expanded=true] span {
+            display: initial;
+            color: #009fff;
+        }
+
+        [data-component=navbar] .navbar-toggler[aria-expanded=true] i {
+            color: #009fff;
+        }
+
+        [data-component=navbar] .navbar-collapse {
+            background-color: #292a2c;
+            margin-left: 75px;
+        }
+
+        [data-component=navbar] .navbar-nav {
+            height: 100vw;
+        }
+
+        [data-component=navbar] .collapsing {
+            -webkit-transition: height .3s ease;
+            -o-transition: height .3s ease;
+            transition: height .3s ease;
+        }
+
+        [data-component=navbar] .navbar-brand {
+            background-color: #009fff;
+            height: 60px;
+            width: 75px;
+            text-align: center;
+        }
+
+        [data-component=navbar] ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        [data-component=navbar] .right-links i {
+            color: #000;
+            font-size: 20px;
+            line-height: 2.8;
+        }
+
+        [data-component=navbar] .home {
+            border-right: 1px solid #ababab;
+        }
+
+        [data-component=navbar] .dropdown-toggle::after {
+            display: none;
+        }
+
+        [data-component=navbar] .dropdown-item {
+            color: #292b2c;
+            font-size: 0.75em;
+        }
+
+        [data-component=navbar] .dropdown {
+            position: relative;
+        }
+
+        [data-component=navbar] .dropdown span {
+            color: #fff;
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            top: -8px;
+            right: -3px;
+            background-color: red;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.625em;
+            font-weight: 600;
+        }
+
+        [data-component=navbar] .dropdown img {
+            border-radius: 50%;
+            height: 40px;
+        }
+
+        [data-component=navbar] .list-group .lg {
+            height: 500px;
+            width: 270px;
+            overflow: auto;
+        }
+
+        [data-component=navbar] .list-group .list-group-item {
+            border-radius: 0;
+            letter-spacing: 0.5px;
+        }
+
+        [data-component=navbar] .list-group h5 {
+            font-size: 0.6875em;
+            font-weight: 700;
+            line-height: 2;
+        }
+
+        [data-component=navbar] .list-group p {
+            font-size: 0.5625em;
+            font-weight: 400;
+            line-height: 2;
+        }
+
+        [data-component=navbar] .megamenu #menuOne, [data-component=navbar] .megamenu #menuTwo, [data-component=navbar] .megamenu #menuThree {
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+        }
+
+        [data-component=navbar] .megamenu .megamenu-links {
+            background-color: #EEEEEE;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        [data-component=navbar] .megamenu .btn {
+            font-size: 0.875em;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        [data-component=navbar] .megamenu .btn:hover {
+            background-color: #292a2c;
+            color: #fff;
+        }
+
+        [data-component=navbar] .megamenu a[aria-expanded=true] .fa-plus {
+            display: none;
+        }
+
+        [data-component=navbar] .megamenu a[aria-expanded=false] .fa-minus {
+            display: none;
+        }
+
+        [data-component=navbar] .megamenu [aria-expanded=true] {
+            background-color: #292a2c;
+            color: #fff;
+        }
+
+        [data-component=navbar] .megamenu [aria-expanded=true] i {
+            color: #fff;
+            font-size: 1.25em;
+        }
+
+        [data-component=navbar] .megamenu [aria-expanded=false] {
+            background-color: #eee;
+            color: #292a2c;
+            border-radius: 0;
+        }
+
+        [data-component=navbar] .megamenu [aria-expanded=false] i {
+            color: #009fff;
+            font-size: 1.25em;
+        }
+
+        [data-component=navbar] .megamenu .list-group {
+            height: 100vw;
+            background-color: #292a2c;
+        }
+
+        [data-component=navbar] .megamenu .list-group-item {
+            border-radius: 0;
+            background-color: #292a2c;
+            font-size: 0.75em;
+            color: #fff;
+        }
+
+        [data-component=navbar] .megamenu .list-group-item:hover {
+            background-color: #009fff;
+        }
+
+        [data-component=sidebar] .sidebar {
+            position: fixed;
+            z-index: 9999;
+        }
+
+        [data-component=sidebar] .first-menu {
+            position: fixed;
+            background-color: #292a2c;
+            height: 100vw;
+            width: 75px;
+            top: 60px;
+            overflow: hidden;
+        }
+
+        .list-group-item a {
+            color: #292a2c;
+        }
+
+    </style>
+
+    <div data-component="navbar">
+
+        <nav class="navbar p-0 fixed-top">
+            <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
+                    data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
+                    aria-label="Toggle navigation" disabled>
+                <a style="text-decoration: none"><span class="ml-3">Tableau de Bord</span></a>
+            </button>
+
+            <div><a class="navbar-brand px-1" href=""><img
+                            src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
+                            class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
+
+                <div class="right-links float-right mr-4">
+                    <div class="d-inline dropdown">
+                        <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false" href="#">
+                        </a>
+                    </div> <!-- /.dropdown -->
+
+                </div> <!-- /.right-links -->
+
+            </div>
+
+
+            <div class="megamenu">
+                <div class="navbar-collapse collapse show" id="megamenu-dropdown" aria-expanded="true" style="">
+                    <div class="megamenu-links">
+                        <div class="row">
+                            {# Colone à ajouter si besoin #}
+                            <div class="col-md-4 px-0">
+                                <a class="btn rounded-0 border-0 d-flex w-100 justify-content-between p-3 pl-5 collapsed"
+                                   data-toggle="collapse" href="#menuOne" aria-expanded="false"
+                                   aria-controls="collapseExample" id="more">Gérer les Produits
+                                    <i class="fa fa-minus float-right" aria-hidden="true"></i>
+                                    <i class="fa fa-plus float-right" aria-hidden="true"></i>
+                                </a> <!-- button close -->
+                                <div class="collapse" id="menuOne" aria-expanded="false" style="">
+                                    <div class="list-group border-0">
+                                        <a href="{{ path('app_admin_new_product') }}"
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">Ajouter un
+                                            Produit</a>
+                                        <a href=""
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">Modifier
+                                            un Produit</a>
+                                    </div> <!-- /.list-group -->
+                                </div><!-- /.collapse -->
+                            </div> <!-- /.col-md-3 -->
+                            {# Colone à ajouter si besoin #}
+
+                            {# Colone à ajouter si besoin #}
+                            <div class="col-md-4 px-0">
+                                <a class="btn rounded-0 border-0 d-flex w-100 justify-content-between p-3 pl-5 collapsed"
+                                   data-toggle="collapse" href="#menuTwo" aria-expanded="false"
+                                   aria-controls="collapseExample" id="more">Gérer les Catégories
+                                    <i class="fa fa-minus float-right" aria-hidden="true"></i>
+                                    <i class="fa fa-plus float-right" aria-hidden="true"></i>
+                                </a> <!-- button close -->
+                                <div class="collapse" id="menuTwo" aria-expanded="false" style="">
+                                    <div class="list-group border-0">
+                                        <a href="{{ path('app_admin_new_categorie') }}"
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">Ajouter une
+                                            Catégorie</a>
+                                        <a href=""
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">Modifier
+                                            une Catégorie</a>
+                                    </div> <!-- /.list-group -->
+                                </div><!-- /.collapse -->
+                            </div> <!-- /.col-md-3 -->
+                            {# Colone à ajouter si besoin #}
+
+                            {# Colone à ajouter si besoin #}
+                            <div class="col-md-4 px-0">
+                                <a class="btn rounded-0 border-0 d-flex w-100 justify-content-between p-3 pl-5 collapsed"
+                                   data-toggle="collapse" href="#menuThree" aria-expanded="false"
+                                   aria-controls="collapseExample" id="more">Gérer les Unitées
+                                    <i class="fa fa-minus float-right" aria-hidden="true"></i>
+                                    <i class="fa fa-plus float-right" aria-hidden="true"></i>
+                                </a> <!-- button close -->
+                                <div class="collapse" id="menuThree" aria-expanded="false" style="">
+                                    <div class="list-group border-0">
+                                        <a href="{{ path('app_admin_new_product') }}"
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">Ajouter une
+                                            Unitées</a>
+                                        <a href=""
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">Modifier
+                                            une Unitées</a>
+                                    </div> <!-- /.list-group -->
+                                </div><!-- /.collapse -->
+                            </div> <!-- /.col-md-3 -->
+                            {# Colone à ajouter si besoin #}
+
+                            {# Colone à ajouter si besoin #}
+                            <div class="col-md-4 px-0">
+                                <a class="btn rounded-0 border-0 d-flex w-100 justify-content-between p-3 pl-5 collapsed"
+                                   data-toggle="collapse" href="#menuFive" aria-expanded="false"
+                                   aria-controls="collapseExample" id="more">Gérer l'annonce d'Accueil
+                                    <i class="fa fa-minus float-right" aria-hidden="true"></i>
+                                    <i class="fa fa-plus float-right" aria-hidden="true"></i>
+                                </a> <!-- button close -->
+                                <div class="collapse" id="menuFive" aria-expanded="false" style="">
+                                    <div class="list-group border-0">
+                                        {% for actuality in actuality %}
+                                            <a href="{{ path('app_admin_edit_actu', {id: actuality.id}) }}"
+                                               class="list-group-item list-group-item-action border-0 pl-4 py-3">
+                                                Modifier l'annonce d'Accueil
+                                            </a>
+                                        {% endfor %}
+                                    </div> <!-- /.list-group -->
+                                </div><!-- /.collapse -->
+                            </div> <!-- /.col-md-3 -->
+                            {# Colone à ajouter si besoin #}
+
+                            {# Colone à ajouter si besoin #}
+                            <div class="col-md-4 px-0">
+                                <a class="btn rounded-0 border-0 d-flex w-100 justify-content-between p-3 pl-5 collapsed"
+                                   data-toggle="collapse" href="#menuSix" aria-expanded="false"
+                                   aria-controls="collapseExample" id="more">Gestion de la Gallerie
+                                    <i class="fa fa-minus float-right" aria-hidden="true"></i>
+                                    <i class="fa fa-plus float-right" aria-hidden="true"></i>
+                                </a> <!-- button close -->
+                                <div class="collapse" id="menuSix" aria-expanded="false" style="">
+                                    <div class="list-group border-0">
+                                        <a href="{{ path('app_admin_gallery') }}"
+                                           class="list-group-item list-group-item-action border-0 pl-4 py-3">
+                                            Ajouter / Modifier une image à la Gallerie
+                                        </a>
+                                    </div> <!-- /.list-group -->
+                                </div><!-- /.collapse -->
+                            </div> <!-- /.col-md-3 -->
+                            {# Colone à ajouter si besoin #}
+
+                        </div> <!-- /.row -->
+                    </div> <!-- /.megamenu-links -->
+                </div>
+            </div>
+        </nav>
+    </div> <!-- END TOP NAVBAR -->
+
+    <div data-component="sidebar">
+        <div class="sidebar">
+            <ul class="flex-column d-inline-block first-menu">
+            </ul> <!-- /.first-menu -->
+        </div> <!-- /.sidebar -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
 {% endblock %}

@@ -55,7 +55,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/actualite/{id}", name="app_admin_new_actuality")
+     * @Route("/admin/actualite/{id}", name="app_admin_edit_actu")
      */
     public function actualtiEdit(Request $request, Actuality $actuality): Response
     {
