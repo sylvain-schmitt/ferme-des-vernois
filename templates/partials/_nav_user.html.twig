@@ -1,0 +1,23 @@
+<header class="flex justify-between items-center">
+    <img  class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo">
+<nav>
+    <ul class="nav-links">
+        <li>
+            <a href="{{ path('app_about') }}"> La ferme</a>
+        </li>
+        <li>
+            <a href="{{ path('app_product') }}">Nos Produits</a>
+        </li>
+        <li>
+            <a href="{{ path('app_gallery') }}">Galerie</a>
+        </li>
+        <li>
+            <a href="{{ path('app_order') }}">Commander</a>
+        </li>
+        <li>
+            <a href="{{ path('app_cart') }}">panier</a>
+        </li>
+    </ul>
+</nav>
+    <a class="cta" href="{{ path('app_contact') }}"><button>Contact</button></a>
+</header>

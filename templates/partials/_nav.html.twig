@@ -2,73 +2,11 @@
     app.request.attributes.get('_route') == 'app_admin_new_product' or
     app.request.attributes.get('_route') == 'app_admin_new_categorie' or
     app.request.attributes.get('_route') == 'app_admin_new_unit' %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark  mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app_home') }}">Ferme des vernois</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ path('app_product') }}">Nos Produits</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin') }}">Dashoard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_new_product') }}">Ajouter un Produit</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_new_categorie') }}">Ajouter une Catégorie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_new_unit') }}">Ajouter une Unité</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_admin_gallery') }}">Gestion de la Gallerie</a>
-                    </li>
-                    <li class="nav-item">
-                        {% for actuality in actuality %}
-                            <a class="nav-link" href="{{ path('app_admin_new_actuality' , {id: actuality.id}) }}">Modifier l'Annonce</a>
-                        {% endfor %}
-                    </li>
-                </ul>
-                <div class="d-flex"><a href="{{ path('app_search') }}"><i class="fas fa-search"></i></a></div>
-            </div>
-        </div>
-    </nav>
+
+    {% include 'partials/_nav_admin.html.twig' %}
+
 {% else %}
-    <nav class="navbar  nav navbar-expand-lg mb-4">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app_home') }}">Ferme des vernois</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ path('app_about') }}">La ferme</a>
-                    </li>
-                    <li>
-                        <a class="nav-link " href="{{ path('app_product') }}">Nos Produits</a>
-                    </li>
-                    <li>
-                        <a class="nav-link " href="{{ path('app_gallery') }}">Galerie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ path('app_order') }}">Commander</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ path('app_contact') }}">Contact</a>
-                    </li>
-                </ul>
-                <div class="d-flex"><a href="{{ path('app_search') }}"><i class="fas fa-search"></i></a></div>
-            </div>
-        </div>
-    </nav>
+
+    {% include 'partials/_nav_user.html.twig' %}
+
 {% endif %}
