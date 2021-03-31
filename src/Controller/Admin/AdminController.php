@@ -17,25 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
-    private ProductRepository $productRepository;
-    private CategoryRepository $categoryRepository;
-    private UnitRepository $unitRepository;
     private ActualityRepository $actualityRepository;
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
 
     public function __construct(
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository,
-        UnitRepository $unitRepository,
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
         ActualityRepository $actualityRepository
     )
     {
-        $this->productRepository = $productRepository;
-        $this->categoryRepository = $categoryRepository;
-        $this->unitRepository = $unitRepository;
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
         $this->actualityRepository = $actualityRepository;
@@ -47,9 +38,6 @@ class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('admin/index.html.twig', [
-            'products' => $this->productRepository->findBy([], ['createdAt' => 'DESC']),
-            'categories' => $this->categoryRepository->findAll(),
-            'units' => $this->unitRepository->findAll(),
             'actuality' => $this->actualityRepository->findAll(),
         ]);
     }
