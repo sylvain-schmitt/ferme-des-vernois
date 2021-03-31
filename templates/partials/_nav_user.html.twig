@@ -1,4 +1,4 @@
-<header class="flex justify-between items-center">
+<header class="flex justify-between items-center sticky">
     <a href="{{ path('app_home') }}">
         <img  class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo">
     </a>
@@ -22,19 +22,22 @@
         <li>
 
         </li>
-    </ul>
-</nav>
-<nav>
-    <ul class="nav-links">
-        <li>
-            <a href="{{ path('app_cart') }}"><img class="panier" src="{{ asset('build/images/panier.png') }}" alt="panier"></a>
-        </li>
-        <li>
-            <a href="#"><img class="facebook" src="{{ asset('build/images/facebook.png') }}" alt="facebook"></a>
-        </li>
-        <li>
-            <a href="{{ path('app_search') }}"><img class="search" src="{{ asset('build/images/loupe.png') }}" alt="recherche"></a>
-        </li>
+        <div class="module">
+            <li>
+                <a href="{{ path('app_cart') }}"><img class="panier" src="{{ asset('build/images/panier.png') }}" alt="panier"></a>
+                {% if app.session.get('panier')  %}
+                <div class="product-panier">
+                    <span>{{app.session.get('panier') | length}}</span>
+                </div>
+                {% endif %}
+            </li>
+            <li>
+                <a href="#"><img class="facebook" src="{{ asset('build/images/facebook.png') }}" alt="facebook"></a>
+            </li>
+            <li>
+                <a href="{{ path('app_search') }}"><img class="search" src="{{ asset('build/images/loupe.png') }}" alt="recherche"></a>
+            </li>
+        </div>
     </ul>
 </nav>
     <div class="burger">

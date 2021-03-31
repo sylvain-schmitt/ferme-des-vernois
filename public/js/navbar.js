@@ -1,6 +1,13 @@
+window.addEventListener("scroll", function(){
+    const header = document.querySelector("header");
+    header.classList.toggle('sticky', window.scrollY > 80);
+});
+
+
 const burger = document.querySelector('.burger');
 const navigation = document.querySelector(".nav-links");
-const navigationItems = document.querySelectorAll(".nav-links ul li a")
+const module = document.querySelector(".nav-module");
+const navigationItems = document.querySelectorAll(".nav-links a")
 burger.addEventListener('click',()=>{
     //Burger Animation
     burger.classList.toggle('toggle');
