@@ -563,27 +563,45 @@
                     <a style="text-decoration: none"><span class="ml-3 ">Tableau de Bord</span></a>
                 </button>
 
-                <div><a class="navbar-brand px-1" href=""><img
+                <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
                                 src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
                                 class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
 
                     <div class="right-links float-right mr-4">
                         <div class="d-inline dropdown">
                             <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false" href="#">
+                               aria-expanded="false" href="">
                             </a>
                         </div> <!-- /.dropdown -->
                     </div> <!-- /.right-links -->
                 </div>
                 <div class="row">
                     <div class="container">
-
-                        {# Colone à ajouter si besoin #}
+                        <div class="container col-md-3 my-5" style="overflow: auto; max-height: 400px">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Unité</th>
+                                    <th scope="col">Modifier</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for unit in units %}
+                                    <tr>
+                                        <th scope="row">{{ unit.title }}</th>
+                                        <td><a href="{{ path('app_admin_edit_unit' , {id: unit.id}) }}"
+                                               class="btn"><img src="https://img.icons8.com/fluent/20/000000/edit.png"/></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                </div>
 
-                </div> <!-- /.row -->
             </nav>
-        </div> <!-- END TOP NAVBAR -->
+        </div> <!-- /.row -->
 
         <div data-component="sidebar">
             <div class="sidebar">

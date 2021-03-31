@@ -579,7 +579,7 @@
                 <div class="right-links float-right mr-4">
                     <div class="d-inline dropdown">
                         <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false" href="#">
+                           aria-expanded="false" href="{{ path('app_admin') }}">
                         </a>
                     </div> <!-- /.dropdown -->
                 </div> <!-- /.right-links -->
@@ -639,5 +639,16 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+    <script>
+        let activer = document.querySelectorAll('.form-check-input')
+        for (let bouton of activer) {
+            bouton.addEventListener("click", function () {
+                let xmlhttp = new XMLHttpRequest;
+                xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`)
+                xmlhttp.send()
+            })
+        }
+    </script>
 
 {% endblock %}

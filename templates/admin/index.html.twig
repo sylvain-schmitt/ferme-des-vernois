@@ -1,48 +1,3 @@
-{# {% extends 'base.html.twig' %} #}
-
-{# {% block title %}Tableau de Bord{% endblock %} #}
-
-{# {% block body %} #}
-
-
-
-
-
-{# <div class="container col-md-3 my-5" style="overflow: auto; max-height: 400px"> #}
-{# <table class="table"> #}
-{# <thead class="thead-dark"> #}
-{# <tr> #}
-{# <th scope="col">Unité</th> #}
-{# <th scope="col">Modifier</th> #}
-{# </tr> #}
-{# </thead> #}
-{# <tbody> #}
-{# {% for unit in units %} #}
-{# <tr> #}
-{# <th scope="row">{{ unit.title }}</th> #}
-{# <td><a href="{{ path('app_admin_edit_unit' , {id: unit.id}) }}" #}
-{# class="btn btn-info">Modifier</a> #}
-{# </td> #}
-{# </tr> #}
-{# {% endfor %} #}
-{# </tbody> #}
-{# </table> #}
-{# </div> #}
-{# </div> #}
-
-{# <script> #}
-{# let activer = document.querySelectorAll('.form-check-input') #}
-{# for (let bouton of activer) { #}
-{# bouton.addEventListener("click", function () { #}
-{# let xmlhttp = new XMLHttpRequest; #}
-{# xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`) #}
-{# xmlhttp.send() #}
-{# }) #}
-{# } #}
-{# </script> #}
-
-{# {% endblock %} #}
-
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -614,7 +569,7 @@
                 <div class="right-links float-right mr-4">
                     <div class="d-inline dropdown">
                         <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false" href="#">
+                           aria-expanded="false" href="{{ path('app_admin') }}">
                         </a>
                     </div> <!-- /.dropdown -->
 
