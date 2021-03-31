@@ -60,9 +60,11 @@ header {
       background: rgba(105, 104, 104);
       span{
         display: flex;
-        align-items: center;
         justify-content: center;
-        color: $clickable;
+        color: #F2994A;
+        font-size: 12px;
+        margin-top: 4px;
+      
       }
     }
   }

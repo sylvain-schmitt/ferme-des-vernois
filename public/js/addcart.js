@@ -7,8 +7,7 @@ function onClickBtnLike(event) {
     const url = this.href;
     const button = this.querySelector('span.js-disable')
     axios.get(url).then(function (response) {
-        console.log(button)
         button.style.display = "none";
-
+        window.location.reload();
     })
 }
