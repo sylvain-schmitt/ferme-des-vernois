@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ActualityRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,17 +18,20 @@ class ProductController extends AbstractController
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
     private ActualityRepository $actualityRepository;
+    private ProductRepository $productRepository;
 
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        ActualityRepository $actualityRepository
+        ActualityRepository $actualityRepository,
+        ProductRepository $productRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
         $this->actualityRepository = $actualityRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -37,6 +41,16 @@ class ProductController extends AbstractController
     {
         return $this->render('admin/show_product.html.twig', [
             'product' => $product
+        ]);
+    }
+
+    /**
+     * @Route("/admin/produit", name="app_admin_all_product")
+     */
+    public function allProduct(): Response
+    {
+        return $this->render('admin/all_product.html.twig', [
+            'products' => $this->productRepository->findAll()
         ]);
     }
 
@@ -57,7 +71,7 @@ class ProductController extends AbstractController
         }
         return $this->render('admin/edit_product.html.twig', [
             'form' => $form->createView(),
-            'actuality' => $this->actualityRepository->findBy(['active' => true])
+//            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -83,7 +97,7 @@ class ProductController extends AbstractController
         return $this->render('admin/edit_product.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
-            'actuality' => $this->actualityRepository->findBy(['active' => true])
+//            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -110,7 +124,7 @@ class ProductController extends AbstractController
         $product->setQuantity($count)
                 ->setActive(true);
         $this->entityManager->flush();
-        return $this->redirectToRoute('app_admin');
+        return $this->redirectToRoute('app_admin_all_product');
     }
 
     /**
@@ -124,7 +138,7 @@ class ProductController extends AbstractController
             $product->setQuantity($count);
             $this->entityManager->flush();
         }
-        return $this->redirectToRoute('app_admin');
+        return $this->redirectToRoute('app_admin_all_product');
     }
 
     /**

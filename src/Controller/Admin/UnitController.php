@@ -5,10 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\Unit;
 use App\Form\UnitType;
 use App\Repository\ActualityRepository;
+use App\Repository\UnitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UnitController extends AbstractController
@@ -16,15 +18,29 @@ class UnitController extends AbstractController
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
     private ActualityRepository $actualityRepository;
+    private UnitRepository $unitRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        ActualityRepository $actualityRepository)
+        ActualityRepository $actualityRepository,
+        UnitRepository $unitRepository
+    )
     {
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
         $this->actualityRepository = $actualityRepository;
+        $this->unitRepository = $unitRepository;
+    }
+
+    /**
+     * @Route("/admin/unitee", name="app_admin_all_units")
+     */
+    public function allUnits(): Response
+    {
+        return $this->render('admin/all_unit.html.twig', [
+            'units' => $this->unitRepository->findAll()
+        ]);
     }
 
     /**
