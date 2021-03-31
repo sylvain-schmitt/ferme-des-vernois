@@ -1,15 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% set route = app.request.attributes.get('_route') %}
-
-{% block title %}
-    {% if route == 'app_admin_edit_product' %}
-        Modifier {{ product.title }}
-    {% else %}
-        Nouveau Produit
-    {% endif %}
-{% endblock %}
-
 {% block body %}
 
     <link rel="stylesheet"
@@ -565,16 +555,16 @@
 
     <div data-component="navbar">
 
-        <nav class="navbar p-0 fixed-top" style="height: 100%">
-            <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
-                    data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
-                    aria-label="Toggle navigation" disabled>
-                <a style="text-decoration: none"><span class="ml-3 ">Tableau de Bord</span></a>
-            </button>
+    <nav class="navbar p-0 fixed-top" style="height: 100vh">
+        <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
+                data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
+                aria-label="Toggle navigation" disabled>
+            <a style="text-decoration: none"><span class="ml-3 ">Tableau de Bord</span></a>
+        </button>
 
-            <div><a class="navbar-brand px-1" href=""><img
-                            src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
-                            class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
+        <div><a class="navbar-brand px-1" href=""><img
+                        src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
+                        class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
 
                 <div class="right-links float-right mr-4">
                     <div class="d-inline dropdown">
@@ -584,49 +574,31 @@
                     </div> <!-- /.dropdown -->
                 </div> <!-- /.right-links -->
             </div>
-
-            <div class="megamenu">
-                <div class="navbar-collapse collapse show" id="megamenu-dropdown" aria-expanded="true" style="">
-                    <div class="megamenu-links">
-                        <div class="row">
-
-                            {# Colone à ajouter si besoin #}
-                            <div class="col-md-4 px-0">
-                                {{ form_start(form) }}
-                                {{ form_label(form.category, 'Catégorie') }}
-                                {{ form_widget(form.category) }}
-                                {{ form_row(form.title) }}
-                                {{ form_row(form.description) }}
-                                {{ form_row(form.price) }}
-                                {{ form_row(form.pound) }}
-                                {{ form_label(form.units, 'Unité') }}
-                                {{ form_widget(form.units) }}
-                                {{ form_row(form.quantity) }}
-                                <div class="form-check form-switch">
-                                    {{ form_row(form.bio, {'attr': {'class': 'form-check-input'}}) }}
-                                </div>
-                                <div class="form-check form-switch">
-                                    {{ form_row(form.beef, {'attr': {'class': 'form-check-input'}}) }}
-                                </div>
-                                <div class="form-check form-switch">
-                                    {{ form_row(form.logo, {'attr': {'class': 'form-check-input'}}) }}
-                                </div>
-                                {{ form_widget(form.imageFile) }}
-                                {% if route == 'app_admin_edit_product' %}
-                                    <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
-                                    <button type="submit" class="btn btn-success">Modifier</button>
-                                {% else %}
-                                    <button type="submit" class="btn btn-success">Crée</button>
-                                {% endif %}
-                                <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
-                                {{ form_end(form) }}
-                            </div> <!-- /.col-md-3 -->
-                            {# Colone à ajouter si besoin #}
-
-                        </div> <!-- /.row -->
-                    </div> <!-- /.megamenu-links -->
+            <div class="container">
+                <div class="row">
+                    <div class="container col-md-6 my-5" style="overflow: auto; max-height: 400px">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nom des catégories</th>
+                                <th scope="col">Modifier</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for categorie in categories %}
+                                <tr>
+                                    <th scope="row">{{ categorie.title }}</th>
+                                    <td>
+                                        <a href="{{ path('app_admin_edit_category' , {id: categorie.id}) }}"
+                                           class="btn"><img src="https://img.icons8.com/fluent/20/000000/edit.png"/></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {# Colone à ajouter si besoin #}
                 </div>
-            </div>
         </nav>
     </div> <!-- END TOP NAVBAR -->
 
@@ -641,3 +613,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
 {% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

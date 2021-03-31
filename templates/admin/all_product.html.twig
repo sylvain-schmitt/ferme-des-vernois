@@ -1,14 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set route = app.request.attributes.get('_route') %}
-
-{% block title %}
-    {% if route == 'app_admin_edit_product' %}
-        Modifier {{ product.title }}
-    {% else %}
-        Nouveau Produit
-    {% endif %}
-{% endblock %}
+{% block title %}Tous les Produits{% endblock %}
 
 {% block body %}
 
@@ -565,7 +557,7 @@
 
     <div data-component="navbar">
 
-        <nav class="navbar p-0 fixed-top" style="height: 100%">
+        <nav class="navbar p-0 fixed-top" style="height: 100vh">
             <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
                     data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
                     aria-label="Toggle navigation" disabled>
@@ -576,58 +568,112 @@
                             src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
                             class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
 
-                <div class="right-links float-right mr-4">
-                    <div class="d-inline dropdown">
-                        <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false" href="#">
-                        </a>
-                    </div> <!-- /.dropdown -->
-                </div> <!-- /.right-links -->
-            </div>
-
-            <div class="megamenu">
-                <div class="navbar-collapse collapse show" id="megamenu-dropdown" aria-expanded="true" style="">
-                    <div class="megamenu-links">
-                        <div class="row">
-
-                            {# Colone à ajouter si besoin #}
-                            <div class="col-md-4 px-0">
-                                {{ form_start(form) }}
-                                {{ form_label(form.category, 'Catégorie') }}
-                                {{ form_widget(form.category) }}
-                                {{ form_row(form.title) }}
-                                {{ form_row(form.description) }}
-                                {{ form_row(form.price) }}
-                                {{ form_row(form.pound) }}
-                                {{ form_label(form.units, 'Unité') }}
-                                {{ form_widget(form.units) }}
-                                {{ form_row(form.quantity) }}
-                                <div class="form-check form-switch">
-                                    {{ form_row(form.bio, {'attr': {'class': 'form-check-input'}}) }}
-                                </div>
-                                <div class="form-check form-switch">
-                                    {{ form_row(form.beef, {'attr': {'class': 'form-check-input'}}) }}
-                                </div>
-                                <div class="form-check form-switch">
-                                    {{ form_row(form.logo, {'attr': {'class': 'form-check-input'}}) }}
-                                </div>
-                                {{ form_widget(form.imageFile) }}
-                                {% if route == 'app_admin_edit_product' %}
-                                    <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
-                                    <button type="submit" class="btn btn-success">Modifier</button>
-                                {% else %}
-                                    <button type="submit" class="btn btn-success">Crée</button>
-                                {% endif %}
-                                <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
-                                {{ form_end(form) }}
-                            </div> <!-- /.col-md-3 -->
-                            {# Colone à ajouter si besoin #}
-
-                        </div> <!-- /.row -->
-                    </div> <!-- /.megamenu-links -->
+            <div class="right-links float-right mr-4">
+                <div class="d-inline dropdown">
+                    <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" href="#">
+                    </a>
+                </div> <!-- /.dropdown -->
+            </div> <!-- /.right-links -->
+        </div>
+        <div class="row">
+            <div class="container">
+                {# Colone à ajouter si besoin #}
+                <div class="container">
+                    {# Colone à ajouter si besoin #}
+                    <div class="my-5" style="overflow: auto; height: 90vh">
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Miniature</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Modifier</th>
+                                <th scope="col">Activer/Désactiver</th>
+                                <th scope="col">Supprimer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for product in products %}
+                                <tr>
+                                    <th scope="row">
+                                        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
+                                    </th>
+                                    <td>
+                                        <a href="{{ path('app_admin_show_product', {id: product.id}) }}">{{ product.title }}</a>
+                                    </td>
+                                    <td>{{ product.price }} €</td>
+                                    <td>
+                                        {% if product.quantity == 0 %}
+                                            <a href="#"
+                                               onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') &&
+                                                       document
+                                                       .getElementById
+                                                       ('js-product-delete-form-{{ product.id }}').submit();"
+                                               class="btn">
+                                                <img src="https://img.icons8.com/fluent/20/000000/delete-forever.png"/>
+                                                <form id="js-product-delete-form-{{ product.id }}"
+                                                      action="{{ path('app_admin_delete_product', {id: product.id}) }}"
+                                                      method="post" style="display:none;">
+                                                    <input type="hidden" name="csrf_token"
+                                                           value="{{ csrf_token('product_deletion_' ~ product.id) }}">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                </form>
+                                                {{ product.quantity }}
+                                                <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn">
+                                                    <img src="https://img.icons8.com/fluent/20/000000/add.png"/> </a>
+                                            </a>
+                                        {% else %}
+                                            <a href="{{ path('app_quantity_delete', {id: product.id}) }}" class="btn">
+                                                <img src="https://img.icons8.com/fluent/20/000000/minus.png"/>
+                                            </a>
+                                            {{ product.quantity }}
+                                            <a href="{{ path('app_quantity_add', {id: product.id}) }}" class="btn">
+                                                <img src="https://img.icons8.com/fluent/20/000000/add.png"/> </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_admin_edit_product' , {id: product.id}) }}"
+                                           class="btn"><img src="https://img.icons8.com/fluent/20/000000/edit.png"/></a>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input type="checkbox"
+                                                   class="form-check-input mx-auto" {{ (product.active) ? 'checked' : '' }}
+                                                   data-id="{{ product.id }}" id="{{ product.id }}">
+                                            <label class="form-check-label" for="{{ product.id }}"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="#"
+                                           onclick="event.preventDefault(); confirm('Etes vous sur de vouloir supprimer {{ product.title }} ?') &&
+                                                   document
+                                                   .getElementById
+                                                   ('js-product-delete-form-{{ product.id }}').submit();"
+                                           class="btn"><img
+                                                    src="https://img.icons8.com/fluent/20/000000/delete-forever.png"/></a>
+                                        <form id="js-product-delete-form-{{ product.id }}"
+                                              action="{{ path('app_admin_delete_product', {id: product.id}) }}"
+                                              method="post" style="display:none;">
+                                            <input type="hidden" name="csrf_token"
+                                                   value="{{ csrf_token('product_deletion_' ~ product.id) }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {# Colone à ajouter si besoin #}
                 </div>
+
+                {# Colone à ajouter si besoin #}
             </div>
-        </nav>
+
+        </div> <!-- /.row -->
+    </nav>
     </div> <!-- END TOP NAVBAR -->
 
     <div data-component="sidebar">
@@ -639,5 +685,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
 
 {% endblock %}

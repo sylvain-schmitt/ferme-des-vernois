@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\ActualityRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,16 +18,30 @@ class CategoryController extends AbstractController
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
     private ActualityRepository $actualityRepository;
+    private CategoryRepository $categoryRepository;
 
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        ActualityRepository $actualityRepository)
+        ActualityRepository $actualityRepository,
+        CategoryRepository $categoryRepository
+    )
     {
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
         $this->actualityRepository = $actualityRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * @Route("/admin/categorie", name="app_admin_all_category")
+     */
+    public function allCategory(): Response
+    {
+        return $this->render('admin/all_category.html.twig', [
+            'categories' => $this->categoryRepository->findAll()
+        ]);
     }
 
     /**
