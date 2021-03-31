@@ -37,6 +37,9 @@ header {
         a {
           transition: all 0.3s ease 0s;
           text-decoration: none;
+          img,svg {
+            width: 14px;
+          }
           &:hover {
             color: $clickable !important;
             text-decoration:  underline;
