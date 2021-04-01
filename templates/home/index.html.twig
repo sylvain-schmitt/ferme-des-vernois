@@ -3,7 +3,25 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div class="main"></div>
+    <div>
+        <div class="main"></div>
+
+     <div class="flex flex-row items-end justify-center sign">
+            <div class="sign-text">
+                <img src="{{ asset('build/images/ardoise-tracabilite.png') }}" alt="tracabilité">
+            </div>
+            <div class="sign-text">
+                <img src="{{ asset ('build/images/ardoise-label.png') }}" alt="label">
+            </div>
+            <div class="sign-text">
+                <img src="{{ asset ('build/images/ardoise-vente.png') }}" alt="vente">
+            </div>
+            <div class="sign-text">
+                <img src="{{ asset ('build/images/ardoise-reserv.png') }}" alt="réservation">
+            </div>
+        </div>
+    </div>
+
     <h1 class="text-center my-4">Page d'accueil</h1>
 
 
