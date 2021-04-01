@@ -40,12 +40,12 @@ class CategoryController extends AbstractController
     public function allCategory(): Response
     {
         return $this->render('admin/all_category.html.twig', [
-            'categories' => $this->categoryRepository->findAll()
+            'categories' => $this->categoryRepository->findBy([], ['id' => 'DESC'])
         ]);
     }
 
     /**
-     * @Route("/admin/nouvelle_categorie/", name="app_admin_new_categorie")
+     * @Route("/admin/nouvelle_categorie/", name="app_admin_new_category")
      */
     public function newCategory(Request $request): Response
     {

@@ -564,16 +564,18 @@
     </style>
 
     <div data-component="navbar">
-        <nav class="navbar p-0">
+
+        <nav class="navbar p-0 fixed-top" style="height: 100%">
             <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
                     data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
                     aria-label="Toggle navigation" disabled>
-                <a style="text-decoration: none"><span class="ml-3">Tableau de Bord</span></a>
+                <a style="text-decoration: none"><span class="ml-3 ">Tableau de Bord</span></a>
             </button>
 
-            <div><a class="navbar-brand px-1 fixed-top" href=""><img
+            <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
                             src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
                             class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
+
                 <div class="right-links float-right mr-4">
                     <div class="d-inline dropdown">
                         <a class="dropdown-toggle px-2" id="messages" data-toggle="dropdown" aria-haspopup="true"
@@ -589,23 +591,24 @@
                         <div class="row">
 
                             {# Colone à ajouter si besoin #}
-                            <div class="col-md-4 px-0">
-                                {{ form_start(form) }}
-                                {{ form_row(form.title) }}
-                                {% if route == 'app_admin_edit_unit' %}
-                                    <button type="submit" class="btn btn-success">Modifier</button>
-                                {% else %}
-                                    <button type="submit" class="btn btn-success">Crée</button>
-                                {% endif %}
-                                <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
-                                {{ form_end(form) }}
-                            </div> <!-- /.col-md-3 -->
-                            {# Colone à ajouter si besoin #}
-
-                        </div> <!-- /.row -->
-                    </div> <!-- /.megamenu-links -->
-                </div>
-            </div>
+                            <div class="container px-0 form_product py-5">
+                                <div class="form-product row">
+                                    <div class="col-md-6">
+                                        {{ form_start(form) }}
+                                        {{ form_row(form.title) }}
+                                        {% if route == 'app_admin_edit_unit' %}
+                                            <button type="submit" class="btn btn-success">Modifier</button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-success">Crée</button>
+                                        {% endif %}
+                                        <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en arrière</a>
+                                        {{ form_end(form) }}
+                                    </div> <!-- /.col-md-3 -->
+                                    {# Colone à ajouter si besoin #}
+                                </div> <!-- /.row -->
+                            </div> <!-- /.megamenu-links -->
+                        </div>
+                    </div>
         </nav>
     </div> <!-- END TOP NAVBAR -->
 

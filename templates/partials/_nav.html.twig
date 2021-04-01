@@ -1,11 +1,14 @@
 {% if
     app.request.attributes.get('_route') == 'app_admin' or
-    app.request.attributes.get('_route') == 'app_admin_new_product' or
-    app.request.attributes.get('_route') == 'app_admin_new_categorie' or
-    app.request.attributes.get('_route') == 'app_admin_new_unit' or
     app.request.attributes.get('_route') == 'app_admin_all_product' or
     app.request.attributes.get('_route') == 'app_admin_all_category' or
     app.request.attributes.get('_route') == 'app_admin_all_units' or
+    app.request.attributes.get('_route') == 'app_admin_new_product' or
+    app.request.attributes.get('_route') == 'app_admin_new_category' or
+    app.request.attributes.get('_route') == 'app_admin_new_unit' or
+    app.request.attributes.get('_route') == 'app_admin_edit_product' or
+    app.request.attributes.get('_route') == 'app_admin_edit_category' or
+    app.request.attributes.get('_route') == 'app_admin_edit_unit' or
     app.request.attributes.get('_route') == 'app_admin_edit_actu' or
     app.request.attributes.get('_route') == 'app_admin_gallery'
 %}

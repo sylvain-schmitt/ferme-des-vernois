@@ -50,7 +50,7 @@ class ProductController extends AbstractController
     public function allProduct(): Response
     {
         return $this->render('admin/all_product.html.twig', [
-            'products' => $this->productRepository->findAll()
+            'products' => $this->productRepository->findBy([], ['id' => 'DESC'])
         ]);
     }
 
