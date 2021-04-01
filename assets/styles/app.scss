@@ -17,6 +17,12 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: underline;
 }
 
+p{
+  font-size: 20px;
+  font-weight: 400;
+  font-family: Calibri, serif;
+}
+
 button:hover, a:hover {
   color: $clickable;
 }
