@@ -67,11 +67,10 @@ class ProductController extends AbstractController
             $this->entityManager->persist($product);
             $this->entityManager->flush();
             $this->flashy->success('Produit créer');
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin_all_product');
         }
         return $this->render('admin/edit_product.html.twig', [
             'form' => $form->createView(),
-//            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -91,13 +90,12 @@ class ProductController extends AbstractController
 
             $this->entityManager->flush();
             $this->flashy->info('Produit modifier');
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin_all_product');
         }
 
         return $this->render('admin/edit_product.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
-//            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -111,7 +109,7 @@ class ProductController extends AbstractController
             $this->entityManager->flush();
             $this->flashy->error('Produit supprimer');
         }
-        return $this->redirectToRoute('app_admin');
+        return $this->redirectToRoute('app_admin_all_product');
     }
 
     /**

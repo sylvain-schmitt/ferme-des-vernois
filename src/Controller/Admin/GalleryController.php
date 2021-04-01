@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Gallery;
 use App\Form\GalleryType;
 use App\Repository\GalleryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,14 +15,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GalleryController extends AbstractController
 {
+
+    private EntityManagerInterface $entityManager;
+    private FlashyNotifier $flashy;
+    private GalleryRepository $galleryRepository;
+
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FlashyNotifier $flashy,
+        GalleryRepository $galleryRepository
+    )
+    {
+        $this->entityManager = $entityManager;
+        $this->flashy = $flashy;
+        $this->galleryRepository = $galleryRepository;
+    }
+
     /**
      * @Route("/admin/gallery", name="app_admin_gallery")
      */
-    public function index(
-        Request $request,
-        FlashyNotifier $flashyNotifier,
-        GalleryRepository $galleryRepository
-        ): Response
+    public function index(Request $request): Response
     {
         $form = $this->createForm(GalleryType::class);
         $form->handleRequest($request);
@@ -46,18 +60,17 @@ class GalleryController extends AbstractController
                 $img = new Gallery();
                 $img->setTitle($fichier);
                 $img->setAlt($alt);
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($img);
-                $entityManager->flush();
+                $this->entityManager->persist($img);
+                $this->entityManager->flush();
             }
 
 
-            $flashyNotifier->success('Image ajouter avec success');
-            return $this->redirectToRoute('app_admin');
+            $this->flashy->success('Image ajouter avec success');
+            return $this->redirectToRoute('app_admin_gallery');
         }
         return $this->render('admin/gallery.html.twig',[
             'form' => $form->createView(),
-            'images' => $galleryRepository->findAll()
+            'images' => $this->galleryRepository->findAll()
         ]);
     }
 
@@ -76,9 +89,8 @@ class GalleryController extends AbstractController
             unlink($this->getParameter('images_directory').'/'.$nom);
 
             // On supprime l'entrée de la base
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($image);
-            $em->flush();
+            $this->entityManager->remove($image);
+            $this->entityManager->flush();
 
             // On répond en json
             return new JsonResponse(['success' => 1]);

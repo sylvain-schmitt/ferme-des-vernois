@@ -56,7 +56,7 @@ class UnitController extends AbstractController
             $this->entityManager->persist($unit);
             $this->entityManager->flush();
             $this->flashy->success('Unité créer');
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin_all_units');
         }
         return $this->render('admin/edit_unit.html.twig', [
             'form' => $form->createView(),
@@ -75,7 +75,7 @@ class UnitController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
             $this->flashy->info('Unité modifier');
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin_all_units');
         }
 
         return $this->render('admin/edit_unit.html.twig', [
