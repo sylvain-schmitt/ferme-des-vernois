@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Actuality;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\Unit;
@@ -19,6 +20,13 @@ class AppFixtures extends Fixture
             $unit = (new Unit())
                 ->setTitle($faker->sentence());
             $manager->persist($unit);
+        }
+
+        for ($m = 0; $m < 1; $m++) {
+            $actuality = (new Actuality())
+                ->setTitle($faker->sentence())
+                ->setDescription($faker->sentence());
+            $manager->persist($actuality);
         }
 
         for ($j = 0; $j < 5; $j++) {

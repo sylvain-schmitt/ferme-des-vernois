@@ -14,22 +14,35 @@ use MercurySeries\FlashyBundle\FlashyNotifier;
 
 class SearchProductController extends AbstractController
 {
+
+    private ProductRepository $productRepository;
+    private FlashyNotifier $flashy;
+
+    public function __construct(
+        ProductRepository $productRepository,
+        FlashyNotifier $flashy
+    )
+    {
+        $this->productRepository = $productRepository;
+        $this->flashy = $flashy;
+    }
+
     /**
      *@Route("/search", name="app_search")
      */
-    public function search(Request $request, ProductRepository $productRepository, FlashyNotifier $flashy): Response
+    public function search(Request $request): Response
     {
         $products = null;
         $form = $this->createForm(SearchProductType::class);
         $search = $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $products = $productRepository->search(
+            $products = $this->productRepository->search(
                 $search->get('words')->getData(),
                 $search->get('category')->getData()
             );
             if(!$products){
-                $flashy->info('Aucuns produit trouver !');
+                $this->flashy->info('Aucuns produit trouver !');
             }
         }
 

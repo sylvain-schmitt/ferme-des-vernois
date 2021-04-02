@@ -130,7 +130,7 @@ class CartController extends AbstractController
     public function addQuantity($id, CartService $cartService, ProductRepository $productRepository, FlashyNotifier $flashyNotifier): Response
     {
 
-        $quantity = $productRepository->find($id);
+        $quantity = $this->productRepository->find($id);
         $product = $cartService->getFullCart();
 
         foreach ($product as $value) {
@@ -139,7 +139,7 @@ class CartController extends AbstractController
         if ($quantity->getQuantity() > $value['quantity']) {
             $cartService->addQuantity($id);
         } else {
-            $flashyNotifier->info('Stock insufisant');
+            $this->flashy->info('Stock insufisant');
         }
         return $this->redirectToRoute('app_cart');
 

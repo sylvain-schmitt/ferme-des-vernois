@@ -57,7 +57,7 @@ class CategoryController extends AbstractController
             $this->entityManager->persist($category);
             $this->entityManager->flush();
             $this->flashy->success('Catégorie créer');
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin_all_category');
         }
         return $this->render('admin/edit_category.html.twig', [
             'form' => $form->createView(),
@@ -76,7 +76,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
             $this->flashy->info('Catégorie modifier');
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('app_admin_all_category');
         }
 
         return $this->render('admin/edit_category.html.twig', [

@@ -1,12 +1,18 @@
 <div class="row mb-4">
     {% for actuality in actuality %}
-        <div class="col">
-            <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "
-                 style="border-radius: 50%"/>
-        </div>
-        <div class="col">
-            <h1>{{ actuality.title }}</h1>
-            <p>{{ actuality.description | raw }}</p>
+        <div class="flex justify-center pt-16">
+            <div class="new-delivery block">
+                <div>
+                    <h2 class="flash-title">{{ actuality.title }}</h2>
+                <div class="col">
+                    <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "
+                         style="border-radius: 50%"/>
+                </div>
+                <div class="col">
+                    <p>{{ actuality.description | raw }}</p>
+                </div>
+                </div>
+            </div>
         </div>
     {% endfor %}
 </div>

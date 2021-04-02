@@ -1,7 +1,27 @@
-div.main{
+div .main {
   top: 0;
   width: 100%;
   height: 70vh;
   background-size: cover;
   background: url(../images/acceuil_header.jpg) no-repeat center;
+}
+
+div .sign {
+  flex-wrap: wrap;
+  margin: -23vh auto 0 auto;
+  .sign-text {
+    margin-right: 10px;
+  }
+}
+
+.new-delivery {
+  background: center no-repeat url("../images/arrivage.png");
+  width: 900px;
+  height: 80vh;
+  margin: 0  auto;
+  h2 {
+    margin-top: 10px;
+    font-size: 3rem;
+    color: #E40017;
+  }
 }
