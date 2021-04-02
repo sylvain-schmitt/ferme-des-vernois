@@ -591,7 +591,7 @@
                         <div class="row">
 
                             {# Colone à ajouter si besoin #}
-                            <div class="container px-0 form_product py-5">
+                            <div class="container px-0 form_product py-5" style="overflow: auto; height: 90vh">
                                 <div class="form-product row">
                                     <div class="col-md-6">
                                         {{ form_start(form) }}
@@ -631,7 +631,9 @@
                                             <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
                                         {% endif %}
                                     </div>
+                                    <div class="col-md-10">
                                     {{ form_row(form.description) }}
+                                    </div>
                                     <div class="col-md-12">
                                         {% if route == 'app_admin_edit_product' %}
                                             <button type="submit" class="btn btn-success">Modifier</button>

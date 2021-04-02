@@ -16,7 +16,7 @@ class GalleryType extends AbstractType
     {
         $builder
             ->add('title', FileType::class,[
-                'label' => 'Images',
+                'label' => false,
                 'multiple' => true,
                 'constraints' => [
                     new All([

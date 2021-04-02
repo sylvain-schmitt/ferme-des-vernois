@@ -1195,6 +1195,7 @@ ol, ul {
 .btn:focus, .btn:hover {
   text-decoration: none;
   outline: none;
+  cursor: pointer;
 }
 
 .btn-success {
@@ -1207,7 +1208,6 @@ ol, ul {
   color: #fff;
   background-color: #218838;
   border-color: #1e7e34;
-  cursor: pointer;
 }
 
 .btn-success.focus, .btn-success:focus {

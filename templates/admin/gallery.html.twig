@@ -577,26 +577,35 @@
                 </div> <!-- /.right-links -->
             </div>
             <div class="row">
-                <div class="container">
-                    {{ form_start(form) }}
-                    <div class="custom-file">
-                        {{ form(form) }}
-                        <button type="submit" class="btn btn-primary">Valider</button>
-                    </div>
-                    {{ form_end(form) }}
-
-                    <h2>Images</h2>
-                    <div class="row">
-                        {% for image in images %}
-                            <div class="col">
-                                <img src="{{ asset('/uploads/images/'~image.title) | imagine_filter('squared_thumbnail_small') }}" alt="{{ image.alt }}" width="150">
-
-                                {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
-                                <a href="{{ path('gallery_delete_image', {id: image.id})}}" class="btn btn-primary" data-delete data-token="{{ csrf_token('delete' ~ image.id )}}">Supprimer</a>
+                <div class="container px-0 form_product py-5" style="overflow: auto; height: 90vh">
+                    <div class="form-product row">
+                        <div class="col-md-12">
+                            {{ form_start(form) }}
+                            <div class="custom-file col-md-6">
+                                {{ form_row(form.alt) }}
+                                {{ form_row(form.title) }}
+                                <button type="submit" class="btn btn-primary mb-5">Valider</button>
                             </div>
-                        {% endfor %}
-                    </div>
+                            <div class="col-md-2">
+                                <a href="{{ path('app_admin') }}" class="btn btn-primary">Revenir en arrière</a>
+                            </div>
+                            {{ form_end(form) }}
+                            <h2 class="mt-5">Images :</h2>
+                            <div class="flex flex-wrap">
+                                {% for image in images %}
+                                    <div class="col-md-6">
+                                        <img src="{{ asset('/uploads/images/'~image.title) | imagine_filter('squared_thumbnail_medium') }}"
+                                             alt="{{ image.alt }}">
 
+                                        {# On ajoute un lien permettant de supprimer une image (sera géré en Ajax) #}
+                                        <a href="{{ path('gallery_delete_image', {id: image.id}) }}"
+                                           class="btn btn-primary" data-delete
+                                           data-token="{{ csrf_token('delete' ~ image.id ) }}">Supprimer</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
