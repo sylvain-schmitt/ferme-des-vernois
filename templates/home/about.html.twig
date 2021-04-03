@@ -133,7 +133,7 @@
         </div>
     </section>
 
-    <section class="boutique mb-16">
+    <section class="boutique">
         <div class="item-boutique">
             <h2 class="text-center mb-5 title">Le Chalet de la vente direct :</h2>
             <p>
@@ -141,6 +141,7 @@
                     le vendredi  et le samedi de chaque date de livraison :
                 </p>
             <div class="horaire">
+                <img src="{{ asset('build/images/boutiqueforme.png') }}" alt="image de fleur">
                 <div class="text">
                     <p>
                         Le Vendredi:
@@ -158,15 +159,15 @@
                         LA FERME :
                     </p>
                     <p class="light">
-                        Chemin de la Creusotte
+                        Chemin de la Creusotte <br>
                         70160 Breurey-lès-Faverney
                     </p>
                     <p>
                         tel : 07 81 36 35 75
                     </p>
                 </div>
-                <img src="{{ asset('build/images/boutiqueforme.png') }}" alt="image de fleur">
             </div>
+            <a href="{{ path('app_contact') }}"><img class="contact" src="{{ asset('build/images/btn_contact.png') }}" alt="bouton de contact"></a>
         </div>
     </section>
 
