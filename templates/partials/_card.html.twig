@@ -1,31 +1,39 @@
 {% for product in products %}
-    <div class="col mb-4">
-        <div class="card" style="width: 25rem;">
-            <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "/>
-            <div class="card-body">
-                <h5 class="card-title">{{ product.title }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Catégorie <a
-                            href="{{ path('app_category', {slug: product.category.slug}) }}">{{ product.category }}</a>
-                </h6>
-                <p class="card-text">{{ product.description | u.truncate(60, '...', false) | raw }}</p>
-                <a href="{{ path('app_product_show', {slug:product.slug}) }}" class="btn btn-primary">Voir le
-                    produit</a>
-                {% if product.quantity == 0 %}
-                    <span>Produit insdisponible</span>
-                {% elseif app.session.get('panier')[product.id] is not defined %}
-                    <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart "><span
-                                class="js-disable"><img src="{{ asset('build/images/btn_commander.png') }}"
-                                                        alt="Comander" style="width: 40%"></span></a>
-                {% else %}
-                    <a href="{{ path('app_cart') }}" class="btn btn-primary">Voir le Panier</a>
-                {% endif %}
+
+    <div class="container">
+        <div class="row">
+            {# img #}
+            <h3>{{ product.title }}</h3>
+            <div class="control-btn"></div>
+            <p>
+                {# {{ product.description }} #}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aperiam architecto aut autem
+                beatae
+                consequatur cumque ducimus ea eo
+            </p>
+            <div class="properties">
+                <div class="qty">
+                    <h4>Stock dispo</h4>
+                    <span class="number">{{ product.quantity }}</span>
+                </div>
+                <div class="price">
+                    <h4>Prix</h4>
+                    <span class="price-inr">
+        <i class="fa fa-inr"></i>
+        <span class="amount">{{ product.price }} €</span>
+      </span>
+                </div>
+                <div class="delivery">
+                    <h4>Livraison</h4>
+                    <i class="fa fa-fighter-jet"></i>
+                    <span class="time">Livraison ou A emporter</span>
+                </div>
             </div>
-            <div class="card-footer text-muted">
-                <p>Prix : {{ product.price }}€/{{ product.units }}</p>
-                <p>Stock : {{ pluralize(product.pound , product.units) }}</p>
-            </div>
+            <input class="ip-add-cart" type="button" value="Add to cart"/>
         </div>
     </div>
+
 {% endfor %}
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="{{ asset('js/addcart.js') }}"></script>
