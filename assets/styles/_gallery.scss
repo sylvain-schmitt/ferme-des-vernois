@@ -1,0 +1,30 @@
+h2{
+  font-family: Gloria Hallelujah, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+}
+.container{
+  width: 100%;
+  display: flex;
+  padding: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.col img{
+  width: 100%;
+}
+.item-image{
+  margin: 2rem;
+}
+@media (max-width: 560px) {
+  h2{
+    font-size: 30px;
+  }
+  .item-image{
+    margin: 1rem;
+  }
+}
+

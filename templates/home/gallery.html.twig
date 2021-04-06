@@ -3,15 +3,15 @@
 {% block title %}Galerie{% endblock %}
 
 {% block body %}
-    <h2>Galerie de la Ferme des Vernois</h2>
-    <div class="row">
+    <h2 class="text-center">Notre Galerie photo:</h2>
+    <div class="row container">
         {% for gallery in gallerys %}
             <div class="col">
-                <img src="{{ asset('/uploads/images/'~gallery.title) | imagine_filter('squared_thumbnail_gallery') }}" alt="{{ gallery.alt }}">
+                <div class="item-image">
+                    <img src="{{ asset('/uploads/images/'~gallery.title) | imagine_filter('squared_thumbnail_gallery') }}" alt="{{ gallery.alt }}">
+                </div>
             </div>
         {% endfor %}
     </div>
-    {% block javascripts %}
-        <script src="{{ asset('js/gallery.js') }}"></script>
-    {% endblock %}
+
 {% endblock %}
