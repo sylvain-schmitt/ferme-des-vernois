@@ -4,16 +4,31 @@
     {% endblock %}
 
 {% block body %}
-        <h2 class="text-center">Nous contacter</h2>
-        {{ form_start(form) }}
-    {{ form_row(form.last_name) }}
-    {{ form_row(form.first_name) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.phone) }}
-    {{ form_row(form.address) }}
-    {{ form_row(form.message) }}
-    <button type="submit" class="btn btn-primary">Envoyer</button>
-        {{ form_end(form) }}
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center">Nous contacter</h2>
+            <div class="col-md-12 mx-auto">
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.last_name) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.first_name) }}
+                    </div>
+                </div>
+                {{ form_row(form.email) }}
+                {{ form_row(form.phone) }}
+                {{ form_row(form.address) }}
+                {{ form_row(form.message) }}
+                <div class="text-center">
+                    <button class="btn-link" type="submit"><img class="contact" src="{{ asset('build/images/btn_envoyer.png') }}" alt="bouton de contact"></button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 
