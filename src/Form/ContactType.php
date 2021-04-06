@@ -2,15 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Order;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OrderType extends AbstractType
+class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,18 +33,7 @@ class OrderType extends AbstractType
                     'value' => 'Adresse Postal de test'
                 ]
             ])
-            ->add('city',TextType::class, [
-                'label' => 'ville',
-                'attr' => [
-                    'value' => 'Vesoul'
-                ]
-            ])
-            ->add('zip',TextType::class, [
-                'label' => 'code postal',
-                'attr' => [
-                    'value' => '70000'
-                ]
-            ])
+
             ->add('phone', PhoneNumberType::class, [
                 'label' => 'Numéro de téléphone',
                 'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
@@ -61,13 +50,15 @@ class OrderType extends AbstractType
                     'value' => 'mail@test.com'
                 ]
             ])
+            ->add('message', TextareaType::class, [
+                'label' => 'Votre message',
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Order::class,
             'validation_groups' => ['add_firm']
         ]);
     }

@@ -4,16 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Form\ContactType;
 use App\Repository\ActualityRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\GalleryRepository;
 use App\Repository\OrderRepository;
+use App\Service\Mailer\MailerService;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -94,9 +97,35 @@ class HomeController extends AbstractController
     /**
      * @Route("/contact", name="app_contact")
      */
-    public function contact(): Response
+    public function contact(Request $request, MailerService $mailerService): Response
     {
-        return $this->render('home/contact.html.twig');
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contact = $form->getData();
+            $last_name = $contact['last_name'];
+            $first_name = $contact['first_name'];
+            $phone = $contact['phone'];
+            $address = $contact['address'];
+            $message = $contact['message'];
+            $email = $contact['email'];
+            $toAddresses = [new Address($email), new Address('mailcentre@mail.com')];
+            $mailerService->sendContact($email, $toAddresses, 'Nouveau message depuis votre site !', 'emails/contact.mjml.twig', 'emails/contact.txt.twig', [
+                'last_name' => $last_name,
+                'first_name' => $first_name,
+                'phone' => $phone,
+                'address' => $address,
+                'message' => $message,
+                'mail' => $email,
+            ]);
+
+            $this->flashy->success('Votre message à bien été envoyer');
+            return $this->redirectToRoute('app_home');
+        }
+        return $this->render('home/contact.html.twig',[
+            'form' => $form->createView()
+        ]);
     }
 
     /**

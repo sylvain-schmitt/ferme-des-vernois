@@ -91,4 +91,24 @@ class MailerService
         }
     }
 
+    public function sendContact(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params)
+    {
+        $toAddresses = ['fermedesvernois@gmail.com', $from];
+        $email = (new TemplatedEmail())
+            ->from($from)
+            ->to(...$toAddresses)
+            ->subject($subject)
+            ->html($this->convertMjmlToHtml($mjmlTemplate, $params))
+            ->textTemplate($txt)
+            ->context($params)
+        ;
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $exception){
+            $this->logger->error('Un problème est survenue lors de l\'envoie du mail', [
+                'execption'=> $exception,
+            ]);
+        }
+    }
+
 }

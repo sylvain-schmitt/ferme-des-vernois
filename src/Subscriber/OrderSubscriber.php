@@ -49,7 +49,7 @@ class OrderSubscriber implements EventSubscriberInterface
         $total = $this->cartService->getTotal();
         $toAddresses = [new Address($email), new Address('mailcentre@mail.com')];
 
-        $this->mailerService->sendAdmin($email, $toAddresses, 'Nouvelle commande depuis votre site !', 'emails/admin.mjml.twig', 'emails/contact.txt.twig', [
+        $this->mailerService->sendAdmin($email, $toAddresses, 'Nouvelle commande depuis votre site !', 'emails/admin.mjml.twig', 'emails/order.txt.twig', [
             'product' => $product,
             'quantity' => $quantity,
             'price' => $price,
@@ -64,7 +64,7 @@ class OrderSubscriber implements EventSubscriberInterface
             'total' => $total,
         ]);
 
-        $this->mailerService->sendUser($email, $toAddresses, 'Récapitulatif de votre commande', 'emails/user.mjml.twig', 'emails/contact.txt.twig', [
+        $this->mailerService->sendUser($email, $toAddresses, 'Récapitulatif de votre commande', 'emails/user.mjml.twig', 'emails/order.txt.twig', [
             'product' => $product,
             'quantity' => $quantity,
             'price' => $price,
