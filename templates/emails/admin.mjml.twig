@@ -81,7 +81,7 @@
                     <span style="font-size:15px">{{ mail }}
                     </span>
                     <br/>
-                    <span style="font-size:15px">{{ phone }}
+                    <span style="font-size:15px">{{ phone |phone_number_format('NATIONAL') }}
                     </span>
                 </mj-text>
             </mj-column>
