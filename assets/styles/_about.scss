@@ -138,25 +138,28 @@ h2.title{
   }
 }
 
-.chalet{
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  .bout-ext{
+.chalet-sec{
+  margin: 0 auto;
+  .chalet{
+    width: 100%;
     display: flex;
-    width: 750px;
-    img{
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .bout-ext{
       display: flex;
-      width: 100%;
+      width: 750px;
+      img{
+        display: flex;
+        width: 100%;
+      }
     }
-  }
-  .bout-int{
-    display: flex;
-    width: 750px;
-    img{
+    .bout-int{
       display: flex;
-      width: 100%;
+      width: 750px;
+      img{
+        display: flex;
+        width: 100%;
+      }
     }
   }
 }
@@ -190,7 +193,6 @@ h2.title{
       width: 100%;
       max-width: 900px;
       height: 100%;
-      min-height: 500px;
       margin-top: 4rem;
       .text{
         position: absolute;
@@ -198,7 +200,6 @@ h2.title{
         left: 0;
         width: 100%;
         height: 100%;
-        /*margin: 4rem 1rem 1rem 1rem;*/
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -222,4 +223,81 @@ h2.title{
     margin-top: 2rem;
   }
   }
+@media (max-width: 1500px){
+  .chalet-sec .chalet .bout-int img {
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 1515px){
+  .surface .item-surface {
+    display: flex;
+    margin: 2rem;
+  }
+  .surface .fleur {
+    margin: 0 auto;
+  }
+  .surface .item-surface .bg-surface{
+    padding: 5rem 4rem 6rem 4rem;
+  }
+  }
 
+@media (max-width: 1400px){
+  .meat{
+    background: $bg-items;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+    width: 95%;
+  }
+}
+
+@media (max-width: 980px){
+  .boutique .item-boutique p{
+    font-size: 30px;
+  }
+  h2.title{
+    font-size: 38px;
+  }
+  .boutique .horaire .text p{
+    font-size: 24px;
+  }
+  .boutique .horaire .text .light{
+    margin: 10px;
+  }
+}
+@media (max-width: 790px){
+  .chalet .bout-int img {
+
+  }
+}
+@media (max-width: 710px){
+  .boutique .horaire .text .light{
+    line-height: 30px;
+  }
+  .boutique .horaire .text p{
+    font-size: 20px;
+  }
+}
+@media (max-width: 666px){
+  .boutique .horaire .text .light{
+    line-height: 16px;
+  }
+  .boutique .horaire .text p{
+    font-size: 18px;
+  }
+}
+@media (max-width: 530px){
+  .boutique .horaire .text .light{
+    margin: 0px;
+  }
+  .boutique .item-boutique {
+    width: 95%;
+  }
+}
+@media (max-width: 420px){
+  .surface .item-surface {
+    margin: 1rem;
+  }
+  .surface .item-surface .bg-surface {
+    padding: 2rem;
+  }
+}
