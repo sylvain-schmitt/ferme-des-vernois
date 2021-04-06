@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Order;
+use libphonenumber\PhoneNumberFormat;
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,10 +46,14 @@ class OrderType extends AbstractType
                     'value' => '70000'
                 ]
             ])
-            ->add('phone', TextType::class, [
+            ->add('phone', PhoneNumberType::class, [
                 'label' => 'Numéro de téléphone',
-                'attr' => [
-                    'value' => '01 23 45 67 89'
+                'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
+                'country_choices' => [
+                    'FR',
+                ],
+                'preferred_country_choices' => [
+                    'Fr'
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -63,6 +69,7 @@ class OrderType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Order::class,
+            'validation_groups' => ['add_firm']
         ]);
     }
 }

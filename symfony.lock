@@ -120,6 +120,12 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.0.3"
     },
+    "giggsey/libphonenumber-for-php": {
+        "version": "8.12.21"
+    },
+    "giggsey/locale": {
+        "version": "1.9"
+    },
     "imagine/imagine": {
         "version": "1.2.4"
     },
@@ -162,6 +168,18 @@
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
+    },
+    "odolbeau/phone-number-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "4388686329b81291918a948cd42891829fb1de71"
+        },
+        "files": [
+            "config/packages/misd_phone_number.yaml"
+        ]
     },
     "php": {
         "version": "7.4"

@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
+use libphonenumber\PhoneNumber;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
@@ -29,7 +33,10 @@ class Order
     private $first_name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="phone_number")
+     * @Assert\NotBlank(groups={"add_firm"})
+     * @AssertPhoneNumber(groups={"add_firm"}, defaultRegion="FR")
+     * @Type("libphonenumber\PhoneNumber")
      */
     private $phone;
 
@@ -98,12 +105,12 @@ class Order
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getPhone(): PhoneNumber
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhone(PhoneNumber $phone = null): self
     {
         $this->phone = $phone;
 
