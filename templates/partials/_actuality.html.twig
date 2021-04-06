@@ -2,15 +2,17 @@
     {% for actuality in actuality %}
         <div class="flex justify-center pt-16">
             <div class="new-delivery block">
-                <div>
-                    <h2 class="flash-title">{{ actuality.title }}</h2>
-                <div class="col">
-                    <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "
-                         style="border-radius: 50%"/>
-                </div>
-                <div class="col">
-                    <p>{{ actuality.description | raw }}</p>
-                </div>
+                <div class="content-flash">
+                    <h2 class="flash-title pb-5">{{ actuality.title }}</h2>
+                    <div class="flex flex-row justify-center flash-txt">
+                        <div class="col img-actu">
+                            <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "
+                                 style="border-radius: 50%"/>
+                        </div>
+                        <div class="col">
+                            <p class="mt-15 ">{{ actuality.description | raw }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

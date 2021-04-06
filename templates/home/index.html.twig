@@ -6,7 +6,7 @@
     <div>
         <div class="main"></div>
 
-     <div class="flex flex-row items-end justify-center sign">
+        <div class="flex flex-row items-end justify-center sign">
             <div class="sign-text">
                 <img src="{{ asset('build/images/ardoise-tracabilite.png') }}" alt="tracabilité">
             </div>
@@ -21,10 +21,44 @@
             </div>
         </div>
     </div>
-
-    <h1 class="text-center my-4">Page d'accueil</h1>
-
-
+{#--Flash message--#}
     {% include 'partials/_actuality.html.twig' %}
+{#-----Start about-----#}
+    <div class="flex flex-row home-about justify-center items-start">
+        <div class="home-about-txt flex flex-col">
+            <h1 class="text-center my-4">Producteur Local</h1>
+            <p class="mb-3">
+                Notre principal objectif : Vendre notre production localement et en direct pour recréer un lien entre
+                agriculteur et consommateur. </p>
+            <p>
+                La ferme se situe au cœur de la Haute –Saône (70) à Breurey Les Faverney, à 20 minutes de Luxeuil Les
+                Bains et à 20 minutes de Vesoul.
+                C’est une ferme familiale qui existe depuis les années 1976, qui propose de la viande de bœuf, de veau,
+                et d’agneaux. Elle respecte l’environnement et le bien-être animal.
+            </p>
+            <a href="{{ path('app_about') }}" class="about-btn">
+                <span>
+                    <img src="{{ asset('build/images/btn_voir_plus.png') }}"
+                         alt="Voir plus">
+                </span>
+            </a>
+        </div>
+        <div class="home-about-img">
+            <img src="{{ asset ('build/images/champvache.png') }}" alt="">
+        </div>
+    </div>
+{#------------------#}
+{#-----Start protuct-----#}
+    <div class="bg-product flex items-center flex-col ">
+        <h2>Nos Produits</h2>
+        <div class="category-product flex flex-wrap">
 
+        </div>
+        <a href="{{ path('app_product') }}" class="product-btn">
+            <span>
+                <img src="{{ asset('build/images/btn_voir_plus.png') }}" alt="Voir plus">
+            </span>
+        </a>
+    </div>
+{#--------------------#}
 {% endblock %}
