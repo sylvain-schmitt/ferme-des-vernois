@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\ActualityRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\GalleryRepository;
 use App\Repository\OrderRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -24,6 +25,7 @@ class HomeController extends AbstractController
     private FlashyNotifier $flashy;
     private ActualityRepository $actualityRepository;
     private GalleryRepository $galleryRepository;
+    private CategoryRepository $categoryRepository;
 
     public function __construct(
         ProductRepository $productRepository,
@@ -31,7 +33,8 @@ class HomeController extends AbstractController
         OrderRepository $orderRepository,
         FlashyNotifier $flashy,
         ActualityRepository $actualityRepository,
-        GalleryRepository $galleryRepository
+        GalleryRepository $galleryRepository,
+        CategoryRepository $categoryRepository
     )
     {
         $this->productRepository = $productRepository;
@@ -40,6 +43,7 @@ class HomeController extends AbstractController
         $this->flashy = $flashy;
         $this->actualityRepository = $actualityRepository;
         $this->galleryRepository = $galleryRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -75,6 +79,16 @@ class HomeController extends AbstractController
     public function productShow(Product $product): Response
     {
         return $this->render('home/product_show.html.twig', compact('product'));
+    }
+
+    /**
+     * @Route("/categorie", name="app_all_category")
+     */
+    public function allCategory(): Response
+    {
+        return $this->render('home/index.html.twig', [
+            'categories' => $this->categoryRepository->findBy([], ['id' => 'DESC'])
+        ]);
     }
 
     /**

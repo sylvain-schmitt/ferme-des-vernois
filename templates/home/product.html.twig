@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{#    <h1 class="text-center my-4">Nos Produits : </h1>#}
+    <h1 class="text-center my-4">Nos Produits : </h1>
     <div class="row">
         {% include 'partials/_card.html.twig' %}
     </div>
-{#    <div class="d-flex justify-content-center">#}
-{#        {{ knp_pagination_render(products, 'partials/_pagination.html.twig') }}#}
-{#    </div>#}
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(products, 'partials/_pagination.html.twig') }}
+    </div>
 {% endblock %}
 
 {% block title 'Tout nos produits' %}
