@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
-use App\Repository\ActualityRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -17,20 +16,17 @@ class CategoryController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private FlashyNotifier $flashy;
-    private ActualityRepository $actualityRepository;
     private CategoryRepository $categoryRepository;
 
 
     public function __construct(
         EntityManagerInterface $entityManager,
         FlashyNotifier $flashy,
-        ActualityRepository $actualityRepository,
         CategoryRepository $categoryRepository
     )
     {
         $this->entityManager = $entityManager;
         $this->flashy = $flashy;
-        $this->actualityRepository = $actualityRepository;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -61,7 +57,6 @@ class CategoryController extends AbstractController
         }
         return $this->render('admin/edit_category.html.twig', [
             'form' => $form->createView(),
-            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 
@@ -82,7 +77,6 @@ class CategoryController extends AbstractController
         return $this->render('admin/edit_category.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
-            'actuality' => $this->actualityRepository->findBy(['active' => true])
         ]);
     }
 

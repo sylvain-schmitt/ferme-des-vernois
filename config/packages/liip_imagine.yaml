@@ -33,3 +33,9 @@ liip_imagine:
           size: [ 500, 350 ]
           mode: outbound
           allow_upscale: true
+    squared_thumbnail_cat_home:
+      filters:
+        thumbnail:
+          size: [ 250, 250 ]
+          mode: outbound
+          allow_upscale: true
