@@ -53,7 +53,8 @@ class HomeController extends AbstractController
     {
 
         return $this->render('home/index.html.twig', [
-            'actuality' => $this->actualityRepository->findBy(['active' => true])
+            'actuality' => $this->actualityRepository->findBy(['active' => true]),
+            'categories' => $this->categoryRepository->findBy([], ['id' => 'DESC'])
         ]);
 
     }
@@ -79,16 +80,6 @@ class HomeController extends AbstractController
     public function productShow(Product $product): Response
     {
         return $this->render('home/product_show.html.twig', compact('product'));
-    }
-
-    /**
-     * @Route("/categorie", name="app_all_category")
-     */
-    public function allCategory(): Response
-    {
-        return $this->render('home/index.html.twig', [
-            'categories' => $this->categoryRepository->findBy([], ['id' => 'DESC'])
-        ]);
     }
 
     /**
