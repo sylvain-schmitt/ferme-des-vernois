@@ -4,14 +4,16 @@
 
 {% block body %}
     <h2 class="text-center">Notre Galerie photo:</h2>
-    <div class="row container">
-        {% for gallery in gallerys %}
-            <div class="col">
-                <div class="item-image">
-                    <img src="{{ asset('/uploads/images/'~gallery.title) | imagine_filter('squared_thumbnail_gallery') }}" alt="{{ gallery.alt }}">
+
+        <div class="contain">
+            {% for gallery in gallerys %}
+                <div class="collumn">
+                    <div class="item-image">
+                        <img src="{{ asset('/uploads/images/'~gallery.title) | imagine_filter('squared_thumbnail_gallery') }}" alt="{{ gallery.alt }}">
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
