@@ -1,3 +1,5 @@
+@import "variable";
+
 div .main {
   top: 0;
   width: 100%;
@@ -38,9 +40,10 @@ div .sign {
         width: 100%;
       }
 
-      h1{
+      h1 {
         font-size: 3rem;
       }
+
       p {
         color: #E40017;
         margin-left: 2rem;
@@ -136,17 +139,42 @@ div .sign {
       font-size: 3rem;
     }
 
-    a img {
-      width: 40%;
-      margin: 2rem 25%;
+    a {
+      width: 250px;
+      margin: auto;
+
+      img {
+        width: 250px;
+      }
     }
   }
 
   .home-about-img {
     width: 42%;
+
     img {
       padding-left: 4em;
       width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 1057px) {
+  .home-about .home-about-txt a {
+    width: 200px;
+
+    img {
+      width: 200px;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .home-about .home-about-txt a {
+    width: 150px;
+
+    img {
+      width: 150px;
     }
   }
 }
@@ -158,6 +186,7 @@ div .sign {
 
     .home-about-img {
       width: auto;
+
       img {
         order: 1;
         width: 300px;
@@ -171,18 +200,224 @@ div .sign {
     }
   }
 }
+
 //--------------------------
+.product-title {
+  margin: 1rem 0;
+  font-size: 3rem !important;
+  font-weight: bold !important;
+  text-align: center;
+}
+
 .bg-product {
   width: 100%;
-  height: 620px;
+  height: 500px;
   background: 100% center no-repeat url("../images/produitbg.jpg");
 
-  h2 {
-    margin-top: 2rem;
-    font-size: 3rem !important;
-    font-weight: bold !important;
+  .category-product {
+    /* Conteneur principal */
+    .overlay-image {
+      position: relative;
+      width: 250px;
+      height: auto;
+      margin: 0 2rem 0 4rem;
+      /* Apparition overlay sur passage souris */
+      &:hover .hover {
+        opacity: 1;
+      }
+
+      .overlay-image:hover .normal {
+        opacity: 0;
+      }
+
+      /* Overlay */
+      .hover {
+        position: absolute;
+        top: 0;
+        height: 250px;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: rgba(242, 153, 74, 0.5);
+      }
+
+      /* Image originale */
+      .image {
+        height: auto;
+      }
+
+      /* Texte original */
+      .normal .text {
+        color: #fff;
+        font-size: 30px;
+        line-height: 1.5em;
+        text-shadow: 2px 2px 2px #000;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+      }
+
+      /********* Hover background et texte uniquement *******/
+      .normal {
+        transition: .5s ease;
+      }
+    }
   }
-  .product-btn img {
-    width: 18%;
+
+  .product-btn {
+    margin-top: 1em;
+
+    img {
+      width: 250px;
+    }
+  }
+}
+
+@media screen and (max-width: 1057px) {
+  .bg-product {
+    .category-product .overlay-image {
+      margin: 0;
+
+      .image {
+        width: 95%;
+        margin-top: 5px;
+      }
+
+      .normal .text {
+        font-size: 20px;
+      }
+
+      .normal .hover {
+        max-width: 95%;
+        height: 99%;
+      }
+    }
+
+    .product-btn img {
+      width: 200px;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .bg-product {
+    .category-product .overlay-image {
+      .image {
+        width: 80%;
+      }
+
+      .normal .hover {
+        max-width: 80%;
+      }
+    }
+
+    .product-btn img {
+      width: 150px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .bg-product {
+    background: none;
+
+    .category-product {
+      margin-top: 9em;
+      width: 80%;
+
+      .overlay-image {
+        margin: 10px 0 0 0;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        .image {
+          width: 90%;
+        }
+
+        .normal .hover {
+          max-width: 90%;
+        }
+      }
+    }
+
+    .product-btn img {
+      width: 150px;
+    }
+  }
+}
+
+//---------------------------------
+
+.how-content {
+  padding-top: 5em;
+  width: 80%;
+  margin: auto;
+  display: grid;
+
+  h2 {
+    margin-bottom: 1em;
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  h6 {
+    font-size: 20px;
+    font-family: Calibri, sans-serif !important;
+    text-decoration: none;
+    margin: 10px 0 5px 0;
+    color: $text-nav;
+  }
+
+  p {
+    color: $text-nav;
+  }
+
+  img {
+    width: 150px;
+  }
+.how {
+  height: auto;
+  .reserve, .receive, .recover {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 50%;
+    height: 50vh;
+    margin-right: 30px;
+  }
+
+}
+
+  .order-btn {
+    margin: 1em auto;
+
+    img {
+      width: 350px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .how-content {
+    h2 {
+      margin-top: 2em;
+    }
+    .how {
+      flex-wrap: wrap;
+      .reserve, .receive, .recover {
+        height: auto;
+        width: 90%;
+        margin-bottom: 1em;
+      }
+    }
+    .order-btn img {
+      width: 200px;
+    }
   }
 }

@@ -21,9 +21,9 @@
             </div>
         </div>
     </div>
-{#--Flash message--#}
+    {#- -Flash message-  -#}
     {% include 'partials/_actuality.html.twig' %}
-{#-----Start about-----#}
+    {#- ----Start about----  -#}
     <div class="flex flex-row home-about justify-center items-start">
         <div class="home-about-txt flex flex-col">
             <h1 class="text-center my-4">Producteur Local</h1>
@@ -47,12 +47,25 @@
             <img src="{{ asset ('build/images/champvache.png') }}" alt="">
         </div>
     </div>
-{#------------------#}
-{#-----Start protuct-----#}
-    <div class="bg-product flex items-center flex-col ">
-        <h2>Nos Produits</h2>
-        <div class="category-product flex flex-wrap">
+    {#- ----------------  -#}
+    {#- ----Start protuct----  -#}
+    <h2 class="product-title">Nos Produits</h2>
+    <div class="bg-product flex items-center justify-center flex-col ">
+        <div class="category-product justify-center flex flex-wrap ">
 
+            {% for categorie in categories %}
+                <div class="overlay-image">
+                    <img class="image"
+                         src="{{ (categorie.imageName ? vich_uploader_asset(categorie) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_cat_home') }} "/>
+                    <div class="normal">
+                        <div class="hover">
+                            <div class="text">
+                                {{ categorie.title }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
         <a href="{{ path('app_product') }}" class="product-btn">
             <span>
@@ -60,5 +73,50 @@
             </span>
         </a>
     </div>
-{#--------------------#}
+    {#- ------------------  -#}
+    {#- ------How start------ -#}
+    <div class="how-content">
+
+        <h2>Comment ça marche ?</h2>
+        <div class="how flex justify-center items-center">
+            <div class="reserve">
+                <img src="{{ asset('build/images/vachelog.png') }}" alt="Vache">
+                <h6>
+                    Réservez vos produits
+                </h6>
+                <p>
+                    Réservation en ligne ou par téléphone en fonction de la demande . Comptez un à deux mois entre
+                    le moment de la réservation et le jour de la livraison.
+                </p>
+            </div>
+            <div class="receive">
+                <img src="{{ asset('build/images/prepalog.png') }}" alt="brouette">
+                <h6>
+                    Recevez un SMS ou un mail vous indiquant la date de livraison
+                </h6>
+                <p>
+                    Pour garantir la fraicheur de notre porduit, la date de livraison vous est communiquée une fois
+                    que nous avons reçut le nombre de commandes nécessaires pour abattre la bête.
+                </p>
+            </div>
+            <div class="recover">
+                <img src="{{ asset('build/images/farmlog.png') }}" alt="ferme">
+                <h6>
+                    Récupérez votre commande à la ferme ou commandez une livraison groupée
+                </h6>
+                <p>
+                    Votre commande est préparée avec chaque morceau/tranche mise sous vide, étiquetée, nommée,
+                    datée et prête à mettre au congélateur.
+                </p>
+            </div>
+        </div>
+        <a href="{{ path('app_order') }}" class="order-btn">
+            <span>
+                <img src="{{ asset('build/images/btn_commander.png') }}" alt="Commander">
+            </span>
+        </a>
+    </div>
+
+    {#- ------------------ -#}
+
 {% endblock %}
