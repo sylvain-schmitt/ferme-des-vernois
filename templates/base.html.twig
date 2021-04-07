@@ -21,6 +21,7 @@
         {% endblock %}
     {% include 'partials/_footer.html.twig' %}
     {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
         {{ encore_entry_script_tags('app') }}
         <script src="{{ asset('js/navbar.js') }}"></script>
