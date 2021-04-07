@@ -1,8 +1,38 @@
 {% for product in products %}
 
-    <div class="card-container">
-        <div class="card">
-
+    <div class="col-md-4">
+        <div class="card-product">
+            <div class="imgBx">
+                <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "/>
+            </div>
+            <div class="contentBx">
+                <h4>{{ product.title }}</h4>
+                <h3 class="price">{{ product.price }} €</h3>
+                <div class="label">
+                    <div class="row mt-2">
+                        <div class="col">
+                            {% if product.bio == true %}
+                                <img src="{{ asset('uploads/images/logo-bio.png') }}" alt="logo agriculture bio"
+                                     style="width: 50px">
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            {% if product.beef == true %}
+                                <img src="{{ asset('uploads/images/logo-boeuf.png') }}" alt="logo boeuf certififié"
+                                     style="width: 50px">
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            {% if product.logo == true %}
+                                <img src="{{ asset('uploads/images/cereal-logo.png') }}" alt="logo cereal "
+                                     style="width: 50px">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ path('app_product_show', {slug: product.slug}) }}" class="see"><img
+                            src="{{ asset('build/images/btn_voir_plus.png') }}" width="150px" alt=""></a>
+            </div>
         </div>
     </div>
 

@@ -1,49 +1,53 @@
 {% set products = app.session.get('panier') %}
 <header class="flex justify-between items-center">
+
     <a href="{{ path('app_home') }}">
         <img  class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo">
     </a>
-<nav>
-    <ul class="nav-links">
-        <li>
-            <a href="{{ path('app_about') }}"> La ferme</a>
-        </li>
-        <li>
-            <a href="{{ path('app_product') }}">Nos Produits</a>
-        </li>
-        <li>
-            <a href="{{ path('app_gallery') }}">Galerie</a>
-        </li>
-        <li>
-            <a href="{{ path('app_order') }}">Commander</a>
-        </li>
-        <li>
-            <a href="{{ path('app_contact') }}">Contact</a>
-        </li>
-        <li>
 
-        </li>
-        <div class="module">
+    <nav>
+        <ul class="nav-links">
             <li>
-                <a href="{{ path('app_cart') }}"><img class="panier" src="{{ asset('build/images/panier.png') }}" alt="panier"></a>
-                {% if app.session.get('panier')  %}
-                <div class="product-panier">
-                    <span class="js-count">{{products | length}}</span>
-                </div>
-                {% endif %}
+                <a href="{{ path('app_about') }}"> La ferme</a>
             </li>
             <li>
-                <a href="#"><img class="facebook" src="{{ asset('build/images/facebook.png') }}" alt="facebook"></a>
+                <a href="{{ path('app_product') }}">Nos Produits</a>
             </li>
             <li>
-                <a href="{{ path('app_search') }}"><img class="search" src="{{ asset('build/images/loupe.png') }}" alt="recherche"></a>
+                <a href="{{ path('app_gallery') }}">Galerie</a>
             </li>
-        </div>
-    </ul>
-</nav>
+            <li>
+                <a href="{{ path('app_order') }}">Commander</a>
+            </li>
+            <li>
+                <a href="{{ path('app_contact') }}">Contact</a>
+            </li>
+            <li>
+
+            </li>
+            <div class="module">
+                <li>
+                    <a href="{{ path('app_cart') }}"><img class="panier" src="{{ asset('build/images/panier.png') }}" alt="panier"></a>
+                    {% if app.session.get('panier')  %}
+                    <div class="product-panier">
+                        <span class="js-count">{{products | length}}</span>
+                    </div>
+                    {% endif %}
+                </li>
+                <li>
+                    <a href="#"><img class="facebook" src="{{ asset('build/images/facebook.png') }}" alt="facebook"></a>
+                </li>
+                <li>
+                    <a href="{{ path('app_search') }}"><img class="search" src="{{ asset('build/images/loupe.png') }}" alt="recherche"></a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+
     <div class="burger">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
     </div>
+
 </header>

@@ -683,6 +683,17 @@
         </div> <!-- /.sidebar -->
     </div>
 
+    <script>
+        let activer = document.querySelectorAll('.form-check-input')
+        for (let bouton of activer) {
+            bouton.addEventListener("click", function () {
+                let xmlhttp = new XMLHttpRequest;
+                xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`)
+                xmlhttp.send()
+            })
+        }
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 

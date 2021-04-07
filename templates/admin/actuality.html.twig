@@ -607,6 +607,12 @@
                                         {% endif %}
                                         {{ form_widget(form.imageFile) }}
                                     </div>
+                                    <div class="form-check form-switch">
+                                        <input type="checkbox"
+                                               class="form-check-input mx-auto" {{ (actuality.active) ? 'checked' : '' }}
+                                               data-id="{{ actuality.id }}" id="{{ actuality.id }}">
+                                        <label class="form-check-label" for="{{ actuality.id }}"></label>
+                                    </div>
                                     <div class="col-md-6">
                                         {% if route == 'app_admin_edit_actu' %}
                                             <button type="submit" class="btn btn-success">Modifier</button>
@@ -643,7 +649,7 @@
         for (let bouton of activer) {
             bouton.addEventListener("click", function () {
                 let xmlhttp = new XMLHttpRequest;
-                xmlhttp.open("get", `admin/product/activer/${this.dataset.id}`)
+                xmlhttp.open("get", `admin/actualite/activer/${this.dataset.id}`)
                 xmlhttp.send()
             })
         }
