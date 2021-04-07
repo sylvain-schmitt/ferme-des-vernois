@@ -5,8 +5,8 @@
                 <div class="content-flash">
                     <h2 class="flash-title pb-5">{{ actuality.title }}</h2>
                     <div class="flex flex-row justify-center flash-txt">
-                        <div class="col flex img-actu">
-                            <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "
+                        <div class="col img-actu">
+                            <img src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_card') }} "
                             />
                         </div>
                         <div class="col">
