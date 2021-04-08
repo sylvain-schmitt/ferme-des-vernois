@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row">
-        {% include 'partials/_card.html.twig' %}
+
+    <div class="img-product"></div>
+    <div class="container ">
+        <div class="col-md-10 mx-auto">
+            <div class="row">
+                <h1 class="text-center my-4">{{ category.title }} :</h1>
+                {% include 'partials/_card.html.twig' %}
+            </div>
+        </div>
     </div>
+
 {% endblock %}
 
 {% block title %}

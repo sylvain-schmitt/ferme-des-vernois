@@ -24,7 +24,7 @@ liip_imagine:
     squared_thumbnail_card:
       filters:
         thumbnail:
-          size: [ 224, 288 ]
+          size: [ 270, 200 ]
           mode: outbound
           allow_upscale: true
     squared_thumbnail_gallery:

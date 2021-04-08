@@ -1,0 +1,190 @@
+.img-product {
+  width: 100%;
+  height: 55vh;
+  background: url(../images/food-1209793_1920.jpg)no-repeat center;
+  background-size: cover;
+  margin-bottom: 60px;
+}
+
+.card-product {
+  position: relative;
+  width: 100%;
+  height: 470px;
+  border-radius: 20px;
+  background: linear-gradient(315deg, #ffffff, #e6e6e6);
+  box-shadow: 3px 3px 11px #bcc2d4, -3px -3px 11px #e6eeff;
+  overflow: hidden;
+  margin: 30px auto;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    background-color: $clickable;
+    transform: skewY(345deg);
+    transition: 0.5s;
+  }
+  &:hover:before {
+    top: -50%;
+    transform: skewY(390deg);
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    font-size: 8em;
+    color: white;
+  }
+
+  .imgBx {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    z-index: 1;
+    img {
+      max-width: 100%;
+      transition: 0.5s;
+    }
+    &:hover .imgBx img {
+      max-width: 50%;
+    }
+  }
+
+  .contentBx {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h4 {
+      font-size: 18px;
+      color: $text-nav;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .price {
+      font-size: 24px;
+      color: $title;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    .see {
+      position: relative;
+      top: 200px;
+      opacity: 0;
+      padding: 10px 30px;
+      margin-top: 15px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.5s;
+    }
+  }
+
+  &:hover .contentBx .see {
+    top: -10px;
+    opacity: 1;
+  }
+}
+
+.card-product:hover .contentBx h4 {
+  color: $clickable;
+}
+
+.sidebar-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: 9% auto 0 auto !important;
+}
+
+.sidebar-title-product {
+  text-decoration: none;
+}
+
+.sidebar-product-content {
+  background-color: #E5E5E5;
+  border-radius: 8px;
+  padding: 28px 20px;
+  color: $text-nav;
+  hr {
+    height: 3px;
+  }
+  p {
+    font-size: 3rem;
+  }
+  ul, ol {
+    padding: unset;
+  }
+
+  li {
+    padding: 10px 0;
+  }
+  a {
+    text-decoration: none;
+    color: $text-nav;
+    &:visited {
+      color: initial;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .sidebar-product-content {
+    padding: 14px 10px ;
+    font-size: 15px;
+    p {
+      text-align: center;
+      font-size: 1.5em;
+    }
+  }
+}
+
+@media screen and(max-width: 1202px) {
+  .label {
+    display: none;
+  }
+  .imgBx img {
+    width: 90%;
+  }
+  .card-product:before {
+    height: 80%;
+  }
+}
+
+@media screen and(max-width: 1200px) {
+  .sidebar-product, .col-md-2{
+    display: none;
+  }
+  .all-product-content {
+    .col-md-10 {
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and(max-width: 770px) {
+  .label {
+    display: block;
+  }
+  .imgBx img {
+    width: 50%;
+  }
+
+}

@@ -74,7 +74,10 @@ class HomeController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             6 // Nombre de résultats par page
         );
-        return $this->render('home/product.html.twig', compact('products'));
+        return $this->render('home/product.html.twig', [
+            'products' => $products,
+            'categories' => $this->categoryRepository->findBy([], ['id' => 'DESC'])
+        ]);
     }
 
     /**
