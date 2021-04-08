@@ -565,7 +565,7 @@
             </button>
 
             <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
-                            src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
+                            src="{{ asset('build/images/logo.png') }}"
                             class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
 
                 <div class="right-links float-right mr-4">
@@ -578,7 +578,7 @@
             </div>
             <div class="row">
                 <div class="container px-0 form_product py-5" style="overflow: auto; height: 90vh">
-                    <div class="form-product row">
+                    <div class="form-product row" style="margin: auto">
                         <div class="col-md-12">
                             {{ form_start(form) }}
                             <div class="custom-file col-md-6">

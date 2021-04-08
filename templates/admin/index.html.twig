@@ -563,7 +563,7 @@
             </button>
 
             <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
-                            src="http://kris.agentfire2.com/wp-content/mu-plugins/agentfire-shared-library/img/agentfire.svg"
+                            src="{{ asset('build/images/logo.png') }}"
                             class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
 
                 <div class="right-links float-right mr-4">
@@ -699,6 +699,6 @@
         </div> <!-- /.sidebar -->
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 {% endblock %}
