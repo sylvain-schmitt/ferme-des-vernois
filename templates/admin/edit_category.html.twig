@@ -602,7 +602,6 @@
                                                 <img src="{{ (category.imageName ? vich_uploader_asset(category) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
                                             {% endif %}
                                         </div>
-                                        <div class="col-md-6">
                                             {% if route == 'app_admin_edit_category' %}
                                                 <button type="submit" class="btn btn-success">Modifier</button>
                                             {% else %}
@@ -610,7 +609,6 @@
                                             {% endif %}
                                             <a href="{{ path('app_admin') }}" class="btn btn-info">Revenir en
                                                 arrière</a>
-                                        </div>
                                         {{ form_end(form) }}
                                     </div> <!-- /.col-md-3 -->
                                     {# Colone à ajouter si besoin #}
