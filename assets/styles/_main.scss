@@ -21,10 +21,11 @@ div .sign {
 .new-delivery {
   background: center no-repeat url("../images/arrivage.png");
   width: 50%;
-  //height: 568px;
   margin: auto;
 
   .content-flash {
+    height: 560px;
+    overflow: auto;
     h2 {
       text-align: center;
       margin-top: 10px;
@@ -45,7 +46,7 @@ div .sign {
       }
 
       p {
-        color: #E40017;
+        color: black;
         margin-left: 2rem;
         font-size: 26px;
         line-height: 2;
