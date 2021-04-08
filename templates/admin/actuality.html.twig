@@ -3,10 +3,8 @@
 {% set route = app.request.attributes.get('_route') %}
 
 {% block title %}
-    {% if route == 'app_admin_edit_product' %}
-        Modifier {{ product.title }}
-    {% else %}
-        Nouveau Produit
+    {% if route == 'app_admin_edit_actu' %}
+        Modifier l'Annonce
     {% endif %}
 {% endblock %}
 
