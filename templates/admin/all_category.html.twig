@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Modifier une Catégorie
+{% endblock %}
+
 {% block body %}
 
     <link rel="stylesheet"
@@ -555,16 +559,16 @@
 
     <div data-component="navbar">
 
-    <nav class="navbar p-0 fixed-top" style="height: 100vh">
-        <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
-                data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
-                aria-label="Toggle navigation" disabled>
-            <a href="{{ path('app_admin') }}" style="text-decoration: none"><span class="ml-3 ">Tableau de Bord des Catégories</span></a>
-        </button>
+        <nav class="navbar p-0 fixed-top" style="height: 100vh">
+            <button class="navbar-toggler navbar-toggler-left rounded-0 border-0" type="button" data-toggle="collapse"
+                    data-target="#megamenu-dropdown" aria-controls="megamenu-dropdown" aria-expanded="true"
+                    aria-label="Toggle navigation" disabled>
+                <a href="{{ path('app_admin') }}" style="text-decoration: none"><span class="ml-3 ">Tableau de Bord des Catégories</span></a>
+            </button>
 
-        <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
-                        src="{{ asset('build/images/logo.png') }}"
-                        class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
+            <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
+                            src="{{ asset('build/images/logo.png') }}"
+                            class="d-inline-block mt-1" alt="AgentFire Logo" height="40"></a>
 
                 <div class="right-links float-right mr-4">
                     <div class="d-inline dropdown">
@@ -613,8 +617,3 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 
 {% endblock %}
-
-{% block title %}
-
-{% endblock %}
-
