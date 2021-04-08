@@ -136,9 +136,6 @@
   a {
     text-decoration: none;
     color: $text-nav;
-    &:visited {
-      color: initial;
-    }
     &:hover {
       text-decoration: underline;
     }
