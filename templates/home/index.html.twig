@@ -60,7 +60,7 @@
                     <div class="normal">
                         <div class="hover">
                             <div class="text">
-                                {{ categorie.title }}
+                                <a href="{{ path('app_category', {slug: categorie.slug}) }}">{{ categorie.title }} </a>
                             </div>
                         </div>
                     </div>
