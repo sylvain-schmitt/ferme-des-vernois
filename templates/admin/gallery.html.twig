@@ -590,10 +590,10 @@
                                 <a href="{{ path('app_admin') }}" class="btn btn-primary">Revenir en arrière</a>
                             </div>
                             {{ form_end(form) }}
-                            <h2 class="mt-5">Images :</h2>
-                            <div class="flex flex-wrap">
+                            <h2 class="my-5">Images :</h2>
+                            <div class="flex flex-wrap my-5">
                                 {% for image in images %}
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 my-3">
                                         <img src="{{ asset('/uploads/images/'~image.title) | imagine_filter('squared_thumbnail_medium') }}"
                                              alt="{{ image.alt }}">
 
