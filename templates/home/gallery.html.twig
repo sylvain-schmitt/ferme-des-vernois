@@ -9,11 +9,21 @@
             {% for gallery in gallerys %}
                 <div class="collumn">
                     <div class="item-image">
+                        <a href="{{ asset('/uploads/images/'~gallery.title) }}" alt="{{ gallery.alt }}" class="yBox">
                         <img src="{{ asset('/uploads/images/'~gallery.title) | imagine_filter('squared_thumbnail_gallery') }}" alt="{{ gallery.alt }}">
+                        </a>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </div>
-
+    <script src="{{ asset('js/directive.js') }}"></script>
+    <script src="{{ asset('js/yBox.js') }}"></script>
+    <script>
+        window.onload = function(){
+            if(document.querySelector('.yBox')){
+                let myYbox = new yBox();
+                myYbox.init();
+            };
+        }
+    </script>
 {% endblock %}

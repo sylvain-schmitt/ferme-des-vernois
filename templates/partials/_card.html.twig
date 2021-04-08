@@ -10,19 +10,19 @@
                 <h3 class="price">{{ product.price }} €</h3>
                 <div class="label">
                     <div class="row mt-2">
-                        <div class="col">
+                        <div class="col-4">
                             {% if product.bio == true %}
                                 <img src="{{ asset('uploads/images/logo-bio.png') }}" alt="logo agriculture bio"
                                      style="width: 50px">
                             {% endif %}
                         </div>
-                        <div class="col">
+                        <div class="col-4">
                             {% if product.beef == true %}
                                 <img src="{{ asset('uploads/images/logo-boeuf.png') }}" alt="logo boeuf certififié"
                                      style="width: 50px">
                             {% endif %}
                         </div>
-                        <div class="col">
+                        <div class="col-4">
                             {% if product.logo == true %}
                                 <img src="{{ asset('uploads/images/cereal-logo.png') }}" alt="logo cereal "
                                      style="width: 50px">
