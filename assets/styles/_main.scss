@@ -55,9 +55,13 @@ div .sign {
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .new-delivery .content-flash .flash-txt .img-actu img {
-    width: 50%;
+@media screen and (max-width: 1180px) {
+  .new-delivery .content-flash .flash-txt .img-actu{
+    display: flex;
+    justify-content: center;
+    img {
+      width: 50%;
+    }
   }
 }
 
@@ -80,7 +84,7 @@ div .sign {
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 800px) {
   .new-delivery {
     //background: 10% center no-repeat url("../images/arrivage.png");
     background: 21% center no-repeat url("../images/arrivage.png");
@@ -108,7 +112,7 @@ div .sign {
   }
 }
 
-@media screen and (max-width: 593px) {
+@media screen and (max-width: 600px) {
   .new-delivery {
     width: 100%;
     height: auto;
@@ -172,7 +176,6 @@ div .sign {
 @media screen and (max-width: 750px) {
   .home-about .home-about-txt a {
     width: 150px;
-
     img {
       width: 150px;
     }
