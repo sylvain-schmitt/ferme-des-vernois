@@ -56,9 +56,10 @@ div .sign {
 }
 
 @media screen and (max-width: 1180px) {
-  .new-delivery .content-flash .flash-txt .img-actu{
+  .new-delivery .content-flash .flash-txt .img-actu {
     display: flex;
     justify-content: center;
+
     img {
       width: 50%;
     }
@@ -176,6 +177,7 @@ div .sign {
 @media screen and (max-width: 750px) {
   .home-about .home-about-txt a {
     width: 150px;
+
     img {
       width: 150px;
     }
@@ -357,7 +359,6 @@ div .sign {
 //---------------------------------
 
 .how-content {
-  padding-top: 5em;
   width: 80%;
   margin: auto;
   display: grid;
@@ -387,19 +388,21 @@ div .sign {
     width: 150px;
     height: 120px;
   }
-.how {
-  height: auto;
-  .reserve, .receive, .recover {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-    width: 50%;
-    height: 50vh;
-    margin-right: 30px;
-  }
 
-}
+  .how {
+    height: auto;
+
+    .reserve, .receive, .recover {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      width: 50%;
+      height: 50vh;
+      margin-right: 30px;
+    }
+
+  }
 
   .order-btn {
     margin: 1em auto;
@@ -410,19 +413,40 @@ div .sign {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1115px) {
   .how-content {
     h2 {
-      margin-top: 2em;
+      margin-bottom: 0;
+    }
+
+    .how {
+      height: 500px;
+    }
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .how-content .how {
+    height: 600px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .how-content {
+    h2 {
+      margin: 2em 0;
     }
     .how {
       flex-wrap: wrap;
+      height: auto;
+
       .reserve, .receive, .recover {
         height: auto;
         width: 90%;
         margin-bottom: 1em;
       }
     }
+
     .order-btn img {
       width: 200px;
     }
