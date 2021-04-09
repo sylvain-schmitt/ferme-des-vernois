@@ -22,7 +22,10 @@ div .sign {
   background: center no-repeat url("../images/arrivage.png");
   width: 70%;
   margin: auto;
-
+  ::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+  }
   .content-flash {
     height: 560px;
     overflow: auto;
