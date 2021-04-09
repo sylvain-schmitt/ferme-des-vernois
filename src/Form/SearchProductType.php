@@ -33,11 +33,6 @@ class SearchProductType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('Rechercher', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary',
-                ]
-            ])
         ;
     }
 
