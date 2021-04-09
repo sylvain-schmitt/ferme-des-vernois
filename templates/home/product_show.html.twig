@@ -21,7 +21,18 @@
         </div>
     </div>
     <p>{{ product.description | raw}}</p>
+    {% if product.quantity == 0 %}
+        <span>Produit insdisponible</span>
+    {% elseif app.session.get('panier')[product.id] is not defined %}
+        <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart"><span class="js-disable"><img src="{{ asset('build/images/btn_commander.png') }}" alt="Comander" class="contact"></span></a>
+    {% else %}
+        <a href="{{ path('app_cart') }}" class="btn btn-primary">Voir le Panier</a>
+    {% endif %}
+{#
     <a href="{{ path('app_cart_add_product', {id: product.id}) }}"><img src="{{ asset('build/images/btn_commander.png') }}" alt="Comander" class="btn-perso"></a>
+#}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('js/addcart.js') }}"></script>
 {% endblock %}
 
 {% block title %}
