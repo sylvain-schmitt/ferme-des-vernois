@@ -4,10 +4,14 @@
 
 {% block body %}
     <div class="title-search">
-        <h1 class="text-center my-4">Rechercher de produit</h1>
+        <h1 class="text-center my-16">Rechercher de produit</h1>
         <div class="container">
             <div class="row">
-                {{ form(form) }}
+                <div class="col-md-6 mx-auto">
+                    {{ form(form) }}
+                </div>
+            </div>
+            <div class="row">
                 {% include 'partials/_card.html.twig' %}
             </div>
         </div>
