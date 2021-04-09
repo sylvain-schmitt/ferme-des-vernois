@@ -18,13 +18,9 @@ fieldset{
 }
 select{
   margin-bottom: 0.5rem;
-  box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.5);
-  -webkit-box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 11px #bcc2d4, -3px -3px 11px #e6eeff;
 }
 
 input,textarea{
-  box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.5);
-  -webkit-box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: -5px 5px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 11px #bcc2d4, -3px -3px 11px #e6eeff;
 }

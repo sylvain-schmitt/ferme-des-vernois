@@ -16,52 +16,56 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('last_name', TextType::class, [
-                'label' => 'Nom de Famille',
+                'label' => false,
                 'attr' => [
-                    'value' => 'Nom de test'
+                    'placeholder' => 'Nom:'
                 ]
             ])
             ->add('first_name', TextType::class, [
-                'label' => 'Prénom',
+                'label' => false,
                 'attr' => [
-                    'value' => 'Prénom de test'
+                    'placeholder' => 'Prénom:'
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse',
+                'label' => false,
                 'attr' => [
-                    'value' => 'Adresse Postal de test'
+                    'placeholder' => 'Adresse:'
                 ]
             ])
-            ->add('city',TextType::class, [
-                'label' => 'ville',
+            ->add('city', TextType::class, [
+                'label' => false,
                 'attr' => [
-                    'value' => 'Vesoul'
+                    'placeholder' => 'Ville:'
                 ]
             ])
-            ->add('zip',TextType::class, [
-                'label' => 'code postal',
+            ->add('zip', TextType::class, [
+                'label' => false,
                 'attr' => [
-                    'value' => '70000'
+                    'placeholder' => 'Code postal:'
                 ]
             ])
             ->add('phone', PhoneNumberType::class, [
-                'label' => 'Numéro de téléphone',
+                'label' => false,
                 'widget' => PhoneNumberType::WIDGET_COUNTRY_CHOICE,
                 'country_choices' => [
                     'FR',
                 ],
                 'preferred_country_choices' => [
                     'Fr'
-                ]
+                ],
+                'number_options' => [
+                    'attr' => [
+                        'placeholder' => 'Téléphone:'
+                    ]
+                ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse mail',
+                'label' => false,
                 'attr' => [
-                    'value' => 'mail@test.com'
+                    'placeholder' => 'mail:'
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
