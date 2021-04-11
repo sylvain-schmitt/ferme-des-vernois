@@ -4,37 +4,64 @@
   h2 {
     text-align: center;
   }
-
+  h3 {
+    color: $text-nav !important;
+    font-family: Calibri !important;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 2em 0;
+  }
+  a span img {
+    width: 20%;
+    margin: auto;
+  }
   .table {
     display: grid;
-    width: 90%;
+    width: 80%;
     table-layout: fixed;
     border-collapse: collapse;
+
+    tr.border_bottom {
+      border-bottom: 2px solid rgba(94, 107, 116, 0.4);
+      margin: 2rem 0;
+    }
+
+    tr.border_top {
+      border-top: 2px solid rgba(94, 107, 116, 0.4);
+    }
+
+    tr.Result, td.Result {
+      text-align: right;
+      font-weight: bold;
+    }
+
     tr {
       margin-bottom: 1em;
       height: auto;
-    }
 
-    td, th {
-      color: $text-nav;
-      //border: 1px solid black;
-      padding: 10px;
-    }
+      .prod-table {
+        width: 40%;
+      }
 
-    th img {
-      padding-right: 1em;
-    }
+      .result {
+        text-align: center;
+        font-weight: bold;
+      }
 
-    td a .remove, td a .add {
-      width: 24px;
-    }
+      td, th {
+        color: $text-nav;
+        padding: 15px;
+      }
 
-    tr.border_bottom{
-      border-bottom: 2px solid rgba(94, 107, 116, 0.4);
-      margin: 2rem 0;
-     }
-    tr.border_top{
-      border-top: 2px solid rgba(94, 107, 116, 0.4);
+      td {
+        a .remove, a .add {
+          width: 20px;
+        }
+      }
+
+      th img {
+        padding-right: 1em;
+      }
     }
   }
 }

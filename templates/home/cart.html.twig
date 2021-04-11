@@ -12,7 +12,7 @@
 {#                <thead>#}
                     <tr class="border_bottom">
                         <th></th>
-                        <th>Produit</th>
+                        <th class="text-left">Produit(s)</th>
                         <th>Prix</th>
                         <th>Poids</th>
                         <th>Quantité</th>
@@ -27,7 +27,7 @@
                             <img src="{{ (item.product.imageName ? vich_uploader_asset(item.product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
                         </th>
                         <td class="prod-table">{{ item.product.title }}</td>
-                        <td>{{ item.product.price }} €</td>
+                        <td class="result">{{ item.product.price }} €</td>
                         <td>{{ pluralize(item.product.pound , item.product.units) }}</td>
                         <td>
                             <a href="{{ path('app_cart_remove_quantity', {id: item.product.id}) }}">
@@ -38,7 +38,7 @@
                                 <img class="add" src="{{ asset('build/images/+.png') }}"/>
                             </a>
                         </td>
-                        <td>
+                        <td class="result">
                             {{ item.product.price * item.quantity }} €
                         </td>
                         <td>
@@ -50,16 +50,16 @@
                 {% endfor %}
 {#                </tbody>#}
 {#                <tfoot>#}
-                <tr class="border_bottom border_top">
-                    <td colspan="5" style="text-align: right">Total :</td>
+                <tr class="border_bottom border_top Result">
+                    <td colspan="5" class="Result">Total :</td>
                     <td>{{ total }} €</td>
                     <td></td>
                 </tr>
 {#                </tfoot>#}
             </table>
             <div class="row">
-                <h2 class="text-center">Vos coordonées:</h2>
-                <div class="col-md-8 mx-auto">
+                <h3 class="text-center">Vos coordonées:</h3>
+                <div class="col-md-10 mx-auto">
                     {{ form_start(form) }}
                     <div class="row">
                         <div class="col-md-6">
@@ -80,7 +80,11 @@
                     </div>
                     {{ form_row(form.phone) }}
                     {{ form_row(form.email) }}
-                    <button type="submit" class="btn btn-primary">Passer commande</button>
+                    <a href="">
+                        <span>
+                            <img src="{{ asset('build/images/btn_envoyer.png') }}" alt="">
+                        </span>
+                    </a>
                     {{ form_end(form) }}
                 </div>
             </div>
