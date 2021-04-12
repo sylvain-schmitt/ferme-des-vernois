@@ -26,7 +26,8 @@
 
 
   .table {
-    width: 100%;
+    display: grid;
+    width: 80%;
     table-layout: fixed;
     border-collapse: collapse;
 
