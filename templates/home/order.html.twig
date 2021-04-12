@@ -33,7 +33,7 @@
                     {% for product in category.products %}
                         <tr class="prod-mobile">
                             <td class="product-img" data-label=>
-                                <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
+                                <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }}" alt="image produit"/>
                             </td>
                             <td class="prod-title text-left" data-label=Produit:>
                                 {{ product.title }}
