@@ -5,7 +5,7 @@
 
 {% block body %}
     <div class="cart-content container">
-        <h2 class="text-center">Commander en ligne :</h2>
+        <h2 class="text-center txt-commande">Commander en ligne :</h2>
         <div class="flex">
             <p class="text-commande">Bon de Commande:</p>
         </div>
@@ -17,34 +17,34 @@
                             <p class="cat-title">{{ category.title }}</p>
                         </th>
                     </tr>
-                   <tr>
-                       <th></th>
-                       <th class="text-left">
-                           Produits:
-                       </th>
-                       <th>
-                           Prix:
-                       </th>
-                       <th>
-                           Poids:
-                       </th>
-                       <th></th>
-                   </tr>
+                    <tr class="mobile">
+                        <th></th>
+                        <th class="text-left">
+                            Produits:
+                        </th>
+                        <th>
+                            Prix:
+                        </th>
+                        <th>
+                            Poids:
+                        </th>
+                        <th></th>
+                    </tr>
                     {% for product in category.products %}
-                        <tr>
-                            <th class="product-img">
+                        <tr class="prod-mobile">
+                            <td class="product-img" data-label=>
                                 <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
-                            </th>
-                            <th class="prod-title text-left">
+                            </td>
+                            <td class="prod-title text-left" data-label=Produit:>
                                 {{ product.title }}
-                            </th>
-                            <th class="prod-price">
+                            </td>
+                            <td class="prod-price" data-label=Prix:>
                                 {{ product.price }} €
-                            </th>
-                            <th class="prod-pound">
+                            </td>
+                            <td class="prod-pound" data-label=poids:>
                                 {{ pluralize(product.pound , product.units) }}
-                            </th>
-                            <th class="prod-ico-pan">
+                            </td>
+                            <td class="prod-ico-pan" data-label=>
                                 {% if product.quantity == 0 %}
                                     <span class="none-product">Produit insdisponible</span>
                                 {% elseif app.session.get('panier')[product.id] is not defined %}
@@ -53,7 +53,7 @@
                                 {% else %}
                                     <a href="{{ path('app_cart') }}" class="link-panier">Voir le Panier</a>
                                 {% endif %}
-                            </th>
+                            </td>
                         </tr>
                     {% endfor %}
                 {% endfor %}
