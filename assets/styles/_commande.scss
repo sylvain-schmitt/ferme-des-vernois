@@ -1,8 +1,19 @@
+.tableau {
+  display: grid;
+  width: 80%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
 tr.divider{
   width: 100%;
   display: block;
   border-top: 2px solid rgba(94, 107, 116, 0.4);
   border-bottom: 2px solid rgba(94, 107, 116, 0.4);
+}
+
+td, th {
+  color: $text-nav;
+  padding: 15px;
 }
 .product-img{
   width: 20%;
@@ -20,7 +31,7 @@ tr.divider{
   width: 15%;
 }
 p.text-commande{
-  margin: 5% 13%;
+  margin: 5% 10%;
   font-size: 36px;
   line-height: 44px;
   text-decoration: underline;
@@ -41,7 +52,7 @@ p.text-commande{
   font-size: 16px;
 }
 @media (max-width: 780px) {
-  .table{
+  .tableau{
     overflow-x: auto !important;
   }
 
