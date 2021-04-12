@@ -11,7 +11,7 @@
             <table class="table">
 {#                <thead>#}
                     <tr class="border_bottom">
-                        <th></th>
+                        <th class="prod-img"></th>
                         <th class="text-left">Produit(s)</th>
                         <th>Prix</th>
                         <th>Poids</th>
@@ -23,7 +23,7 @@
 {#                <tbody>#}
                 {% for item in items %}
                     <tr>
-                        <th scope="row prod-img">
+                        <th class="prod-img" scope="row">
                             <img src="{{ (item.product.imageName ? vich_uploader_asset(item.product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
                         </th>
                         <td class="prod-table">{{ item.product.title }}</td>
