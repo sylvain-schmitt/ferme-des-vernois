@@ -20,7 +20,7 @@ tr.divider{
   width: 15%;
 }
 p.text-commande{
-  margin: 5% 10%;
+  margin: 5% 13%;
   font-size: 36px;
   line-height: 44px;
   text-decoration: underline;
@@ -42,7 +42,7 @@ p.text-commande{
 }
 @media (max-width: 780px) {
   .table{
-    overflow-x: auto;
+    overflow-x: auto !important;
   }
 
   p.text-commande{
