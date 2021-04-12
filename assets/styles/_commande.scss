@@ -53,12 +53,62 @@ p.text-commande{
   font-size: 16px;
 }
 @media (max-width: 780px) {
-  .tableau{
+ /* .tableau{
     overflow-x: auto !important;
+  }*/
+
+  @media (max-width: 780px){
+    tr.mobile {
+      display: none;
+    }
+    tr.prod-mobile{
+      display: block;
+      margin-bottom: 40px;
+      margin-top: 30px;
+      text-align: left;
+      border: 1px solid rgba(94, 107, 116, 0.4);
+      box-shadow: 3px 3px 11px #bcc2d4, -3px -3px 11px #e6eeff;
+      border-radius: 10px;
+    }
+    .prod-mobile td {
+      display: block;
+      text-align: center;
+    }
+    .prod-mobile td:before {
+      content: attr(data-label);
+      font-weight: bold;
+    }
+    .divider th{
+      display: block;
+    }
+    p.text-commande{
+      text-align: center;
+    }
+    .product-img{
+      width: 100%;
+      img{
+        width: 200px;
+      }
+    }
+    .prod-price{
+      width: 100%;
+    }
+    .prod-pound{
+      width: 100%;
+    }
+    .prod-title{
+      width: 100%;
+    }
+    .prod-ico-pan{
+      width: 100%;
+    }
   }
 
   p.text-commande{
     font-size: 26px;
     line-height: 34px;
+  }
+  h2.txt-commande{
+    font-size: 26px;
   }
 }
