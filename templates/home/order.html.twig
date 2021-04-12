@@ -17,19 +17,19 @@
                             <p class="cat-title">{{ category.title }}</p>
                         </th>
                     </tr>
-                    <tr>
-                        <th></th>
-                        <th class="text-left">
-                            Produits:
-                        </th>
-                        <th>
-                            Prix:
-                        </th>
-                        <th>
-                            Poids:
-                        </th>
-                        <th></th>
-                    </tr>
+                   <tr>
+                       <th></th>
+                       <th class="text-left">
+                           Produits:
+                       </th>
+                       <th>
+                           Prix:
+                       </th>
+                       <th>
+                           Poids:
+                       </th>
+                       <th></th>
+                   </tr>
                     {% for product in category.products %}
                         <tr>
                             <th class="product-img">
@@ -49,7 +49,7 @@
                                     <span class="none-product">Produit insdisponible</span>
                                 {% elseif app.session.get('panier')[product.id] is not defined %}
                                     <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart"><span class="js-disable"><img
-                                                    src="{{ asset('build/images/add-cart.png') }}" alt="icone panier" style="width: 50px"></span></a>
+                                                    src="{{ asset('build/images/add-cart.png') }}" alt="icone panier" style="width: 35px;"></span></a>
                                 {% else %}
                                     <a href="{{ path('app_cart') }}" class="link-panier">Voir le Panier</a>
                                 {% endif %}
