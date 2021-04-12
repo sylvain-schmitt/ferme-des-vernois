@@ -30,12 +30,12 @@
                         <td class="result">{{ item.product.price }} €</td>
                         <td>{{ pluralize(item.product.pound , item.product.units) }}</td>
                         <td>
-                            <a href="{{ path('app_quantity_delete', {id: item.product.id}) }}"
+                            <a href="{{ path('app_cart_add_quantity', {id: item.product.id}) }}"
                                class="btn">
                                 <img src="https://img.icons8.com/fluent/20/000000/minus.png"/>
                             </a>
                             {{ item.product.quantity }}
-                            <a href="{{ path('app_quantity_add', {id: item.product.id}) }}" class="btn">
+                            <a href="{{ path('app_cart_remove_quantity', {id: item.product.id}) }}" class="btn">
                                 <img src="https://img.icons8.com/fluent/20/000000/add.png"/>
                             </a>
                         </td>
