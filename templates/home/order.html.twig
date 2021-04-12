@@ -4,41 +4,62 @@
     {% endblock %}
 
 {% block body %}
-        <table>
-            {% for category in categories %}
-            <thead>
-                <td>
-                    <th>
-                    {{ category.title }}
-                    </th>
-                </td>
-            </thead>
-            {% for product in category.products %}
-            <tbody>
-                <td>
-                    <th>
-                        <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
-                    </th>
-                    <th>
-                        {{ product.title }}
-                    </th>
-                    <th>
-                        {{ product.price }} €
-                    </th>
-                    <th>
-                        {% if product.quantity == 0 %}
-                            <span>Produit insdisponible</span>
-                        {% elseif app.session.get('panier')[product.id] is not defined %}
-                            <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart"><span class="btn btn-success js-disable">Ajouter au pannier</span></a>
-                        {% else %}
-                            <a href="{{ path('app_cart') }}" class="btn btn-primary">Voir le Panier</a>
-                        {% endif %}
-                    </th>
-                </td>
-            </tbody>
-            {% endfor %}
-            {% endfor %}
-        </table>
+    <div class="cart-content container">
+        <h2 class="text-center">Commander en ligne :</h2>
+        <div class="flex">
+            <p class="text-commande">Bon de Commande:</p>
+        </div>
+        <div class="flex justify-center items-center flex-col">
+            <table class="table">
+                {% for category in categories %}
+                    <tr class="divider">
+                        <th>
+                            <p class="cat-title">{{ category.title }}</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th class="text-left">
+                            produits:
+                        </th>
+                        <th>
+                            Prix:
+                        </th>
+                        <th>
+                            poids:
+                        </th>
+                        <th></th>
+                    </tr>
+                    {% for product in category.products %}
+                        <tr>
+                            <th class="product-img">
+                                <img src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
+                            </th>
+                            <th class="prod-title text-left">
+                                {{ product.title }}
+                            </th>
+                            <th class="prod-price">
+                                {{ product.price }} €
+                            </th>
+                            <th class="prod-pound">
+                                {{ pluralize(product.pound , product.units) }}
+                            </th>
+                            <th class="prod-ico-pan">
+                                {% if product.quantity == 0 %}
+                                    <span class="none-product">Produit insdisponible</span>
+                                {% elseif app.session.get('panier')[product.id] is not defined %}
+                                    <a href="{{ path('app_cart_add_product', {id: product.id}) }}" class="js-addcart"><span class="js-disable"><img
+                                                    src="{{ asset('build/images/add-cart.png') }}" alt="icone panier" style="width: 50px"></span></a>
+                                {% else %}
+                                    <a href="{{ path('app_cart') }}" class="link-panier">Voir le Panier</a>
+                                {% endif %}
+                            </th>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/addcart.js') }}"></script>
 
