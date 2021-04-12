@@ -16,10 +16,10 @@
   button {
     border: none;
     background: none;
-    width: 20%;
+    width: 250px;
 
     span img {
-      width: 100%;
+      width: 250px;
       margin: auto;
     }
   }
@@ -64,6 +64,7 @@
       td, th {
         color: $text-nav;
         padding: 15px;
+        text-align: center;
       }
 
       td {
@@ -75,6 +76,55 @@
       th img {
         padding-right: 1em;
       }
+    }
+  }
+}
+@media screen and (max-width: 1390px) {
+  .cart-content {
+    .table {
+      width: 90%;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .cart-content {
+    .table {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 776px) {
+  .cart-content {
+    .table {
+      tr.result-title, td.result-title {
+        font-size: 16px;
+      }
+
+      tr {
+        .prod-table {
+          width: auto;
+        }
+
+        td, th {
+          padding: 5px;
+          font-size: 12px;
+        }
+
+        td {
+          a .remove, a .add, a .delete {
+            width: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .cart-content {
+    .table {
     }
   }
 }
