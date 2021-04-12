@@ -16,7 +16,7 @@
         "fakerphp/faker": "^1.13",
         "friendsofsymfony/ckeditor-bundle": "^2.3",
         "knplabs/knp-paginator-bundle": "^5.4",
-        "liip/imagine-bundle": "^2.5",
+        "liip/imagine-bundle": "^2.6",
         "mercuryseries/flashy-bundle": "^3.0",
         "odolbeau/phone-number-bundle": "^3.4",
         "phpdocumentor/reflection-docblock": "^5.2",
