@@ -23,13 +23,13 @@
 {#                <tbody>#}
                 {% for item in items %}
                     <tr>
-                        <th scope="row">
+                        <th scope="row prod-img">
                             <img src="{{ (item.product.imageName ? vich_uploader_asset(item.product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
                         </th>
                         <td class="prod-table">{{ item.product.title }}</td>
                         <td class="result">{{ item.product.price }} €</td>
                         <td>{{ pluralize(item.product.pound , item.product.units) }}</td>
-                        <td>
+                        <td class="quantity">
                             <a href="{{ path('app_cart_remove_quantity', {id: item.product.id}) }}"
                                class="btn">
                                 <img src="https://img.icons8.com/fluent/20/000000/minus.png"/>
@@ -60,7 +60,7 @@
             </table>
             <div class="row">
                 <h3 class="text-center">Vos coordonées:</h3>
-                <div class="col-md-8 mx-auto">
+                <div class="col-md-10 mx-auto">
                     {{ form_start(form) }}
                     <div class="row">
                         <div class="col-md-6">

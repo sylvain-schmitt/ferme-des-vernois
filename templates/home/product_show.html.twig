@@ -3,7 +3,64 @@
 {% block body %}
 
     <div class="img-product"></div>
-    <h2 class="text-center my-4">{{ product.title }}</h2>
+
+    <div class="container content-product">
+        <a class="back-link" href="{{ path('app_product') }}"><< Retour vers les produits</a>
+        <div class="flex content-product flex-wrap">
+            <div class="col-md-6 content-left">
+                <img class="my-15"
+                     src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_large') }} "/>
+                <div class="logo-content-product my-15">
+                    {% if product.bio == true %}
+                        <img src="{{ asset('uploads/images/logo-bio.png') }}" alt="logo agriculture bio">
+                    {% endif %}
+                    {% if product.beef == true %}
+                        <img src="{{ asset('uploads/images/logo-boeuf.png') }}" alt="logo boeuf certifié">
+                    {% endif %}
+                    {% if product.logo == true %}
+                        <img src="{{ asset('uploads/images/cereal-logo.png') }}" alt="logo cereal">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6 content-right">
+                <div class="title-content-right mt-15">
+                    <h3>{{ product.title }} :</h3>
+                </div>
+                <div class="info-content-right my-3">
+                    {% if product.quantity == 0 %}
+                        <p>(Non disponible pour le moment)</p>
+                    {% else %}
+                        <p>(En stock)</p>
+                    {% endif %}
+                </div>
+                <div class="info-product-pound mt-10">
+                    <p>Descriptions : {{ product.description | raw }} </p>
+                </div>
+                <div class="info-product-pound mt-10">
+                    <p>
+                        <b>Poids :</b>
+                        {{ pluralize(product.pound , product.units) }}*
+                    </p>
+                </div>
+                <div class="info-product-pound mt-10">
+                    <p>
+                        <b>Prix TTC :
+                        <span class="green">{{ product.price }} €</span>
+                        </b>
+                        *
+                    </p>
+                </div>
+                <div class="btn-product-add-cart mt-15 text-center">
+                    <a href="{{ path('app_order') }}"><img src="{{ asset('build/images/btn_commander.png') }}"
+                                                           alt="Commander" width="250px"></a>
+                </div>
+            </div>
+        </div>
+        <div class="about-order">
+            <p>*Le prix et poids de chaque produit est approximatif !</p>
+        </div>
+    </div>
+
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/addcart.js') }}"></script>
