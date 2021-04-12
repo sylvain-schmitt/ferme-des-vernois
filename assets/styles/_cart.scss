@@ -4,6 +4,7 @@
   h2 {
     text-align: center;
   }
+
   h3 {
     color: $text-nav !important;
     font-family: Calibri !important;
@@ -11,13 +12,22 @@
     font-size: 30px;
     padding: 2em 0;
   }
-  a span img {
+
+  button {
+    border: none;
+    background: none;
     width: 20%;
-    margin: auto;
+
+    span img {
+      width: 100%;
+      margin: auto;
+    }
   }
+
+
   .table {
     display: grid;
-    width: 80%;
+    width: 73%;
     table-layout: fixed;
     border-collapse: collapse;
 
@@ -35,12 +45,16 @@
       font-weight: bold;
     }
 
+    tr.result-title, td.result-title {
+      font-size: 20px;
+    }
+
     tr {
       margin-bottom: 1em;
       height: auto;
 
       .prod-table {
-        width: 40%;
+        width: 38%;
       }
 
       .result {

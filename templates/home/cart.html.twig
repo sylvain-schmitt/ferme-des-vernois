@@ -13,7 +13,7 @@
                     <tr class="border_bottom">
                         <th></th>
                         <th class="text-left">Produit(s)</th>
-                        <th>Prix</th>
+                        <th>Prix (€)</th>
                         <th>Poids</th>
                         <th>Quantité</th>
                         <th>Total</th>
@@ -27,11 +27,11 @@
                             <img src="{{ (item.product.imageName ? vich_uploader_asset(item.product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
                         </th>
                         <td class="prod-table">{{ item.product.title }}</td>
-                        <td class="result">{{ item.product.price }} €</td>
+                        <td class="result">{{ item.product.price }}</td>
                         <td>{{ pluralize(item.product.pound , item.product.units) }}</td>
                         <td>
                             <a href="{{ path('app_cart_remove_quantity', {id: item.product.id}) }}">
-                                <img class="remove" src="{{ asset('build/images/-.png') }}"/>
+                                <img class="remove" src="{{ asset('build/images/-.png') }}"/></a>
                             </a>
                             {{ item.quantity }}
                             <a href="{{ path('app_cart_add_quantity', {id: item.product.id}) }}">
@@ -50,16 +50,16 @@
                 {% endfor %}
 {#                </tbody>#}
 {#                <tfoot>#}
-                <tr class="border_bottom border_top Result">
-                    <td colspan="5" class="Result">Total :</td>
-                    <td>{{ total }} €</td>
-                    <td></td>
+                <tr class="border_bottom border_top Result result-title">
+                    <td colspan="5" class="Result result-title">Total TTC :</td>
+                    <td class="result-title">{{ total }}</td>
+                    <td class="result-title text-left">€</td>
                 </tr>
 {#                </tfoot>#}
             </table>
             <div class="row">
                 <h3 class="text-center">Vos coordonées:</h3>
-                <div class="col-md-10 mx-auto">
+                <div class="col-md-8 mx-auto">
                     {{ form_start(form) }}
                     <div class="row">
                         <div class="col-md-6">
@@ -80,11 +80,11 @@
                     </div>
                     {{ form_row(form.phone) }}
                     {{ form_row(form.email) }}
-                    <a href="">
+                    <button type="submit">
                         <span>
                             <img src="{{ asset('build/images/btn_envoyer.png') }}" alt="">
                         </span>
-                    </a>
+                    </button>
                     {{ form_end(form) }}
                 </div>
             </div>
