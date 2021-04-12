@@ -13,7 +13,7 @@
                     <tr class="border_bottom">
                         <th></th>
                         <th class="text-left">Produit(s)</th>
-                        <th>Prix (€)</th>
+                        <th>Prix</th>
                         <th>Poids</th>
                         <th>Quantité</th>
                         <th>Total</th>
@@ -27,7 +27,7 @@
                             <img src="{{ (item.product.imageName ? vich_uploader_asset(item.product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_small') }} "/>
                         </th>
                         <td class="prod-table">{{ item.product.title }}</td>
-                        <td class="result">{{ item.product.price }}</td>
+                        <td class="result">{{ item.product.price }} €</td>
                         <td>{{ pluralize(item.product.pound , item.product.units) }}</td>
                         <td>
                             <a href="{{ path('app_cart_remove_quantity', {id: item.product.id}) }}">

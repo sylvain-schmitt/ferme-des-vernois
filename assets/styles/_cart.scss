@@ -7,7 +7,7 @@
 
   h3 {
     color: $text-nav !important;
-    font-family: Calibri !important;
+    font-family: Calibri, sans-serif !important;
     font-weight: bold;
     font-size: 30px;
     padding: 2em 0;
@@ -26,7 +26,6 @@
 
 
   .table {
-    display: grid;
     width: 73%;
     table-layout: fixed;
     border-collapse: collapse;
