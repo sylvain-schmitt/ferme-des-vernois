@@ -16,14 +16,13 @@
   button {
     border: none;
     background: none;
-    width: 250px;
+    width: 200px;
 
     span img {
-      width: 250px;
+      width: 200px;
       margin: auto;
     }
   }
-
 
   .table {
     width: 100%;
@@ -79,6 +78,7 @@
     }
   }
 }
+
 @media screen and (max-width: 1390px) {
   .cart-content {
     .table {
@@ -89,29 +89,29 @@
 
 @media screen and (max-width: 1200px) {
   .cart-content {
+    width: 100%;
+
     .table {
-      width: 100%;
-    }
-  }
-}
-@media screen and (max-width: 1000px) {
-  .cart-content {
-    .table {
-     td.quantity {
+      td.quantity {
         text-align: initial;
       }
+
       tr th img {
         width: 90px;
       }
     }
   }
 }
-@media screen and (max-width: 776px) {
+
+@media screen and (max-width: 780px) {
   .cart-content {
+    max-width: 100%;
+
     .table {
       tr.result-title, td.result-title {
         font-size: 16px;
       }
+
       tr {
         .prod-table {
           width: auto;
@@ -135,8 +135,42 @@
 @media screen and (max-width: 550px) {
   .cart-content {
     .table {
-      tr th.prod-img{
+      tr {
+        display: block;
+        border-bottom: 2px solid rgba(94, 107, 116, 0.4);
+
+        td, th {
+          display: block;
+        }
+      }
+
+      td.quantity {
+        text-align: center;
+        a {
+          padding: 2px;
+        }
+      }
+      .table-thead {
         display: none;
+      }
+      tr.border_top {
+        border-top: none;
+        td {
+          text-align: center;
+        }
+      }
+    }
+    .table td:before {
+      content: attr(data-label);
+      text-align: center;
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    button {
+      width: 150px;
+
+      span img {
+        width: 150px;
       }
     }
   }
