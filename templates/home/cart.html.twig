@@ -9,18 +9,18 @@
 
         {% if items | length > 0 %}
             <table class="table">
-{#                <thead>#}
-                    <tr class="border_bottom table-thead">
-                        <th class="prod-img"></th>
-                        <th class="text-left">Produit(s)</th>
-                        <th>Prix</th>
-                        <th>Poids</th>
-                        <th>Quantité</th>
-                        <th>Total</th>
-                        <th></th>
-                   </tr>
-{#                </thead>#}
-{#                <tbody>#}
+                {# <thead> #}
+                <tr class="border_bottom table-thead">
+                    <th class="prod-img"></th>
+                    <th class="text-left">Produit(s)</th>
+                    <th>Prix</th>
+                    <th>Poids</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                {# </thead> #}
+                {# <tbody> #}
                 {% for item in items %}
                     <tr>
                         <th class="prod-img" scope="row">
@@ -49,14 +49,14 @@
                         </td>
                     </tr>
                 {% endfor %}
-{#                </tbody>#}
-{#                <tfoot>#}
+                {# </tbody> #}
+                {# <tfoot> #}
                 <tr class="border_bottom border_top Result result-title">
                     <td colspan="5" class="Result result-title">Total TTC :</td>
-                  <td class="result-title">{{ total }} €</td>
+                    <td class="result-title">{{ total }} €</td>
                     <td></td>
                 </tr>
-{#                </tfoot>#}
+                {# </tfoot> #}
             </table>
             <div class="row">
                 <h3 class="text-center">Vos coordonées:</h3>
@@ -81,11 +81,13 @@
                     </div>
                     {{ form_row(form.phone) }}
                     {{ form_row(form.email) }}
-                    <button type="submit">
-                        <span>
-                            <img src="{{ asset('build/images/btn_envoyer.png') }}" alt="">
-                        </span>
-                    </button>
+                    <div class="col-4 mx-auto">
+                        <button type="submit">
+                            <span>
+                                <img src="{{ asset('build/images/btn_envoyer.png') }}" alt="btn-envoyer">
+                            </span>
+                        </button>
+                    </div>
                     {{ form_end(form) }}
                 </div>
             </div>
