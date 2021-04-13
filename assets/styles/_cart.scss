@@ -138,7 +138,9 @@
       tr {
         display: block;
         border-bottom: 2px solid rgba(94, 107, 116, 0.4);
-
+        th img {
+          width: 120px;
+        }
         td, th {
           display: block;
         }
