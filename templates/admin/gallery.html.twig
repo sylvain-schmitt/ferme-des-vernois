@@ -583,8 +583,14 @@
                             {{ form_start(form) }}
                             <div class="custom-file col-md-6">
                                 {{ form_row(form.alt) }}
-                                {{ form_label(form.title, 'Téléverser une image. (max: 10MO)') }}
-                                {{ form_row(form.title) }}
+                                <div class="row">
+                                    {{ form_label(form.title, 'Téléverser une image. (max: 10MO)') }}
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.title) }}
+                                    </div>
+                                </div>
                                 <button type="submit" class="btn btn-primary mb-5">Valider</button>
                             </div>
                             <div class="col-md-2">
