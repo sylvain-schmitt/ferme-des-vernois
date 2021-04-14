@@ -21,7 +21,7 @@ class GalleryType extends AbstractType
                 'constraints' => [
                     new All([
                         new File([
-                            'maxSize' => '2048k',
+                            'maxSize' => '10240K',
                             'mimeTypes' => [
                                 'image/jpeg',
                                 'image/png'
