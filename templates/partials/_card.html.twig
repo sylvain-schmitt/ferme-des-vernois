@@ -7,27 +7,24 @@
             </div>
             <div class="contentBx">
                 <h4>{{ product.title }}</h4>
-                <h3 class="price">{{ product.price }} €</h3>
+                <h3 class="price my-4">{{ product.price }} €</h3>
                 <div class="label">
-                    <div class="row mt-2">
-                        <div class="col-4">
-                            {% if product.bio == true %}
-                                <img src="{{ asset('uploads/images/logo-bio.png') }}" alt="logo agriculture bio"
-                                     style="width: 50px">
-                            {% endif %}
-                        </div>
-                        <div class="col-4">
-                            {% if product.beef == true %}
-                                <img src="{{ asset('uploads/images/logo-boeuf.png') }}" alt="logo boeuf certififié"
-                                     style="width: 50px">
-                            {% endif %}
-                        </div>
-                        <div class="col-4">
-                            {% if product.logo == true %}
-                                <img src="{{ asset('uploads/images/cereal-logo.png') }}" alt="logo cereal "
-                                     style="width: 50px">
-                            {% endif %}
-                        </div>
+                    <div class="row">
+                        {% if product.bio == true %}
+                            <div class="col-3">
+                                <img src="{{ asset('build/images/logo-bio.jpg') }}" alt="logo agriculture bio" style="width: 100%;">
+                            </div>
+                        {% endif %}
+                        {% if product.beef == true %}
+                            <div class="col-6">
+                                <img src="{{ asset('build/images/boeuf-comtois.PNG') }}" alt="logo boeuf certifié" style="width: 100%;">
+                            </div>
+                        {% endif %}
+                        {% if product.logo == true %}
+                            <div class="col-3">
+                                <img src="{{ asset('build/images/exploitation.PNG') }}" alt="logo exploitation environementale" style="width: 100%;">
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <a href="{{ path('app_product_show', {slug: product.slug}) }}" class="see"><img
