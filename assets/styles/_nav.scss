@@ -16,8 +16,8 @@ header {
   nav {
     margin-right: 30px;
     li, a {
-      font-weight: 500;
-      font-size: 18px;
+      font-weight: bold;
+      font-size: 26px;
       color: $text-nav!important;
       img.facebook{
           width: 14px;
@@ -79,6 +79,14 @@ header {
         transition: all 0.3s ease;
 
       }
+  }
+  
+  @media (max-width: 1300px) {
+    nav {
+      li, a {
+        font-size: 18px;
+      }
+    }
   }
   @media (max-width: 1080px){
     .burger {
