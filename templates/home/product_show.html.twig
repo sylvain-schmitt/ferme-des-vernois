@@ -11,15 +11,23 @@
                 <img class="my-15"
                      src="{{ (product.imageName ? vich_uploader_asset(product) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_large') }} " width="100%"/>
                 <div class="logo-content-product my-15">
-                    {% if product.bio == true %}
-                        <img src="{{ asset('uploads/images/logo-bio.png') }}" alt="logo agriculture bio">
-                    {% endif %}
-                    {% if product.beef == true %}
-                        <img src="{{ asset('uploads/images/logo-boeuf.png') }}" alt="logo boeuf certifié">
-                    {% endif %}
-                    {% if product.logo == true %}
-                        <img src="{{ asset('uploads/images/cereal-logo.png') }}" alt="logo cereal">
-                    {% endif %}
+                    <div class="row">
+                        {% if product.bio == true %}
+                        <div class="col-3">
+                            <img src="{{ asset('build/images/logo-bio.jpg') }}" alt="logo agriculture bio">
+                        </div>
+                        {% endif %}
+                        {% if product.beef == true %}
+                        <div class="col-6">
+                            <img src="{{ asset('build/images/boeuf-comtois.PNG') }}" alt="logo boeuf certifié">
+                        </div>
+                        {% endif %}
+                        {% if product.logo == true %}
+                        <div class="col-3">
+                            <img src="{{ asset('build/images/exploitation.PNG') }}" alt="logo exploitation environementale">
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 content-right mx-auto">
