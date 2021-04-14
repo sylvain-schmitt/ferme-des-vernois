@@ -7,22 +7,22 @@
             </div>
             <div class="contentBx">
                 <h4>{{ product.title }}</h4>
-                <h3 class="price my-4">{{ product.price }} €</h3>
+                <h3 class="price mb-2">{{ product.price }} €</h3>
                 <div class="label">
                     <div class="row">
                         {% if product.bio == true %}
                             <div class="col-3">
-                                <img src="{{ asset('build/images/logo-bio.jpg') }}" alt="logo agriculture bio" style="width: 100%;">
+                                <img src="{{ asset('build/images/logo-bio.jpg') }}" alt="logo agriculture bio" style="width: 80%;">
                             </div>
                         {% endif %}
                         {% if product.beef == true %}
                             <div class="col-6">
-                                <img src="{{ asset('build/images/boeuf-comtois.PNG') }}" alt="logo boeuf certifié" style="width: 100%;">
+                                <img src="{{ asset('build/images/boeuf-comtois.PNG') }}" alt="logo boeuf certifié" style="width: 80%;">
                             </div>
                         {% endif %}
                         {% if product.logo == true %}
                             <div class="col-3">
-                                <img src="{{ asset('build/images/exploitation.PNG') }}" alt="logo exploitation environementale" style="width: 100%;">
+                                <img src="{{ asset('build/images/exploitation.PNG') }}" alt="logo exploitation environementale" style="width: 80%;">
                             </div>
                         {% endif %}
                     </div>
