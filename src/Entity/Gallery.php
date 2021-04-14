@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GalleryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GalleryRepository::class)
@@ -19,6 +20,7 @@ class Gallery
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Image(maxSize="10M", mimeTypes = {"image/jpeg", "image/png"})
      */
     private $title;
 
