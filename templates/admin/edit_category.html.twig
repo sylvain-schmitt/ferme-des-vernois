@@ -596,6 +596,7 @@
                                     <div class="col-md-6">
                                         {{ form_start(form) }}
                                         {{ form_row(form.title) }}
+                                        {{ form_label(form.title, 'Téléverser une image. (max: 2MO)') }}
                                         {{ form_row(form.imageFile) }}
                                         <div class="col-md-6 mb-5">
                                             {% if route == 'app_admin_edit_category' %}
