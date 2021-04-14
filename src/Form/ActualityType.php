@@ -22,7 +22,6 @@ class ActualityType extends AbstractType
                 'label' => 'Déscription',
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image (JPG ou PNG)',
                 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer l\'image',

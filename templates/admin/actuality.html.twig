@@ -603,6 +603,7 @@
                                         {% if route == 'app_admin_edit_actu' %}
                                             <img class="mb-5" src="{{ (actuality.imageName ? vich_uploader_asset(actuality) : asset('uploads/images/Not-found.png')) | imagine_filter('squared_thumbnail_medium') }} "/>
                                         {% endif %}
+                                        {{ form_label(form.title, 'Téléverser une image. (max: 2MO)') }}
                                         {{ form_widget(form.imageFile) }}
                                     </div>
                                     <div class="form-check form-switch">
