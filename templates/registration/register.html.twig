@@ -7,15 +7,26 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Inscription</h1>
+   <div class="container">
+       <h2 class="text-center">Inscription</h2>
 
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.plainPassword, {
-        label: 'Password'
-    }) }}
-    {{ form_row(registrationForm.agreeTerms) }}
+       <div class="row">
+           <div class="col-md-6 mx-auto">
+               {{ form_start(registrationForm) }}
+               <div class="form-group">
+                   {{ form_row(registrationForm.email) }}
+               </div>
+               <div class="form-group">
+                   {{ form_row(registrationForm.plainPassword) }}
+               </div>
+                   {{ form_row(registrationForm.agreeTerms) }}
+               <div class="text-center">
+                   <button class="btn-link" type="submit"><img class="contact" src="/build/images/btn_inscription.png" alt="bouton d'inscription"></button>
+               </div>
+               {{ form_end(registrationForm) }}
+           </div>
+       </div>
+   </div>
 
-    <button type="submit" class="btn btn-primary">inscription</button>
-    {{ form_end(registrationForm) }}
+
 {% endblock %}
