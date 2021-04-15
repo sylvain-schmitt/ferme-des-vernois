@@ -3,33 +3,34 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-
-
-        <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-        <label for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-        <label for="inputPassword">Mot de passe</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" required>
-
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> se souvenir de moi
-            </label>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <h2 class="text-center">Connexion</h2>
+                    <div class="form-group mt-7">
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" placeholder="Email:" class="form-control" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe:" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+                    <div class="form-check mb-3">
+                        <label>
+                            <input class="form-check-input" type="checkbox" name="_remember_me"> <p> se souvenir de moi</p>
+                        </label>
+                    </div>
+                       <div class="text-center">
+                           <button class="btn-link" type="submit"><img class="contact" src="/build/images/btn_connexion.png" alt="bouton de connexion"></button>
+                   </div>
+                </form>
+            </div>
         </div>
+    </div>
 
-
-        <button class="btn btn-primary" type="submit">
-            Connexion
-        </button>
-    </form>
 {% endblock %}
