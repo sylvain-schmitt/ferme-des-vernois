@@ -113,7 +113,7 @@ class HomeController extends AbstractController
             $address = $contact['address'];
             $message = $contact['message'];
             $email = $contact['email'];
-            $toAddresses = [new Address($email), new Address('romaric.rapine25@gmail.com')];
+            $toAddresses = [new Address($email), new Address('romaricrapine25@gmail.com')];
             $mailerService->sendContact($email, $toAddresses, 'Nouveau message depuis votre site !', 'emails/contact.mjml.twig', 'emails/contact.txt.twig', [
                 'last_name' => $last_name,
                 'first_name' => $first_name,
