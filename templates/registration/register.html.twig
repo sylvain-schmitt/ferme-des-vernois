@@ -4,8 +4,6 @@
 
 {% block body %}
 
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
         {% for flashError in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flashError }}</div>
         {% endfor %}
@@ -24,15 +22,13 @@
                     </div>
                     {{ form_row(registrationForm.agreeTerms) }}
                     <div class="text-center">
-                        <button class="btn-link" type="submit"><img class="contact"
-                                                                    src="/build/images/btn_inscription.png"
-                                                                    alt="bouton d'inscription"></button>
+                        <button class="btn-link" type="submit">
+                            <img class="contact" src="/build/images/btn_inscription.png" alt="bouton d'inscription">
+                        </button>
                     </div>
                     {{ form_end(registrationForm) }}
                 </div>
             </div>
         </div>
-    {% endif %}
-
 
 {% endblock %}
