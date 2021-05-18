@@ -93,7 +93,7 @@ class MailerService
 
     public function sendContact(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params)
     {
-        $toAddresses = ['fermedesvernois@gmail.com', $from];
+        $toAddresses = ['romaric.rapine25@gmail.com', $from];
         $email = (new TemplatedEmail())
             ->from($from)
             ->to(...$toAddresses)
