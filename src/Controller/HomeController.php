@@ -123,8 +123,6 @@ class HomeController extends AbstractController
                 'mail' => $email,
             ]);
 
-            dd($toAddresses);
-
             $this->flashy->success('Votre message à bien été envoyer');
             return $this->redirectToRoute('app_home');
         }
