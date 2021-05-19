@@ -10,5 +10,5 @@ interface MailerServiceInterface
 
     public function sendUser(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params);
 
-    public function sendContact(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params);
+    public function sendContact(string $email,array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params);
 }
