@@ -54,7 +54,7 @@ class MailerService
 
     public function sendAdmin(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params)
     {
-        $toAddresses = ['sylvain.schmitt70@gmail.com', $from];
+        $toAddresses = ['sylvain.schmitt70@gmail.com'];
         $email = (new TemplatedEmail())
             ->from($from)
             ->to(...$toAddresses)
