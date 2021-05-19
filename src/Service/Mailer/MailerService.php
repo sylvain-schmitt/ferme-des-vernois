@@ -54,7 +54,7 @@ class MailerService
 
     public function sendAdmin(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params)
     {
-        $toAddresses = ['fermedesvernois@gmail.com', $from];
+        $toAddresses = ['sylvain.schmitt70@gmail.com', $from];
         $email = (new TemplatedEmail())
             ->from($from)
             ->to(...$toAddresses)
@@ -75,7 +75,7 @@ class MailerService
     public function sendUser(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params) {
         $toAddresses = [$from];
         $email = (new TemplatedEmail())
-            ->from('fermedesvernois@gmail.com')
+            ->from('sylvain.schmitt70@gmail.com')
             ->to(...$toAddresses)
             ->subject($subject)
             ->html($this->convertMjmlToHtml($mjmlTemplate, $params))
