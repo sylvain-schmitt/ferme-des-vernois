@@ -91,12 +91,12 @@ class MailerService
         }
     }
 
-    public function sendContact(string $from, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params)
+    public function sendContact(string $email, array $toAddresses, string $subject, string $mjmlTemplate, string $txt, array $params)
     {
-        $toAddresses = ['sylvain.schmitt70@gmail.com', $from];
+        $toAddresses = 'sylvain.schmitt70@gmail.com';
         $email = (new TemplatedEmail())
-            ->from($from)
-            ->to(...$toAddresses)
+            ->from($email)
+            ->to($toAddresses)
             ->subject($subject)
             ->html($this->convertMjmlToHtml($mjmlTemplate, $params))
             ->textTemplate($txt)
