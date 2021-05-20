@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <title>{% block title %}La ferme des vernois{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="La ferme des Vernois est un site de commande en ligne clic and collect. Ce site vend des produits locaux (viande de bovine, viande ovine, viande chevaline) certifié bio, HVE et Bœuf comtois "> <!-- Meta Description -->
+        <link rel="icon" type="image/png" href="{{ asset('build/images/logo.png') }}" />
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
             {{ encore_entry_link_tags('app') }}

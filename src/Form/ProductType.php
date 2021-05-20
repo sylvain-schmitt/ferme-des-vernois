@@ -40,12 +40,15 @@ class ProductType extends AbstractType
 
             ->add('bio', CheckboxType::class, [
                 'required' => false,
+                'label' => 'Agriculture bio'
             ])
             ->add('beef', CheckboxType::class, [
                 'required' => false,
+                'label' => 'Boeuf certifié'
             ])
             ->add('logo', CheckboxType::class, [
                 'required' => false,
+                'label' => 'HEV'
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image (JPG ou PNG)',

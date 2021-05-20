@@ -561,6 +561,9 @@
                     aria-label="Toggle navigation" disabled>
                 <a style="text-decoration: none"><span class="ml-3 ">Bienvenue sur le Tableau de Bord</span></a>
             </button>
+            <button  class="navbar-toggler navbar-toggler-right rounded-0 border-0">
+                <a style="text-decoration: none" href="{{path('app_logout')}}">Déconnexion</a>
+            </button>
 
             <div><a class="navbar-brand px-1" href="{{ path('app_admin') }}"><img
                             src="{{ asset('build/images/logo.png') }}"
