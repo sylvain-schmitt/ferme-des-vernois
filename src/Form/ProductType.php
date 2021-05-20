@@ -48,7 +48,7 @@ class ProductType extends AbstractType
             ])
             ->add('logo', CheckboxType::class, [
                 'required' => false,
-                'label' => 'HEV'
+                'label' => 'HVE'
             ])
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image (JPG ou PNG)',
