@@ -1,0 +1,22 @@
+
+*** These modified files were found in JOE when it aborted on Wed May 19 20:23:14 2021
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+/var/www/ferme-des-vernois/.git/MERGE_MSG
+
+*** File '/var/www/ferme-des-vernois/.git/MERGE_MSG'
+
+Merge branch 'master' of https://github.com/sylvain-schmitt/ferme-des-vernois
+
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+
+*** File '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
