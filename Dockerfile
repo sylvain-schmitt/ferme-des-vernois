@@ -6,35 +6,34 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libpq-dev \
     libzip-dev \
-    && docker-php-ext-install pdo pdo_pgsql zip opcache \
+    libicu-dev \
+    && docker-php-ext-install pdo pdo_pgsql zip opcache intl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Installation de Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+# Configuration Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_NO_INTERACTION=1
+
 WORKDIR /app
 
-# Copie des fichiers de dépendances d'abord (pour le cache Docker)
-COPY composer.json composer.lock ./
-
-# Installation des dépendances PHP
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
-
-# Copie du reste des fichiers
+# Copie de tous les fichiers
 COPY . .
 
-# Finalisation de l'installation Composer
-RUN composer dump-autoload --optimize --classmap-authoritative
+# Installation des dépendances (avec --ignore-platform-reqs pour éviter les conflits)
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-# Configuration Symfony pour la production
+# Permissions sur les dossiers var/ et public/
+RUN mkdir -p var/cache var/log public/bundles \
+    && chmod -R 777 var/ public/bundles || true
+
+# Variables d'environnement
 ENV APP_ENV=prod
-RUN php bin/console cache:clear --env=prod --no-debug || true
-RUN php bin/console cache:warmup --env=prod --no-debug || true
-
-# Si vous avez des assets à compiler
-# RUN php bin/console assets:install --env=prod --no-debug || true
 
 EXPOSE 8000
 
+# Commande de démarrage simple
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
