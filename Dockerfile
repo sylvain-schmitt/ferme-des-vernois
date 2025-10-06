@@ -23,7 +23,10 @@ WORKDIR /app
 # Copie de tous les fichiers
 COPY . .
 
-# Installation des dépendances (avec --ignore-platform-reqs pour éviter les conflits)
+# Mise à jour de Symfony Flex AVANT l'installation complète
+RUN composer require symfony/flex:"^2.0" --no-scripts --ignore-platform-reqs || true
+
+# Installation des dépendances
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Permissions sur les dossiers var/ et public/
@@ -35,5 +38,5 @@ ENV APP_ENV=prod
 
 EXPOSE 8000
 
-# Commande de démarrage simple
+# Commande de démarrage
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
