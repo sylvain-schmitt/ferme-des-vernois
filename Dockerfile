@@ -1,21 +1,12 @@
 # =============================================================================
 # TEMPLATE DOCKERFILE - Symfony/PHP + Node.js pour Coolify
 # =============================================================================
-# 
-# VARIABLES À MODIFIER :
-# - Ligne 14 : Version PHP (7.2, 7.4, 8.1, 8.3, etc.)
-# - Ligne 18 : Version Node.js (setup_18.x, setup_20.x, etc.)
-# - Ligne 28 : Version Composer si PHP < 7.4
-# - Ligne 53 : Port d'exposition (8001, 8002, 8003, etc.)
-# - Ligne 55 : Même port dans la commande
-#
-# =============================================================================
 
 # ============ 1. VERSION PHP ============
 FROM php:7.4-fpm
 
-# ============ 2. INSTALLATION NODE.JS ============
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+# ============ 2. INSTALLATION NODE.JS 16 (compatible Webpack 4) ============
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
 
 # ============ 3. DÉPENDANCES SYSTÈME + EXTENSIONS PHP ============
@@ -28,7 +19,6 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ============ 4. COMPOSER ============
-# Pour PHP 7.4 : version 2.2 maximum
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 # ============ 5. SYMFONY CLI (optionnel) ============
@@ -44,10 +34,10 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction \
     && composer dump-autoload --optimize
 
-# ============ 8. INSTALLATION + BUILD ASSETS (Node/Webpack Encore) ============
+# ============ 8. INSTALLATION + BUILD ASSETS ============
 RUN npm install && npm run build
 
-# ============ 9. DOSSIERS (uniquement ceux NON montés en volume) ============
+# ============ 9. DOSSIERS ============
 RUN mkdir -p var/cache var/log public/bundles
 
 # ============ 10. CONFIGURATION OPCACHE ============
