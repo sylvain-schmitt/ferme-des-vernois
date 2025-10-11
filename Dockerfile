@@ -5,7 +5,7 @@
 # ============ 1. VERSION PHP ============
 FROM php:7.4-fpm
 
-# ============ 2. INSTALLATION NODE.JS 16 (compatible Webpack 4) ============
+# ============ 2. INSTALLATION NODE.JS 16 ============
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
 
@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 # ============ 4. COMPOSER ============
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
-# ============ 5. SYMFONY CLI (optionnel) ============
+# ============ 5. SYMFONY CLI ============
 RUN curl -sS https://get.symfony.com/cli/installer | bash && \
     mv /root/.symfony*/bin/symfony /usr/local/bin/symfony
 
@@ -30,15 +30,16 @@ WORKDIR /var/www/html
 
 COPY . .
 
-# ============ 7. INSTALLATION DÉPENDANCES PHP ============
+# ============ 7. CRÉATION DES DOSSIERS AVEC PERMISSIONS ============
+RUN mkdir -p var/cache var/log public/bundles public/build \
+    && chmod -R 777 var/ public/build public/bundles
+
+# ============ 8. INSTALLATION DÉPENDANCES PHP ============
 RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction \
     && composer dump-autoload --optimize
 
-# ============ 8. INSTALLATION + BUILD ASSETS ============
+# ============ 9. INSTALLATION + BUILD ASSETS ============
 RUN npm install && npm run build
-
-# ============ 9. DOSSIERS ============
-RUN mkdir -p var/cache var/log public/bundles
 
 # ============ 10. CONFIGURATION OPCACHE ============
 RUN echo "opcache.enable=1\n\
